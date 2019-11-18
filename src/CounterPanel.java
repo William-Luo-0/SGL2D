@@ -20,7 +20,7 @@ public class CounterPanel extends JPanel implements Observer {
     private JLabel counter3;
 
     /**
-     *  Initializes the CounterPanel
+     * Initializes the CounterPanel
      * @param game  The game to be bound
      * @param c1Enable  Determines if counter 1 is enabled
      * @param c2Enable  Determines if counter 2 is enabled
@@ -45,21 +45,32 @@ public class CounterPanel extends JPanel implements Observer {
         counter3.setVisible(c1Enable);                  // Sets visibility of counter 3
     }
 
-
+    /**
+     * Sets the visibility of counter 1 on the CounterPanel
+     * @param isVisible Determines if counter 1 is enabled
+     */
     public void setCounter1Visibility (Boolean isVisible) {
         counter1.setVisible(isVisible);
     }
 
+    /**
+     * Sets the visibility of counter 2 on the CounterPanel
+     * @param isVisible Determines if counter 2 is enabled
+     */
     public void setCounter2Visibility (Boolean isVisible) {
         counter2.setVisible(isVisible);
     }
 
+    /**
+     * Sets the visibility of counter 3 on the CounterPanel
+     * @param isVisible Determines if counter 3 is enabled
+     */
     public void setCounter3Visibility (Boolean isVisible) {
         counter3.setVisible(isVisible);
     }
 
     /**
-     *  Update method for CounterPanel observing bound game
+     * Update method for CounterPanel observing bound game
      * @param o Game bound
      * @param arg   X
      */

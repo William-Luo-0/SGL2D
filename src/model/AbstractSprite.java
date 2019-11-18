@@ -17,7 +17,8 @@ public abstract class AbstractSprite {
     protected Boolean eventIncCounter3Flag;
     protected Boolean eventDecCounter3Flag;
     protected Boolean eventMoveToRandomFlag;
-    protected String eventMoveToRandomSprite;
+    protected Boolean eventTransformToSpriteFlag;
+    protected String eventNewSprite;
 
 
     public AbstractSprite(String name) {
@@ -32,6 +33,8 @@ public abstract class AbstractSprite {
         eventIncCounter3Flag = false;
         eventDecCounter3Flag = false;
         eventMoveToRandomFlag = false;
+        eventTransformToSpriteFlag = false;
+        eventNewSprite = null;
     }
 
     public abstract void paint(Graphics g);

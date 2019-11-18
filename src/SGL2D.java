@@ -15,13 +15,13 @@ public class SGL2D extends JFrame {
     // Use timer from Javax.Swing.Timer to create tick based games, initialize timer to set default update cycle
 
     /**
-     *  SGL2D Game Frame Initializer
+     * SGL2D Game Frame Initializer
      */
     public SGL2D() {
         super("SGL2D Game");                       // JFrame frame = new JFrame("Frame Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);                  // Will display window bar
-        game = new GenericGame();               // Create new game
+        game = new GenericGame();               // Create new game, may change for interpreter!
         gamePanel = new GamePanel(game);        // Create game JPanel
         counterPanel = new CounterPanel(game, false, false, false);  // Create counter JPanel
         game.addObserver(counterPanel);         // Add counter to observe game
@@ -33,7 +33,7 @@ public class SGL2D extends JFrame {
     }
 
     /**
-     *  Handles key events for the game.
+     * Handles key events for the game.
      */
     private class KeyHandler extends KeyAdapter {
         /**
@@ -43,6 +43,7 @@ public class SGL2D extends JFrame {
         @Override
         public void keyPressed (KeyEvent e) {
             game.keyPressed(e.getKeyCode());
+            gamePanel.repaint();
         }
     }
 

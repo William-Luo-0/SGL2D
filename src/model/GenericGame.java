@@ -38,19 +38,30 @@ public class GenericGame extends Observable {
     }
 
     public void update() {
-        // redraw, check win, check game over
+        // repaint game panel in game panel... (DONE)
+        // setChanged();
+        // notifyObservers();
+        // checkWin();
         // checkGameOver();
     }
 
-    public void keyPressed(int keyCode) { // ** Probably change to only on down button unless an delay is added.
-        if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
+    public void keyPressed(int keyCode) { // ** Probably change to only on down button unless an delay is added. Update changed when
+        if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
             movePlayer("LEFT");
-        else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
+            update();
+        }
+        else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
             movePlayer("RIGHT");
-        else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP)
+            update();
+        }
+        else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP) {
             movePlayer("UP");
-        else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN)
+            update();
+        }
+        else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN) {
             movePlayer("DOWN");
+            update();
+        }
         else if (keyCode == KeyEvent.VK_ESCAPE)
             System.exit(0);
     }
@@ -117,6 +128,19 @@ public class GenericGame extends Observable {
 
     public void setValueCounter3(int value) {
         valueCounter3 = value;
+    }
+
+    private Sprite findSprite(String name) {
+        if (sprites == null) {
+            return null;
+        }
+
+        for (Sprite aSprite : sprites) {
+            if (aSprite.getName().equals(name.toLowerCase())) {
+                return aSprite;
+            }
+        }
+        return null;
     }
 
     private Boolean containsSprite(String name) {
@@ -209,16 +233,16 @@ public class GenericGame extends Observable {
             setValueCounter1(valueCounter1 - 1);
         }
         if (eventSprite.eventIncCounter2Flag.equals(true)) {
-            setValueCounter1(valueCounter2 + 1);
+            setValueCounter2(valueCounter2 + 1);
         }
         if (eventSprite.eventDecCounter2Flag.equals(true)) {
-            setValueCounter1(valueCounter2 - 1);
+            setValueCounter2(valueCounter2 - 1);
         }
         if (eventSprite.eventIncCounter3Flag.equals(true)) {
-            setValueCounter1(valueCounter2 + 1);
+            setValueCounter3(valueCounter2 + 1);
         }
         if (eventSprite.eventDecCounter3Flag.equals(true)) {
-            setValueCounter1(valueCounter2 - 1);
+            setValueCounter3(valueCounter2 - 1);
         }
     }
 }
