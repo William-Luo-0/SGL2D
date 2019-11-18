@@ -12,6 +12,14 @@ public class Goal extends AbstractSprite {
         yCoord = 0;
     }
 
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
+    }
+
     public void setxCoord(int xCoord) {
         this.xCoord = xCoord;
     }

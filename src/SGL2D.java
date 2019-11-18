@@ -1,3 +1,5 @@
+import model.GenericGame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -21,7 +23,7 @@ public class SGL2D extends JFrame {
         setUndecorated(false);                  // Will display window bar
         game = new GenericGame();               // Create new game
         gamePanel = new GamePanel(game);        // Create game JPanel
-        counterPanel = new CounterPanel(game);  // Create counter JPanel
+        counterPanel = new CounterPanel(game, false, false, false);  // Create counter JPanel
         game.addObserver(counterPanel);         // Add counter to observe game
         add(gamePanel);                         // Defaults to fill rest of frame (center)
         add(counterPanel, BorderLayout.NORTH);  // Positions the counter at top of frame

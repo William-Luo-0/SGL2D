@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-// TODO: Add player and goal setters, they keep track of their position.
-
 public class GenericGame extends Observable {
+    private static final int GAME_WIDTH = 600;
+    private static final int GAME_HEIGHT = 600;
     private static int COLUMNS = 10;
     private static int ROWS = 10;
 
@@ -32,13 +32,17 @@ public class GenericGame extends Observable {
         }
         observers = new Observable();
         isGameOver = false;
+        valueCounter1 = 0;
+        valueCounter2 = 0;
+        valueCounter3 = 0;
     }
 
     public void update() {
-        checkGameOver();
+        // redraw, check win, check game over
+        // checkGameOver();
     }
 
-    public void keyPressed(int keyCode) {
+    public void keyPressed(int keyCode) { // ** Probably change to only on down button unless an delay is added.
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
             movePlayer("LEFT");
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
@@ -70,10 +74,20 @@ public class GenericGame extends Observable {
             throw new IllegalArgumentException("Invalid Arguments: Cannot name sprite: " + name + ".");
         }
 
-        if (containsSprite(name)) {
-            return;
-        } else {
+        if (!containsSprite(name)) {
             sprites.add(new Sprite(name));
+        }
+    }
+
+    public void createPlayer() {
+        if (player == null) {
+            player = new Player("player");
+        }
+    }
+
+    public void createGoal() {
+        if (goal == null) {
+            goal = new Goal("goal");
         }
     }
 
@@ -93,6 +107,18 @@ public class GenericGame extends Observable {
         return valueCounter3;
     }
 
+    public void setValueCounter1(int value) {
+        valueCounter1 = value;
+    }
+
+    public void setValueCounter2(int value) {
+        valueCounter2 = value;
+    }
+
+    public void setValueCounter3(int value) {
+        valueCounter3 = value;
+    }
+
     private Boolean containsSprite(String name) {
         if (sprites == null) {
             return false;
@@ -107,10 +133,92 @@ public class GenericGame extends Observable {
     }
 
     private Pair<Integer,Integer> convertGridCoordinates(int xPos, int yPos) {
-        return new Pair<Integer,Integer>(xPos*60,yPos*60);
+        return new Pair<Integer,Integer>(xPos*GAME_WIDTH/COLUMNS,yPos*GAME_HEIGHT/ROWS);
+    }
+
+    private Pair<Integer,Integer> convertToGridCoordinates(int xCoord, int yCoord) {
+        return new Pair<Integer,Integer>(xCoord/(GAME_WIDTH/COLUMNS),yCoord/(GAME_HEIGHT/ROWS));
     }
 
     private void movePlayer(String direction) {
+        Pair<Integer,Integer> playerPos = convertToGridCoordinates(player.getxCoord(), player.getyCoord());
+        switch(direction) {
+            case("LEFT"):
+                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                    if (checkLocationMovable(playerPos.getKey()-1, playerPos.getValue())) {
+                        Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey()-1, playerPos.getValue());
+                        player.setxCoord(playerCoord.getKey());
+                        player.setyCoord(playerCoord.getValue());
+                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                    }
+                }
+                break;
+            case("RIGHT"):
+                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                    if (checkLocationMovable(playerPos.getKey()+1, playerPos.getValue())) {
+                        Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey()+1, playerPos.getValue());
+                        player.setxCoord(playerCoord.getKey());
+                        player.setyCoord(playerCoord.getValue());
+                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                    }
+                }
+                break;
+            case("DOWN"):
+                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                    if (checkLocationMovable(playerPos.getKey(), playerPos.getValue()+1)) {
+                        Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey(), playerPos.getValue()+1);
+                        player.setxCoord(playerCoord.getKey());
+                        player.setyCoord(playerCoord.getValue());
+                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                    }
+                }
+                break;
+            case("UP"):
+                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                    if (checkLocationMovable(playerPos.getKey(), playerPos.getValue()-1)) {
+                        Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey(), playerPos.getValue()-1);
+                        player.setxCoord(playerCoord.getKey());
+                        player.setyCoord(playerCoord.getValue());
+                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                    }
+                }
+                break;
+        }
+    }
 
+    private Boolean checkBoundary(int xPos, int yPos) {
+        if (xPos < 0 || xPos > COLUMNS-1) {
+            return false;
+        }
+        if (yPos < 0 || yPos > ROWS-1) {
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean checkLocationMovable(int xPos, int yPos) {
+        return !gridPositions.get(xPos).get(yPos).getSolid();
+    }
+
+    private void performSpriteEvents(int xPos, int yPos) {
+        Sprite eventSprite = gridPositions.get(xPos).get(yPos);
+        if (eventSprite.eventIncCounter1Flag.equals(true)) {
+            setValueCounter1(valueCounter1 + 1);
+        }
+        if (eventSprite.eventDecCounter1Flag.equals(true)) {
+            setValueCounter1(valueCounter1 - 1);
+        }
+        if (eventSprite.eventIncCounter2Flag.equals(true)) {
+            setValueCounter1(valueCounter2 + 1);
+        }
+        if (eventSprite.eventDecCounter2Flag.equals(true)) {
+            setValueCounter1(valueCounter2 - 1);
+        }
+        if (eventSprite.eventIncCounter3Flag.equals(true)) {
+            setValueCounter1(valueCounter2 + 1);
+        }
+        if (eventSprite.eventDecCounter3Flag.equals(true)) {
+            setValueCounter1(valueCounter2 - 1);
+        }
     }
 }

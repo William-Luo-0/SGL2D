@@ -16,15 +16,15 @@ public class GamePanel  extends JPanel {
 
     @Override
     protected  void paintComponent (Graphics g) {
-        super.paintComponent(game);
-        paintGenericGame(game);
-        if (game.isGameOver()) {
-            gameOver(game);
+        super.paintComponent(g);
+        paintGenericGame(g);
+        if (this.game.isGameOver()) {
+            gameOver(g);
         }
     }
 
-    private void paintGenericGame (Graphics game) {
-        game.paint(game);
+    private void paintGenericGame (Graphics g) {
+        this.game.paint(g);
     }
 
     private void gameOver (Graphics g) {

@@ -45,6 +45,19 @@ public class CounterPanel extends JPanel implements Observer {
         counter3.setVisible(c1Enable);                  // Sets visibility of counter 3
     }
 
+
+    public void setCounter1Visibility (Boolean isVisible) {
+        counter1.setVisible(isVisible);
+    }
+
+    public void setCounter2Visibility (Boolean isVisible) {
+        counter2.setVisible(isVisible);
+    }
+
+    public void setCounter3Visibility (Boolean isVisible) {
+        counter3.setVisible(isVisible);
+    }
+
     /**
      *  Update method for CounterPanel observing bound game
      * @param o Game bound

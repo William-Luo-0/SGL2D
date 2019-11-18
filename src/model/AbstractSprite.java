@@ -10,12 +10,28 @@ public abstract class AbstractSprite {
     protected static int SPRITE_HEIGHT;
     protected String name;
     protected Color color;
+    protected Boolean eventIncCounter1Flag;
+    protected Boolean eventDecCounter1Flag;
+    protected Boolean eventIncCounter2Flag;
+    protected Boolean eventDecCounter2Flag;
+    protected Boolean eventIncCounter3Flag;
+    protected Boolean eventDecCounter3Flag;
+    protected Boolean eventMoveToRandomFlag;
+    protected String eventMoveToRandomSprite;
+
 
     public AbstractSprite(String name) {
         this.name = name.toLowerCase();
         this.color = Color.DARK_GRAY;
         SPRITE_WIDTH = 60;
         SPRITE_HEIGHT = 60;
+        eventIncCounter1Flag = false;
+        eventDecCounter1Flag = false;
+        eventIncCounter2Flag = false;
+        eventDecCounter2Flag = false;
+        eventIncCounter3Flag = false;
+        eventDecCounter3Flag = false;
+        eventMoveToRandomFlag = false;
     }
 
     public abstract void paint(Graphics g);
