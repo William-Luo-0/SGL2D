@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+// TODO: Add player and goal setters, they keep track of their position.
+
 public class GenericGame extends Observable {
     private static int COLUMNS = 10;
     private static int ROWS = 10;
@@ -33,26 +35,62 @@ public class GenericGame extends Observable {
     }
 
     public void update() {
-        move();
         checkGameOver();
     }
 
     public void keyPressed(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
-            player.moveLeft();
+            movePlayer("LEFT");
         else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
-            player.moveRight();
+            movePlayer("RIGHT");
         else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP)
-            player.moveUp();
+            movePlayer("UP");
         else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN)
-            player.moveDown();
+            movePlayer("DOWN");
         else if (keyCode == KeyEvent.VK_ESCAPE)
             System.exit(0);
     }
 
     public void paint(Graphics g) {
-        for (Sprite aSprite: sprites)
-            aSprite.paint(g);
+        int columnSize = gridPositions.size();
+        int rowSize = gridPositions.get(0).size();
+
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < columnSize; j++) {
+                Pair<Integer, Integer> position = convertGridCoordinates(j, i);
+                gridPositions.get(i).get(j).paint(g,position.getKey(),position.getValue());
+            }
+        }
+        goal.paint(g);
+        player.paint(g);
+    }
+
+    public void addSprite(String name) throws Exception {
+        if (name.toLowerCase().equals("goal") || name.toLowerCase().equals("player")) {
+            throw new IllegalArgumentException("Invalid Arguments: Cannot name sprite: " + name + ".");
+        }
+
+        if (containsSprite(name)) {
+            return;
+        } else {
+            sprites.add(new Sprite(name));
+        }
+    }
+
+    public Boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public int getValueCounter1() {
+        return valueCounter1;
+    }
+
+    public int getValueCounter2() {
+        return valueCounter2;
+    }
+
+    public int getValueCounter3() {
+        return valueCounter3;
     }
 
     private Boolean containsSprite(String name) {
@@ -66,5 +104,13 @@ public class GenericGame extends Observable {
             }
         }
         return false;
+    }
+
+    private Pair<Integer,Integer> convertGridCoordinates(int xPos, int yPos) {
+        return new Pair<Integer,Integer>(xPos*60,yPos*60);
+    }
+
+    private void movePlayer(String direction) {
+
     }
 }

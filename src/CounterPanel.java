@@ -1,7 +1,9 @@
+import model.GenericGame;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.*;
 
 /**
  *  Creates CounterPanel for use by SGL2D
@@ -50,9 +52,9 @@ public class CounterPanel extends JPanel implements Observer {
      */
     @Override
     public void update (Observable o, Object arg) {
-        counter1.setText(COUNTER_ONE_TEXT + game.getCounterOneValue());         // Updates Counter 1 on change
-        counter2.setText(COUNTER_ONE_TEXT + game.getCounterTwoValue());         // Updates Counter 2 on change
-        counter3.setText(COUNTER_ONE_TEXT + game.getCounterThreeValue());       // Updates Counter 3 on change
+        counter1.setText(COUNTER_ONE_TEXT + game.getValueCounter1());         // Updates Counter 1 on change
+        counter2.setText(COUNTER_ONE_TEXT + game.getValueCounter2());         // Updates Counter 2 on change
+        counter3.setText(COUNTER_ONE_TEXT + game.getValueCounter3());       // Updates Counter 3 on change
         repaint();      // Updates panel
     }
 }

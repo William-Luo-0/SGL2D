@@ -1,3 +1,5 @@
+import model.GenericGame;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +18,7 @@ public class GamePanel  extends JPanel {
     protected  void paintComponent (Graphics g) {
         super.paintComponent(game);
         paintGenericGame(game);
-        if (game.gameOver()) {
+        if (game.isGameOver()) {
             gameOver(game);
         }
     }
