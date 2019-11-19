@@ -47,6 +47,7 @@ public class SGL2D extends JFrame {
         }
     }
 
+    // TODO: CHANGE THIS AS WELL AS SGL2D() to call GameFactory with given file input.
     /**
      * Initializer of SGL2D
      * @param args

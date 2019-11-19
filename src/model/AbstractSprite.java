@@ -70,6 +70,78 @@ public abstract class AbstractSprite {
         }
     }
 
+    public Boolean getEventIncCounter1Flag() {
+        return eventIncCounter1Flag;
+    }
+
+    public Boolean getEventDecCounter1Flag() {
+        return eventDecCounter1Flag;
+    }
+
+    public Boolean getEventIncCounter2Flag() {
+        return eventIncCounter2Flag;
+    }
+
+    public Boolean getEventDecCounter2Flag() {
+        return eventDecCounter2Flag;
+    }
+
+    public Boolean getEventIncCounter3Flag() {
+        return eventIncCounter3Flag;
+    }
+
+    public Boolean getEventDecCounter3Flag() {
+        return eventDecCounter3Flag;
+    }
+
+    public Boolean getEventMoveToRandomFlag() {
+        return eventMoveToRandomFlag;
+    }
+
+    public Boolean getEventTransformToSpriteFlag() {
+        return eventTransformToSpriteFlag;
+    }
+
+    public String getEventNewSprite() {
+        return eventNewSprite;
+    }
+
+    public void setEventIncCounter1Flag(Boolean eventIncCounter1Flag) {
+        this.eventIncCounter1Flag = eventIncCounter1Flag;
+    }
+
+    public void setEventDecCounter1Flag(Boolean eventDecCounter1Flag) {
+        this.eventDecCounter1Flag = eventDecCounter1Flag;
+    }
+
+    public void setEventIncCounter2Flag(Boolean eventIncCounter2Flag) {
+        this.eventIncCounter2Flag = eventIncCounter2Flag;
+    }
+
+    public void setEventDecCounter2Flag(Boolean eventDecCounter2Flag) {
+        this.eventDecCounter2Flag = eventDecCounter2Flag;
+    }
+
+    public void setEventIncCounter3Flag(Boolean eventIncCounter3Flag) {
+        this.eventIncCounter3Flag = eventIncCounter3Flag;
+    }
+
+    public void setEventDecCounter3Flag(Boolean eventDecCounter3Flag) {
+        this.eventDecCounter3Flag = eventDecCounter3Flag;
+    }
+
+    public void setEventMoveToRandomFlag(Boolean eventMoveToRandomFlag) {
+        this.eventMoveToRandomFlag = eventMoveToRandomFlag;
+    }
+
+    public void setEventTransformToSpriteFlag(Boolean eventTransformToSpriteFlag) {
+        this.eventTransformToSpriteFlag = eventTransformToSpriteFlag;
+    }
+
+    public void setEventNewSprite(String eventNewSprite) {
+        this.eventNewSprite = eventNewSprite;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
