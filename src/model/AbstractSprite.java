@@ -4,7 +4,8 @@ import java.awt.*;
 import java.util.Objects;
 
 // Add setter for Sprite Width and Height if we implementing custom grid sizes.
-
+// TODO: ADD REST OF FLAGS AND CASES
+// TODO: ADD TRACKER FOR SPRITE COUNTER (Here or in Sprite, design choice, better have a good reason for choosing which)
 public abstract class AbstractSprite {
     protected static int SPRITE_WIDTH;
     protected static int SPRITE_HEIGHT;

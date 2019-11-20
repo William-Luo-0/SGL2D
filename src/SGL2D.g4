@@ -118,7 +118,7 @@ fragment ACTIONS    : (I N C C O U N T E R '1' EQUALS INT |
                         M O V E T O R A N D O M EQUALS WORD |
                         T R A N S F O R M T O S P R I T E EQUALS WORD |
                         M O V E P L A Y E R T O EQUALS (XINT | YINT)* |
-                        G A M E O V E R
+                        G A M E O V E R |
                         W I N);
 
 ENVIRONMENT         : E N V I R O N M E N T;
