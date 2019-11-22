@@ -13,9 +13,9 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GameFactory {
     public GenericGame createGame (InputStream in) throws IOException {
         GenericGame genericGame = new GenericGame();
-        // TODO: Change this as well as in SGL2D to take in an input file name from read sys call or however you like
+
         // TODO: May have to do changes so it takes in the counter panel input or forwards it to another method call later
-        SGL2DLexer lexer = new SGL2DLexer(CharStreams.fromFileName("/test-game.sgl2d"));
+        SGL2DLexer lexer = new SGL2DLexer(CharStreams.fromStream(in));
         SGL2DParser parser = new SGL2DParser(new CommonTokenStream(lexer));
         parser.addErrorListener(new BaseErrorListener() {
             @Override
@@ -32,6 +32,14 @@ public class GameFactory {
         parser.addParseListener(new SGL2DBaseListener() {
             @Override
             public void exitEnvironment(SGL2DParser.EnvironmentContext ctx) {
+                String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
+                String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
+                //genericGame.setRows(Integer.parseInt(xText.substring(2)));
+                //genericGame.setColumns(Integer.parseInt(yText.substring(2)));
+            }
+
+            @Override
+            public void enterPlayer(SGL2DParser.PlayerContext ctx) {
                 String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
                 String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
                 //genericGame.setRows(Integer.parseInt(xText.substring(2)));

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 
 public class SGL2D extends JFrame {
 
@@ -52,7 +53,10 @@ public class SGL2D extends JFrame {
      * Initializer of SGL2D
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        GameFactory gameFactory = new GameFactory();
+        InputStream inputStream = new FileInputStream("gameFile.sgl2d");
+        GenericGame genericGame = gameFactory.createGame(inputStream);
         new SGL2D();
     }
 }
