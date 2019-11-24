@@ -35,8 +35,8 @@ public class GameFactory {
             public void exitEnvironment(SGL2DParser.EnvironmentContext ctx) {
                 String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
                 String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
-                //genericGame.setRows(Integer.parseInt(xText.substring(2)));
-                //genericGame.setColumns(Integer.parseInt(yText.substring(2)));
+                genericGame.setRows(Integer.parseInt(xText.substring(2)));
+                genericGame.setColumns(Integer.parseInt(yText.substring(2)));
             }
 
             @Override
@@ -44,6 +44,7 @@ public class GameFactory {
                 String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
                 String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
                 String colorText = ctx.COLOR().get(ctx.COLOR().size()-1).getText();
+                genericGame.setGoal(Integer.parseInt(xText.substring(2)),Integer.parseInt(yText.substring(2)),colorText);
             }
 
             @Override

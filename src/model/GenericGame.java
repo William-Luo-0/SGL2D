@@ -56,10 +56,15 @@ public class GenericGame extends Observable {
     public void update() {
         // repaint game panel in game panel... (DONE)
         // setChanged();
+
         // notifyObservers();
+        notifyObservers();
         // checkVictory(); NOTE: NOT THE SAME AS isVICTORY, must notify all observers and end the game.
+
         // checkGameOver(); NOTE: See above
+
     }
+
 
     /**
      * KeyEvent listener for the game with basic arrow key listeners and an exit through escape.
@@ -141,6 +146,22 @@ public class GenericGame extends Observable {
         if (goal == null) {
             goal = new Goal("goal");
         }
+    }
+
+    /**
+     * Setter for the properties of a goal(XCoords,YCoords,Color)
+     * if no goal exists makes a goal
+     * @param xCords X-coordinates of goal
+     * @param yCords Y-coordinates of goal
+     * @param color Color of goal
+     */
+    public void setGoal(int xCords, int yCords,String color){
+        if (goal == null){
+            createGoal();
+        }
+        goal.setxCoord(xCords);
+        goal.setxCoord(yCords);
+        goal.setColor(color);
     }
 
     /**
@@ -231,6 +252,21 @@ public class GenericGame extends Observable {
             }
         }
         return null;
+    }
+    /**
+     * Setter for COLUMNS
+     * @param YINT is the value of the COLUMNS
+     */
+    public void setColumns(int YINT){
+        COLUMNS = YINT;
+    }
+
+    /**
+     * Setter for ROWS
+     * @param XINT is the value of the COLUMNS
+     */
+    public void setRows(int XINT){
+        ROWS = XINT;
     }
 
     /**
