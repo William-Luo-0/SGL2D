@@ -32,11 +32,10 @@ public class GenericGameTest {
         List<List<Sprite>> gridPositions = genericGame.getGridPositions();
         assertFalse(gridPositions.isEmpty());
 
-        for (Sprite x : genericGame.getSprites())
 
-            for (List<Sprite> gridList : gridPositions) {
-                assertTrue(gridList.isEmpty());
-            }
+        for (List<Sprite> gridList : gridPositions) {
+            assertTrue(gridList.isEmpty());
+        }
     }
 
     @Test
