@@ -7,13 +7,14 @@ import model.Sprite;
 import org.antlr.v4.runtime.*;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 
 public class GameFactory {
-    public Pair<GenericGame, ArrayList<Boolean>> createGame (String filePath) throws IOException {
+    protected static String errorMessage;
+
+    public Pair<GenericGame, ArrayList<Boolean>> createGame (String filePath) throws Exception {
         GenericGame genericGame = new GenericGame();
         InputStream inputStream = new FileInputStream(filePath); //GameFactory.class.getResourceAsStream(filePath);
         SGL2DLexer lexer = new SGL2DLexer(CharStreams.fromStream(inputStream));
@@ -21,6 +22,7 @@ public class GameFactory {
         parser.addErrorListener(new BaseErrorListener() {
             @Override
             public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
+                errorMessage = "failed to parse at line " + line + " due to " + msg;
                 throw new IllegalStateException("failed to parse at line " + line + " due to " + msg, e);
             }
         });
@@ -30,7 +32,6 @@ public class GameFactory {
         counterEnableFlags.add(false);
         counterEnableFlags.add(false);
 
-        // TODO: Finish rest of the cases
         parser.addParseListener(new SGL2DBaseListener() {
             @Override
             public void exitEnvironment(SGL2DParser.EnvironmentContext ctx) {
@@ -67,7 +68,7 @@ public class GameFactory {
             public void exitPlayer(SGL2DParser.PlayerContext ctx) {
                 String xText = "0";
                 String yText = "0";
-                String colorText = "yellow";
+                String colorText = "blue";
 
                 if (ctx.XINT().size() != 0) {
                     xText = ctx.XINT().get(ctx.XINT().size() - 1).getText().substring(2);
@@ -300,10 +301,11 @@ public class GameFactory {
                 }
             }
         });
-
-
-
-        parser.start();
+        try {
+            parser.start();
+        } catch (Exception e) {
+            throw new Exception(errorMessage);
+        }
 
         Pair<GenericGame, ArrayList<Boolean>> returnValue = new Pair<>(genericGame, counterEnableFlags);
         return returnValue;

@@ -17,4 +17,8 @@ public class ErrorFrame extends JFrame {
         pack();                                 // Size window
         setVisible(true);                       // Make visible
     }
+
+    public static void triggerParseError(String errorMessage) throws Exception {
+        throw new Exception(errorMessage);
+    }
 }

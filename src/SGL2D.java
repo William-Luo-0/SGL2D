@@ -20,7 +20,7 @@ public class SGL2D extends JFrame {
     /**
      * SGL2D Game Frame Initializer
      */
-    public SGL2D(String filePath) throws IOException {
+    public SGL2D(String filePath) throws Exception {
         super("SGL2D Game");                       // JFrame frame = new JFrame("Frame Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);                  // Will display window bar
@@ -62,7 +62,7 @@ public class SGL2D extends JFrame {
     public static void main(String[] args) {
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle("choosertitle");
+        chooser.setDialogTitle("SGL2D File Chooser");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setAcceptAllFileFilterUsed(false);
 

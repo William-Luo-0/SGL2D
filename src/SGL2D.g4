@@ -1,6 +1,7 @@
 grammar SGL2D;
 start :
-    | expression EOF
+    | expression (NEWLINE expression)*
+    |EOF
     ;
 
 /*
@@ -20,35 +21,35 @@ expression
     ;
 
 environment
-    : ENVIRONMENT ARROW (XINT | YINT)* (NEWLINE expression)?
+    : ENVIRONMENT ARROW (XINT | YINT)*
     ;
 
 goal
-    : GOAL ARROW (XINT | YINT | COLOR)* (NEWLINE expression)?
+    : GOAL ARROW (XINT | YINT | COLOR)*
     ;
 
 player
-    : PLAYER ARROW (XINT | YINT | COLOR)* (NEWLINE expression)?
+    : PLAYER ARROW (XINT | YINT | COLOR)*
     ;
 
 sprite
-    : SPRITE WORD ARROW (COLOR | SOLID)* (NEWLINE expression)?
+    : SPRITE WORD ARROW (COLOR | SOLID)*
     ;
 
 counter
-    : COUNTER COUNTERINDEX ARROW (BOOLEAN | INT | WINONZERO | GAMEOVERONZERO)* (NEWLINE expression)?
+    : COUNTER COUNTERINDEX ARROW (BOOLEAN | INT | WINONZERO | GAMEOVERONZERO)*
     ;
 
 event
-    : EVENT (PLAYER | WORD) ARROW action* (NEWLINE expression)?
+    : EVENT (PLAYER | WORD) ARROW (action)*
     ;
 
 set
-    : SET WORD ARROW (position|range|NEWLINE)+ (NEWLINE expression)?
+    : SET WORD ARROW (position | range | NEWLINE)*
     ;
 
 newline
-    : NEWLINE expression
+    : NEWLINE
     ;
 
 position
@@ -299,6 +300,6 @@ COLOR               : C O L O R EQUALS ROYGBIV;
 SOLID               : S O L I D EQUALS BOOLEAN;
 COMMAND             : ACTIONS;
 WHITESPACE          : ' ' -> skip;
-BOOLEAN             : (T R U E | F A L S E | T | F);
+BOOLEAN             : (T R U E | F A L S E);
 WORD                : (LOWERCASE | UPPERCASE | '_')+ ;
 NEWLINE             : ('\r'? '\n' | '\r')+ ;
