@@ -17,14 +17,15 @@ public abstract class AbstractSprite {
     protected Boolean eventDecCounter2Flag;
     protected Boolean eventIncCounter3Flag;
     protected Boolean eventDecCounter3Flag;
-    protected Boolean eventIncSpriteCounter;
-    protected Boolean eventDecSpriteCounter;
-    protected Boolean eventSetSpriteCounter;
-    protected Boolean eventTransformOnZeroCounter;
-    protected Boolean eventWinOnZeroCounter;
-    protected Boolean eventMovePlayerTo;
-    protected Boolean eventGameOver;
-    protected Boolean eventWin;
+    protected Boolean eventIncSpriteCounterFlag;
+    protected Boolean eventDecSpriteCounterFlag;
+    protected Boolean eventSetSpriteCounterFlag;
+    protected Boolean eventTransformOnZeroCounterFlag;
+    protected Boolean eventGameOverOnZeroCounterFlag;
+    protected Boolean eventWinOnZeroCounterFlag;
+    protected Boolean eventMovePlayerToFlag;
+    protected Boolean eventGameOverFlag;
+    protected Boolean eventWinFlag;
     protected Boolean eventMoveToRandomFlag;
     protected Boolean eventTransformToSpriteFlag;
     protected String eventNewSprite;
@@ -45,14 +46,15 @@ public abstract class AbstractSprite {
         eventDecCounter3Flag = false;
         eventMoveToRandomFlag = false;
         eventTransformToSpriteFlag = false;
-        eventIncSpriteCounter = false;
-        eventDecSpriteCounter = false;
-        eventSetSpriteCounter = false;
-        eventTransformOnZeroCounter = false;
-        eventWinOnZeroCounter = false;
-        eventMovePlayerTo = false;
-        eventGameOver = false;
-        eventWin = false;
+        eventIncSpriteCounterFlag = false;
+        eventDecSpriteCounterFlag = false;
+        eventSetSpriteCounterFlag = false;
+        eventTransformOnZeroCounterFlag = false;
+        eventGameOverOnZeroCounterFlag = false;
+        eventWinOnZeroCounterFlag = false;
+        eventMovePlayerToFlag = false;
+        eventGameOverFlag = false;
+        eventWinFlag = false;
         eventNewSprite = null;
         spriteCounter = 0;
     }
@@ -126,36 +128,40 @@ public abstract class AbstractSprite {
         return eventNewSprite;
     }
 
-    public Boolean getEventIncSpriteCounter () {
-        return eventIncSpriteCounter;
+    public Boolean getEventIncSpriteCounterFlag() {
+        return eventIncSpriteCounterFlag;
     }
 
-    public Boolean getEventDecSpriteCounter() {
-        return eventDecSpriteCounter;
+    public Boolean getEventDecSpriteCounterFlag() {
+        return eventDecSpriteCounterFlag;
     }
 
-    public Boolean getEventSetSpriteCounter() {
-        return eventSetSpriteCounter;
+    public Boolean getEventSetSpriteCounterFlag() {
+        return eventSetSpriteCounterFlag;
     }
 
-    public Boolean getEventTransformOnZeroCounter() {
-        return eventTransformOnZeroCounter;
+    public Boolean getEventTransformOnZeroCounterFlag() {
+        return eventTransformOnZeroCounterFlag;
     }
 
-    public Boolean getEventWinOnZeroCounter() {
-        return eventWinOnZeroCounter;
+    public Boolean getEventGameOverOnZeroCounterFlag() {
+        return eventGameOverOnZeroCounterFlag;
     }
 
-    public Boolean getEventMovePlayerTo() {
-        return eventMovePlayerTo;
+    public Boolean getEventWinOnZeroCounterFlag() {
+        return eventWinOnZeroCounterFlag;
     }
 
-    public Boolean getEventGameOver() {
-        return eventGameOver;
+    public Boolean getEventMovePlayerToFlag() {
+        return eventMovePlayerToFlag;
     }
 
-    public Boolean getEventWin() {
-        return eventWin;
+    public Boolean getEventGameOverFlag() {
+        return eventGameOverFlag;
+    }
+
+    public Boolean getEventWinFlag() {
+        return eventWinFlag;
     }
 
     public int getSpriteCounter() {
@@ -194,36 +200,40 @@ public abstract class AbstractSprite {
         this.eventTransformToSpriteFlag = eventTransformToSpriteFlag;
     }
 
-    public void setEventIncSpriteCounter(Boolean eventIncSpriteCounter){
-        this.eventIncSpriteCounter = eventIncSpriteCounter;
+    public void setEventIncSpriteCounterFlag(Boolean eventIncSpriteCounterFlag){
+        this.eventIncSpriteCounterFlag = eventIncSpriteCounterFlag;
     }
 
-    public void setEventDecSpriteCounter(Boolean eventDecSpriteCounter){
-        this.eventDecSpriteCounter = eventDecSpriteCounter;
+    public void setEventDecSpriteCounterFlag(Boolean eventDecSpriteCounterFlag){
+        this.eventDecSpriteCounterFlag = eventDecSpriteCounterFlag;
     }
 
-    public void setEventSetSpriteCounter(Boolean eventSetSpriteCounter){
-        this.eventSetSpriteCounter = eventSetSpriteCounter;
+    public void setEventSetSpriteCounterFlag(Boolean eventSetSpriteCounterFlag){
+        this.eventSetSpriteCounterFlag = eventSetSpriteCounterFlag;
     }
 
-    public void setEventTransformOnZeroCounter(Boolean eventTransformOnZeroCounter){
-        this.eventTransformOnZeroCounter = eventTransformOnZeroCounter;
+    public void setEventTransformOnZeroCounterFlag(Boolean eventTransformOnZeroCounterFlag){
+        this.eventTransformOnZeroCounterFlag = eventTransformOnZeroCounterFlag;
     }
 
-    public void setEventWinOnZeroCounter(Boolean eventWinOnZeroCounter){
-        this.eventWinOnZeroCounter = eventWinOnZeroCounter;
+    public void setEventWinOnZeroCounterFlag(Boolean eventWinOnZeroCounterFlag){
+        this.eventWinOnZeroCounterFlag = eventWinOnZeroCounterFlag;
     }
 
-    public void setEventMovePlayerTo(Boolean eventMovePlayerTo){
-        this.eventMovePlayerTo = eventMovePlayerTo;
+    public void setEventGameOverOnZeroCounterFlag(Boolean eventGameOverOnZeroCounterFlag){
+        this.eventGameOverOnZeroCounterFlag = eventGameOverOnZeroCounterFlag;
     }
 
-    public void setEventGameOver(Boolean eventGameOver){
-        this.eventGameOver = eventGameOver;
+    public void setEventMovePlayerToFlag(Boolean eventMovePlayerToFlag){
+        this.eventMovePlayerToFlag = eventMovePlayerToFlag;
     }
 
-    public void setEventWin(Boolean eventWin){
-        this.eventWin = eventWin;
+    public void setEventGameOverFlag(Boolean eventGameOverFlag){
+        this.eventGameOverFlag = eventGameOverFlag;
+    }
+
+    public void setEventWinFlag(Boolean eventWinFlag){
+        this.eventWinFlag = eventWinFlag;
     }
 
     public void setEventNewSprite(String eventNewSprite) {
