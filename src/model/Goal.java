@@ -15,6 +15,7 @@ public class Goal extends AbstractSprite {
      */
     public Goal (String name) {
         super(name);
+        eventWinFlag = true;
         xCoord = 0;
         yCoord = 0;
     }

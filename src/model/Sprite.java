@@ -6,7 +6,6 @@ import java.awt.*;
  * General Sprite class
  */
 public class Sprite extends AbstractSprite {
-
     private Boolean solid;
 
     /**

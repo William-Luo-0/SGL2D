@@ -29,7 +29,9 @@ public class GamePanel  extends JPanel {
     protected  void paintComponent (Graphics g) {
         super.paintComponent(g);
         paintGenericGame(g);
-        if (this.game.isGameOver()) {
+        if (this.game.isVictory()) {
+            victory(g);
+        } else if (this.game.isGameOver()) {
             gameOver(g);
         }
     }
@@ -46,12 +48,25 @@ public class GamePanel  extends JPanel {
      * Paints game over onto GamePanel
      * @param g the panel to paint game over
      */
+    private void victory (Graphics g) {
+        Color saved = g.getColor();
+        g.setColor(new Color( 0, 0, 0));
+        g.setFont(new Font("Arial", 20, 75));
+        FontMetrics fm = g.getFontMetrics();
+        centreString("Victory!", g, fm, GAME_HEIGHT / 2);
+        g.setColor(saved);
+    }
+
+    /**
+     * Paints game over onto GamePanel
+     * @param g the panel to paint game over
+     */
     private void gameOver (Graphics g) {
         Color saved = g.getColor();
         g.setColor(new Color( 0, 0, 0));
-        g.setFont(new Font("Arial", 20, 20));
+        g.setFont(new Font("Arial", 20, 75));
         FontMetrics fm = g.getFontMetrics();
-        centreString("GamePanel Over!", g, fm, GAME_HEIGHT / 2);
+        centreString("Game Over!", g, fm, GAME_HEIGHT / 2);
         g.setColor(saved);
     }
 

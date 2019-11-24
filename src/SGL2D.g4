@@ -1,6 +1,6 @@
 grammar SGL2D;
 start :
-    expression EOF
+    | expression EOF
     ;
 
 /*
@@ -36,15 +36,15 @@ sprite
     ;
 
 counter
-    : COUNTER ('1' | '2' | '3') ARROW (BOOLEAN | INT)* (NEWLINE expression)?
+    : COUNTER COUNTERINDEX ARROW (BOOLEAN | INT)* (NEWLINE expression)?
     ;
 
 event
-    : EVENT (SPRITE WORD | GOAL) ARROW COMMAND* (NEWLINE expression)?
+    : EVENT WORD ARROW action* (NEWLINE expression)?
     ;
 
 set
-    : SET (SPRITE WORD | GOAL) ARROW (position|range)+ (NEWLINE expression)?
+    : SET WORD ARROW (position|range)+ (NEWLINE expression)?
     ;
 
 newline
@@ -59,6 +59,95 @@ position
 range
     : '('position ',' position')'
     ;
+
+action
+    : incCounter1
+    | decCounter1
+    | incCounter2
+    | decCounter2
+    | incCounter3
+    | decCounter3
+    | incSpriteCounter
+    | decSpriteCounter
+    | setSpriteCounter
+    | transformOnZeroCounter
+    | gameOverOnZeroCounter
+    | winOnZeroCounter
+    | moveToRandom
+    | transformToSprite
+    | movePlayerTo
+    | gameOver
+    | win
+    ;
+
+incCounter1
+    : INCCOUNTERONE
+    ;
+
+decCounter1
+    : DECCOUNTERONE
+    ;
+
+incCounter2
+    : INCCOUNTERTWO
+    ;
+
+decCounter2
+    : DECCOUNTERTWO
+    ;
+
+incCounter3
+    : INCCOUNTERTHREE
+    ;
+
+decCounter3
+    : DECCOUNTERTHREE
+    ;
+
+incSpriteCounter
+    : INCSPRITECOUNTER
+    ;
+
+decSpriteCounter
+    : DECSPRITECOUNTER
+    ;
+
+setSpriteCounter
+    : SETSPRITECOUNTER
+    ;
+
+transformOnZeroCounter
+    : TRANSFORMONZERO
+    ;
+
+gameOverOnZeroCounter
+    : GAMEOVERONZERO
+    ;
+
+winOnZeroCounter
+    : WINONZERO
+    ;
+
+moveToRandom
+    : MOVETORANDOM
+    ;
+
+transformToSprite
+    : TRANSFORMTOSPRITE
+    ;
+
+movePlayerTo
+    : MOVEPLAYERTO (XINT | YINT)*
+    ;
+
+gameOver
+    : GAMEOVER
+    ;
+
+win
+    : WIN
+    ;
+
 /*
  *  Lexer Rules
  */
@@ -117,9 +206,27 @@ fragment ACTIONS    : (I N C C O U N T E R '1' EQUALS INT |
                         W I N O N Z E R O C O U N T E R |
                         M O V E T O R A N D O M EQUALS WORD |
                         T R A N S F O R M T O S P R I T E EQUALS WORD |
-                        M O V E P L A Y E R T O EQUALS (XINT | YINT)* |
+                        M O V E P L A Y E R T O (XINT | YINT)* |
                         G A M E O V E R |
                         W I N);
+
+INCCOUNTERONE       : I N C C O U N T E R '1' EQUALS INT;
+DECCOUNTERONE       : D E C C O U N T E R '1' EQUALS INT;
+INCCOUNTERTWO       : I N C C O U N T E R '2' EQUALS INT;
+DECCOUNTERTWO       : D E C C O U N T E R '2' EQUALS INT;
+INCCOUNTERTHREE     : I N C C O U N T E R '3' EQUALS INT;
+DECCOUNTERTHREE     : D E C C O U N T E R '3' EQUALS INT;
+INCSPRITECOUNTER    : I N C S P R I T E C O U N T E R EQUALS INT;
+DECSPRITECOUNTER    : D E C S P R I T E C O U N T E R EQUALS INT;
+SETSPRITECOUNTER    : S E T S P R I T E C O U N T E R EQUALS INT;
+TRANSFORMONZERO     : T R A N S F O R M O N Z E R O C O U N T E R EQUALS WORD;
+GAMEOVERONZERO      : G A M E O V E R O N Z E R O C O U N T E R;
+WINONZERO           : W I N O N Z E R O C O U N T E R;
+MOVETORANDOM        : M O V E T O R A N D O M EQUALS WORD;
+TRANSFORMTOSPRITE   : T R A N S F O R M T O S P R I T E EQUALS WORD;
+MOVEPLAYERTO        : M O V E P L A Y E R T O EQUALS;
+GAMEOVER            : G A M E O V E R;
+WIN                 : W I N;
 
 ENVIRONMENT         : E N V I R O N M E N T;
 GOAL                : G O A L;
@@ -128,11 +235,12 @@ SPRITE              : S P R I T E;
 COUNTER             : C O U N T E R;
 EVENT               : E V E N T;
 SET                 : S E T;
+COUNTERINDEX        : ('1' | '2' | '3');
 ARROW               : '>';
 INT                 : '-'?'0'..'9'+;
 XINT                : X EQUALS '0'..'9'+;
 YINT                : Y EQUALS '0'..'9'+;
-COLOR               : C O L O U? R EQUALS ROYGBIV;
+COLOR               : C O L O R EQUALS ROYGBIV;
 SOLID               : S O L I D EQUALS BOOLEAN;
 COMMAND             : ACTIONS;
 WHITESPACE          : ' ' -> skip;

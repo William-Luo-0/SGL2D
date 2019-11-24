@@ -1,9 +1,12 @@
+import javafx.util.Pair;
 import model.GenericGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SGL2D extends JFrame {
 
@@ -17,13 +20,18 @@ public class SGL2D extends JFrame {
     /**
      * SGL2D Game Frame Initializer
      */
-    public SGL2D() {
+    public SGL2D() throws IOException {
         super("SGL2D Game");                       // JFrame frame = new JFrame("Frame Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);                  // Will display window bar
-        game = new GenericGame();               // Create new game, may change for interpreter!
+        GameFactory gameFactory = new GameFactory();
+        Pair<GenericGame, ArrayList<Boolean>> gameFactoryOutput = gameFactory.createGame();
+        game = gameFactoryOutput.getKey();
         gamePanel = new GamePanel(game);        // Create game JPanel
-        counterPanel = new CounterPanel(game, false, false, false);  // Create counter JPanel
+        counterPanel = new CounterPanel(game,
+                gameFactoryOutput.getValue().get(0),
+                gameFactoryOutput.getValue().get(1),
+                gameFactoryOutput.getValue().get(2));  // Create counter JPanel
         game.addObserver(counterPanel);         // Add counter to observe game
         add(gamePanel);                         // Defaults to fill rest of frame (center)
         add(counterPanel, BorderLayout.NORTH);  // Positions the counter at top of frame
@@ -47,12 +55,25 @@ public class SGL2D extends JFrame {
         }
     }
 
-    // TODO: CHANGE THIS AS WELL AS SGL2D() to call GameFactory with given file input.
     /**
      * Initializer of SGL2D
      * @param args
      */
     public static void main(String[] args) {
-        new SGL2D();
+        try {
+            new SGL2D();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+            System.out.println("Error, could not create game, file not readable or does not exist!");
+        }
     }
 }
+
+
+/*
+* future changes:
+* move events into more specific classes
+* move static fields too
+* add position class to handle positioning for the generic game
+* */

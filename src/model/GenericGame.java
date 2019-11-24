@@ -7,13 +7,13 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-// TODO: CHANGE GOAL TO BE NON-ESSENTIAL.
+import java.util.Random;
 
 /**
  * Generic Game class
  */
 public class GenericGame extends Observable {
+    public static final Random RND = new Random();
     private static final int GAME_WIDTH = 600;
     private static final int GAME_HEIGHT = 600;
     private static int COLUMNS = 10;
@@ -36,26 +36,53 @@ public class GenericGame extends Observable {
     public GenericGame() {
         sprites = new ArrayList<Sprite>();
         gridPositions = new ArrayList<>();
+        Sprite tempS = new Sprite("g10492");
+        tempS.setColor("black");
         for (int i = 0; i < ROWS; i++) {
-            gridPositions.add(new ArrayList<>());
+            ArrayList<Sprite> temp = new ArrayList<>();
+            for (int j = 0; j < COLUMNS; j++) {
+                temp.add(tempS);
+            }
+            gridPositions.add(temp);
         }
         observers = new Observable();
         isGameOver = false;
+        isVictory = false;
         valueCounter1 = 0;
         valueCounter2 = 0;
         valueCounter3 = 0;
     }
 
-    // TODO: ADD WHEN FINISHED
     /**
      * Updates game parameters, notifies observers, and repaints panel.
      */
     public void update() {
-        // repaint game panel in game panel... (DONE)
-        // setChanged();
-        // notifyObservers();
-        // checkVictory(); NOTE: NOT THE SAME AS isVICTORY, must notify all observers and end the game.
-        // checkGameOver(); NOTE: See above
+        for (int j = 0; j < COLUMNS; j++) {
+            for (int i = 0; i < ROWS; i++) {
+                Sprite eventSprite = gridPositions.get(j).get(i);
+                if (eventSprite.eventTransformOnZeroCounterFlag.equals(true)) {
+                    gridPositions.get(j).set(i, findSprite(eventSprite.getEventNewSprite()));
+                }
+                if (eventSprite.eventGameOverOnZeroCounterFlag.equals(true)) {
+                    if (eventSprite.getSpriteCounter() == 0) {
+                        isGameOver = true;
+                    }
+                }
+                if (eventSprite.eventWinOnZeroCounterFlag.equals(true)) {
+                    if (eventSprite.getSpriteCounter() == 0) {
+                        isGameOver = true;
+                    }
+                }
+            }
+        }
+        if (player.getxCoord() == goal.getxCoord() & player.getyCoord() == goal.getyCoord()) {
+            isVictory = true;
+        }
+        setChanged();
+        notifyObservers();
+        // If implementing resets:
+        // checkVictory(); // NOTE: NOT THE SAME AS isVICTORY, must notify all observers and end the game.
+        // checkGameOver(); // NOTE: See above
     }
 
     /**
@@ -63,24 +90,22 @@ public class GenericGame extends Observable {
      * @param keyCode Key press input
      */
     public void keyPressed(int keyCode) { // ** Probably change to only on down button unless an delay is added. Update changed when
-        if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
-            movePlayer("LEFT");
-            update();
+        if (!isGameOver & !isVictory) {
+            if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
+                movePlayer("LEFT");
+                update();
+            } else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
+                movePlayer("RIGHT");
+                update();
+            } else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP) {
+                movePlayer("UP");
+                update();
+            } else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN) {
+                movePlayer("DOWN");
+                update();
+            } else if (keyCode == KeyEvent.VK_ESCAPE)
+                System.exit(0);
         }
-        else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
-            movePlayer("RIGHT");
-            update();
-        }
-        else if (keyCode == KeyEvent.VK_KP_UP || keyCode == KeyEvent.VK_UP) {
-            movePlayer("UP");
-            update();
-        }
-        else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN) {
-            movePlayer("DOWN");
-            update();
-        }
-        else if (keyCode == KeyEvent.VK_ESCAPE)
-            System.exit(0);
     }
 
     /**
@@ -88,14 +113,17 @@ public class GenericGame extends Observable {
      * @param g panel to paint over
      */
     public void paint(Graphics g) {
-        int columnSize = gridPositions.size();
-        int rowSize = gridPositions.get(0).size();
+        //int columnSize = gridPositions.size();
+        //int rowSize = gridPositions.get(0).size();
+
+        int columnSize = COLUMNS;
+        int rowSize = ROWS;
 
         for (int i = 0; i < rowSize; i++) {
             for (int j = 0; j < columnSize; j++) {
                 Pair<Integer, Integer> position = convertGridCoordinates(j, i);
-                if (gridPositions.get(i).get(j) != null) {
-                    gridPositions.get(i).get(j).paint(g, position.getKey(), position.getValue());
+                if (gridPositions.get(j).get(i) != null) {
+                    gridPositions.get(j).get(i).paint(g, position.getKey(), position.getValue());
                 }
             }
         }
@@ -156,28 +184,36 @@ public class GenericGame extends Observable {
         return isVictory;
     }
 
+    public Goal getGoal () {
+        return goal;
+    }
+
+    public Player getPlayer () {
+        return player;
+    }
+
     /**
      * Getter for valueCounter1.
      * @return valueCounter1
      */
-    public int getValueCounter1() {
-        return valueCounter1;
+    public String getStringCounter1() {
+        return Integer.toString(valueCounter1);
     }
 
     /**
      * Getter for valueCounter2.
      * @return valueCounter2
      */
-    public int getValueCounter2() {
-        return valueCounter2;
+    public String getStringCounter2() {
+        return Integer.toString(valueCounter2);
     }
 
     /**
      * Getter for valueCounter3.
      * @return valueCounter3
      */
-    public int getValueCounter3() {
-        return valueCounter3;
+    public String getStringCounter3() {
+        return Integer.toString(valueCounter3);
     }
 
     /**
@@ -209,7 +245,7 @@ public class GenericGame extends Observable {
      * @param name the name of the sprite to find
      * @return the sprite matching the name or null
      */
-    private Sprite findSprite(String name) {
+    public Sprite findSprite(String name) {
         if (sprites == null) {
             return null;
         }
@@ -227,7 +263,7 @@ public class GenericGame extends Observable {
      * @param name the name of the sprite to find
      * @return true or false
      */
-    private Boolean containsSprite(String name) {
+    public Boolean containsSprite(String name) {
         if (sprites == null) {
             return false;
         }
@@ -241,13 +277,32 @@ public class GenericGame extends Observable {
     }
 
     /**
+     * Sets the sprite onto the grid
+     * @param sprite sprite to add to grid
+     * @param xPos x-position
+     * @param yPos y-position
+     */
+    // If time, make these into exceptions then handle with a try/catch block in exitSet.
+    public void setGridSprite(Sprite sprite, int xPos, int yPos) {
+        if (xPos > COLUMNS - 1) {
+            return;
+        }
+        if (yPos > ROWS - 1) {
+            return;
+        }
+        if (sprite != null) {
+            gridPositions.get(xPos).set(yPos, sprite);
+        }
+    }
+
+    /**
      * Converts given grid coordinates to position coordinates in the GamePanel.
      * @param xPos x-position in grid coordinates
      * @param yPos y-position in grid coordinates
      * @return a Pair containing x-coordinate and y-coordinate
      */
-    private Pair<Integer,Integer> convertGridCoordinates(int xPos, int yPos) {
-        return new Pair<Integer,Integer>(xPos*GAME_WIDTH/COLUMNS,yPos*GAME_HEIGHT/ROWS);
+    public Pair<Integer,Integer> convertGridCoordinates(int xPos, int yPos) {
+        return new Pair<Integer,Integer>(xPos*(GAME_WIDTH/COLUMNS),yPos*(GAME_HEIGHT/ROWS));
     }
 
     /**
@@ -268,37 +323,37 @@ public class GenericGame extends Observable {
         Pair<Integer,Integer> playerPos = convertToGridCoordinates(player.getxCoord(), player.getyCoord());
         switch(direction) {
             case("LEFT"):
-                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                if (checkBoundary(playerPos.getKey()-1, playerPos.getValue())) {
                     if (checkLocationMovable(playerPos.getKey()-1, playerPos.getValue())) {
                         Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey()-1, playerPos.getValue());
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
-                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                        performSpriteEvents(playerPos.getKey()-1, playerPos.getValue());
                     }
                 }
                 break;
             case("RIGHT"):
-                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                if (checkBoundary(playerPos.getKey()+1, playerPos.getValue())) {
                     if (checkLocationMovable(playerPos.getKey()+1, playerPos.getValue())) {
                         Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey()+1, playerPos.getValue());
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
-                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                        performSpriteEvents(playerPos.getKey()+1, playerPos.getValue());
                     }
                 }
                 break;
             case("DOWN"):
-                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                if (checkBoundary(playerPos.getKey(), playerPos.getValue()+1)) {
                     if (checkLocationMovable(playerPos.getKey(), playerPos.getValue()+1)) {
                         Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey(), playerPos.getValue()+1);
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
-                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                        performSpriteEvents(playerPos.getKey(), playerPos.getValue()+1);
                     }
                 }
                 break;
             case("UP"):
-                if (checkBoundary(playerPos.getKey(), playerPos.getValue())) {
+                if (checkBoundary(playerPos.getKey(), playerPos.getValue()-1)) {
                     if (checkLocationMovable(playerPos.getKey(), playerPos.getValue()-1)) {
                         Pair<Integer,Integer> playerCoord = convertGridCoordinates(playerPos.getKey(), playerPos.getValue()-1);
                         player.setxCoord(playerCoord.getKey());
@@ -344,22 +399,46 @@ public class GenericGame extends Observable {
     private void performSpriteEvents(int xPos, int yPos) {
         Sprite eventSprite = gridPositions.get(xPos).get(yPos);
         if (eventSprite.eventIncCounter1Flag.equals(true)) {
-            setValueCounter1(valueCounter1 + 1);
+            setValueCounter1(valueCounter1 + eventSprite.getIncCounter1());
         }
         if (eventSprite.eventDecCounter1Flag.equals(true)) {
-            setValueCounter1(valueCounter1 - 1);
+            setValueCounter1(valueCounter1 - eventSprite.getDecCounter1());
         }
         if (eventSprite.eventIncCounter2Flag.equals(true)) {
-            setValueCounter2(valueCounter2 + 1);
+            setValueCounter2(valueCounter2 + eventSprite.getIncCounter2());
         }
         if (eventSprite.eventDecCounter2Flag.equals(true)) {
-            setValueCounter2(valueCounter2 - 1);
+            setValueCounter2(valueCounter2 - eventSprite.getDecCounter2());
         }
         if (eventSprite.eventIncCounter3Flag.equals(true)) {
-            setValueCounter3(valueCounter2 + 1);
+            setValueCounter3(valueCounter2 + eventSprite.getIncCounter3());
         }
         if (eventSprite.eventDecCounter3Flag.equals(true)) {
-            setValueCounter3(valueCounter2 - 1);
+            setValueCounter3(valueCounter2 - eventSprite.getDecCounter3());
+        }
+        if (eventSprite.eventIncSpriteCounterFlag.equals(true)) {
+            eventSprite.setSpriteCounter(eventSprite.getSpriteCounter() + eventSprite.getIncSpriteCounter());
+        }
+        if (eventSprite.eventDecSpriteCounterFlag.equals(true)) {
+            eventSprite.setSpriteCounter(eventSprite.getSpriteCounter() - eventSprite.getDecSpriteCounter());
+        }
+        if (eventSprite.eventMoveToRandomFlag.equals(true)) {
+            gridPositions.get(xPos).set(yPos, findSprite(eventSprite.getEventNewSprite()));
+            gridPositions.get(RND.nextInt(ROWS)).set(RND.nextInt(COLUMNS), eventSprite);
+        }
+        if (eventSprite.eventTransformToSpriteFlag.equals(true)) {
+            gridPositions.get(xPos).set(yPos, findSprite(eventSprite.getEventNewSprite()));
+        }
+        if (eventSprite.eventMovePlayerToFlag.equals(true)) {
+            Pair<Integer,Integer> temp = convertGridCoordinates(eventSprite.getMovePlayerToX(), eventSprite.getMovePlayerToY());
+            player.setxCoord(temp.getKey());
+            player.setyCoord(temp.getValue());
+        }
+        if (eventSprite.eventGameOverFlag.equals(true)) {
+            isGameOver = true;
+        }
+        if (eventSprite.eventWinFlag.equals(true)) {
+            isVictory = true;
         }
     }
 }
