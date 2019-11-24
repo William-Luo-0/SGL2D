@@ -18,8 +18,13 @@ public abstract class AbstractSprite {
     private int decCounter3;
     protected int movePlayerToX;
     protected int movePlayerToY;
+    protected int playerDecCounter;
+    protected int playerIncCounter;
     protected String name;
     protected Color color;
+    protected int initialSpriteCounter;
+    protected Boolean eventPlayerDecCounterFlag;
+    protected Boolean eventPlayerIncCounterFlag;
     protected Boolean eventIncCounter1Flag;
     protected Boolean eventDecCounter1Flag;
     protected Boolean eventIncCounter2Flag;
@@ -32,6 +37,7 @@ public abstract class AbstractSprite {
     protected Boolean eventGameOverOnZeroCounterFlag;
     protected Boolean eventWinOnZeroCounterFlag;
     protected Boolean eventMoveToRandomFlag;
+    protected Boolean eventMoveToRandomOnZeroFlag;
     protected Boolean eventTransformToSpriteFlag;
     protected Boolean eventMovePlayerToFlag;
     protected Boolean eventGameOverFlag;
@@ -53,6 +59,9 @@ public abstract class AbstractSprite {
         decCounter1 = 1;
         decCounter2 = 1;
         decCounter3 = 1;
+        playerDecCounter = 0;
+        playerIncCounter = 0;
+        initialSpriteCounter = 0;
         eventIncCounter1Flag = false;
         eventDecCounter1Flag = false;
         eventIncCounter2Flag = false;
@@ -65,11 +74,14 @@ public abstract class AbstractSprite {
         eventGameOverOnZeroCounterFlag = false;
         eventWinOnZeroCounterFlag = false;
         eventMoveToRandomFlag = false;
+        eventMoveToRandomOnZeroFlag = false;
         eventTransformToSpriteFlag = false;
         eventMovePlayerToFlag = false;
         eventGameOverFlag = false;
         eventWinFlag = false;
         eventNewSprite = null;
+        eventPlayerDecCounterFlag = false;
+        eventPlayerIncCounterFlag = false;
     }
 
     public abstract void paint(Graphics g);
@@ -114,6 +126,9 @@ public abstract class AbstractSprite {
                 color = Color.WHITE;
                 break;
             case ("grey"):
+                color = Color.GRAY;
+                break;
+            case ("gray"):
                 color = Color.GRAY;
                 break;
             default:
@@ -241,8 +256,20 @@ public abstract class AbstractSprite {
         this.eventMoveToRandomFlag = eventMoveToRandomFlag;
     }
 
+    public void setEventMoveToRandomOnZeroFlag(Boolean eventMoveToRandomOnZeroFlag) {
+        this.eventMoveToRandomOnZeroFlag = eventMoveToRandomOnZeroFlag;
+    }
+
     public void setEventTransformToSpriteFlag(Boolean eventTransformToSpriteFlag) {
         this.eventTransformToSpriteFlag = eventTransformToSpriteFlag;
+    }
+
+    public void setEventPlayerDecCounterFlag(Boolean eventPlayerDecCounterFlag) {
+        this.eventPlayerDecCounterFlag = eventPlayerDecCounterFlag;
+    }
+
+    public void setEventPlayerIncCounterFlag(Boolean eventPlayerIncCounterFlag) {
+        this.eventPlayerIncCounterFlag = eventPlayerIncCounterFlag;
     }
 
     public void setEventGameOverFlag(Boolean eventGameOverFlag) {
@@ -267,6 +294,10 @@ public abstract class AbstractSprite {
 
     public int getSpriteCounter () {
         return spriteCounter;
+    }
+
+    public int getInitialSpriteCounter() {
+        return initialSpriteCounter;
     }
 
     public int getIncSpriteCounter () {
@@ -301,6 +332,22 @@ public abstract class AbstractSprite {
         return decCounter3;
     }
 
+    public int getPlayerDecCounter() {
+        return playerDecCounter;
+    }
+
+    public void setPlayerDecCounter(int playerDecCounter) {
+        this.playerDecCounter = playerDecCounter;
+    }
+
+    public int getPlayerIncCounter() {
+        return playerIncCounter;
+    }
+
+    public void setPlayerIncCounter(int playerIncCounter) {
+        this.playerIncCounter = playerIncCounter;
+    }
+
     public void setMovePlayerToX (int value) {
         movePlayerToX = value;
     }
@@ -311,6 +358,10 @@ public abstract class AbstractSprite {
 
     public void setSpriteCounter (int value) {
         spriteCounter = value;
+    }
+
+    public void setInitialSpriteCounter(int initialSpriteCounter) {
+        this.initialSpriteCounter = initialSpriteCounter;
     }
 
     public void setIncSpriteCounter (int value) {

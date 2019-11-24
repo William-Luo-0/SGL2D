@@ -50,6 +50,8 @@ public class GamePanel  extends JPanel {
      */
     private void victory (Graphics g) {
         Color saved = g.getColor();
+        g.setColor(new Color(255,255,255, 175));
+        g.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
         g.setColor(new Color( 0, 0, 0));
         g.setFont(new Font("Arial", 20, 75));
         FontMetrics fm = g.getFontMetrics();
@@ -63,6 +65,8 @@ public class GamePanel  extends JPanel {
      */
     private void gameOver (Graphics g) {
         Color saved = g.getColor();
+        g.setColor(new Color(255,255,255, 175));
+        g.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
         g.setColor(new Color( 0, 0, 0));
         g.setFont(new Font("Arial", 20, 75));
         FontMetrics fm = g.getFontMetrics();

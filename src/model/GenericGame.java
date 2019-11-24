@@ -29,6 +29,24 @@ public class GenericGame extends Observable {
     private int valueCounter1;
     private int valueCounter2;
     private int valueCounter3;
+    private Boolean playerIncCounter1Flag;
+    private Boolean playerIncCounter2Flag;
+    private Boolean playerIncCounter3Flag;
+    private Boolean playerDecCounter1Flag;
+    private Boolean playerDecCounter2Flag;
+    private Boolean playerDecCounter3Flag;
+    private int playerIncValue1;
+    private int playerIncValue2;
+    private int playerIncValue3;
+    private int playerDecValue1;
+    private int playerDecValue2;
+    private int playerDecValue3;
+    private Boolean counter1WinOnZero;
+    private Boolean counter2WinOnZero;
+    private Boolean counter3WinOnZero;
+    private Boolean counter1GameOverOnZero;
+    private Boolean counter2GameOverOnZero;
+    private Boolean counter3GameOverOnZero;
 
     /**
      * Constructor for a GenericGame
@@ -51,6 +69,24 @@ public class GenericGame extends Observable {
         valueCounter1 = 0;
         valueCounter2 = 0;
         valueCounter3 = 0;
+        playerIncCounter1Flag = false;
+        playerIncCounter2Flag = false;
+        playerIncCounter3Flag = false;
+        playerDecCounter1Flag = false;
+        playerDecCounter2Flag = false;
+        playerDecCounter3Flag = false;
+        playerIncValue1 = 0;
+        playerIncValue2 = 0;
+        playerIncValue3 = 0;
+        playerDecValue1 = 0;
+        playerDecValue2 = 0;
+        playerDecValue3 = 0;
+        counter1WinOnZero = false;
+        counter2WinOnZero = false;
+        counter3WinOnZero = false;
+        counter1GameOverOnZero = false;
+        counter2GameOverOnZero = false;
+        counter3GameOverOnZero = false;
     }
 
     /**
@@ -73,10 +109,55 @@ public class GenericGame extends Observable {
                         isGameOver = true;
                     }
                 }
+                if (eventSprite.eventPlayerIncCounterFlag.equals(true)) {
+                    eventSprite.setSpriteCounter(eventSprite.getSpriteCounter() + eventSprite.getPlayerIncCounter());
+                }
+                if (eventSprite.eventPlayerDecCounterFlag.equals(true)) {
+                    eventSprite.setSpriteCounter(eventSprite.getSpriteCounter() - eventSprite.getPlayerDecCounter());
+                }
+                if (eventSprite.eventMoveToRandomOnZeroFlag.equals(true) && eventSprite.getSpriteCounter() == 0) {
+                    eventSprite.setSpriteCounter(eventSprite.getInitialSpriteCounter());
+                    if (containsSprite(eventSprite.getEventNewSprite())) {
+                        gridPositions.get(j).set(i, findSprite(eventSprite.getEventNewSprite()));
+                        gridPositions.get(RND.nextInt(ROWS)).set(RND.nextInt(COLUMNS), eventSprite);
+                    }
+                }
             }
         }
-        if (player.getxCoord() == goal.getxCoord() & player.getyCoord() == goal.getyCoord()) {
-            isVictory = true;
+        if (counter1WinOnZero) {
+            if (valueCounter1 == 0) {
+                isVictory = true;
+            }
+        }
+        if (counter2WinOnZero) {
+            if (valueCounter2 == 0) {
+                isVictory = true;
+            }
+        }
+        if (counter3WinOnZero) {
+            if (valueCounter3 == 0) {
+                isVictory = true;
+            }
+        }
+        if (counter1GameOverOnZero) {
+            if (valueCounter1 == 0) {
+                isGameOver = true;
+            }
+        }
+        if (counter2GameOverOnZero) {
+            if (valueCounter2 == 0) {
+                isGameOver = true;
+            }
+        }
+        if (counter3GameOverOnZero) {
+            if (valueCounter3 == 0) {
+                isGameOver = true;
+            }
+        }
+        if (goal != null) {
+            if (player.getxCoord() == goal.getxCoord() & player.getyCoord() == goal.getyCoord()) {
+                isVictory = true;
+            }
         }
         setChanged();
         notifyObservers();
@@ -240,6 +321,78 @@ public class GenericGame extends Observable {
         valueCounter3 = value;
     }
 
+    public void setPlayerIncCounter1Flag(Boolean playerIncCounter1Flag) {
+        this.playerIncCounter1Flag = playerIncCounter1Flag;
+    }
+
+    public void setPlayerIncCounter2Flag(Boolean playerIncCounter2Flag) {
+        this.playerIncCounter2Flag = playerIncCounter2Flag;
+    }
+
+    public void setPlayerIncCounter3Flag(Boolean playerIncCounter3Flag) {
+        this.playerIncCounter3Flag = playerIncCounter3Flag;
+    }
+
+    public void setPlayerDecCounter1Flag(Boolean playerDecCounter1Flag) {
+        this.playerDecCounter1Flag = playerDecCounter1Flag;
+    }
+
+    public void setPlayerDecCounter2Flag(Boolean playerDecCounter2Flag) {
+        this.playerDecCounter2Flag = playerDecCounter2Flag;
+    }
+
+    public void setPlayerDecCounter3Flag(Boolean playerDecCounter3Flag) {
+        this.playerDecCounter3Flag = playerDecCounter3Flag;
+    }
+
+    public void setPlayerIncValue1(int playerIncValue1) {
+        this.playerIncValue1 = playerIncValue1;
+    }
+
+    public void setPlayerIncValue2(int playerIncValue2) {
+        this.playerIncValue2 = playerIncValue2;
+    }
+
+    public void setPlayerIncValue3(int playerIncValue3) {
+        this.playerIncValue3 = playerIncValue3;
+    }
+
+    public void setPlayerDecValue1(int playerDecValue1) {
+        this.playerDecValue1 = playerDecValue1;
+    }
+
+    public void setPlayerDecValue2(int playerDecValue2) {
+        this.playerDecValue2 = playerDecValue2;
+    }
+
+    public void setPlayerDecValue3(int playerDecValue3) {
+        this.playerDecValue3 = playerDecValue3;
+    }
+
+    public void setCounter1WinOnZero(Boolean counter1WinOnZero) {
+        this.counter1WinOnZero = counter1WinOnZero;
+    }
+
+    public void setCounter2WinOnZero(Boolean counter2WinOnZero) {
+        this.counter2WinOnZero = counter2WinOnZero;
+    }
+
+    public void setCounter3WinOnZero(Boolean counter3WinOnZero) {
+        this.counter3WinOnZero = counter3WinOnZero;
+    }
+
+    public void setCounter1GameOverOnZero(Boolean counter1GameOverOnZero) {
+        this.counter1GameOverOnZero = counter1GameOverOnZero;
+    }
+
+    public void setCounter2GameOverOnZero(Boolean counter2GameOverOnZero) {
+        this.counter2GameOverOnZero = counter2GameOverOnZero;
+    }
+
+    public void setCounter3GameOverOnZero(Boolean counter3GameOverOnZero) {
+        this.counter3GameOverOnZero = counter3GameOverOnZero;
+    }
+
     /**
      * Finds a sprite given the name in sprites if it exists otherwise return null.
      * @param name the name of the sprite to find
@@ -321,6 +474,7 @@ public class GenericGame extends Observable {
      */
     private void movePlayer(String direction) {
         Pair<Integer,Integer> playerPos = convertToGridCoordinates(player.getxCoord(), player.getyCoord());
+        Boolean moved = false;
         switch(direction) {
             case("LEFT"):
                 if (checkBoundary(playerPos.getKey()-1, playerPos.getValue())) {
@@ -329,6 +483,7 @@ public class GenericGame extends Observable {
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
                         performSpriteEvents(playerPos.getKey()-1, playerPos.getValue());
+                        moved = true;
                     }
                 }
                 break;
@@ -339,6 +494,7 @@ public class GenericGame extends Observable {
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
                         performSpriteEvents(playerPos.getKey()+1, playerPos.getValue());
+                        moved = true;
                     }
                 }
                 break;
@@ -349,6 +505,7 @@ public class GenericGame extends Observable {
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
                         performSpriteEvents(playerPos.getKey(), playerPos.getValue()+1);
+                        moved = true;
                     }
                 }
                 break;
@@ -359,9 +516,30 @@ public class GenericGame extends Observable {
                         player.setxCoord(playerCoord.getKey());
                         player.setyCoord(playerCoord.getValue());
                         performSpriteEvents(playerPos.getKey(), playerPos.getValue()-1);
+                        moved = true;
                     }
                 }
                 break;
+        }
+        if (moved) {
+            if (playerIncCounter1Flag) {
+                valueCounter1 += playerIncValue1;
+            }
+            if (playerIncCounter2Flag) {
+                valueCounter2 += playerIncValue2;
+            }
+            if (playerIncCounter3Flag) {
+                valueCounter3 += playerIncValue3;
+            }
+            if (playerDecCounter1Flag) {
+                valueCounter1 -= playerDecValue1;
+            }
+            if (playerDecCounter2Flag) {
+                valueCounter2 -= playerDecValue2;
+            }
+            if (playerDecCounter3Flag) {
+                valueCounter3 -= playerDecValue3;
+            }
         }
     }
 
@@ -423,8 +601,13 @@ public class GenericGame extends Observable {
             eventSprite.setSpriteCounter(eventSprite.getSpriteCounter() - eventSprite.getDecSpriteCounter());
         }
         if (eventSprite.eventMoveToRandomFlag.equals(true)) {
-            gridPositions.get(xPos).set(yPos, findSprite(eventSprite.getEventNewSprite()));
-            gridPositions.get(RND.nextInt(ROWS)).set(RND.nextInt(COLUMNS), eventSprite);
+            if (eventSprite.getSpriteCounter() != 0) {
+                eventSprite.setSpriteCounter(eventSprite.getInitialSpriteCounter());
+            }
+            if (containsSprite(eventSprite.getEventNewSprite())) {
+                gridPositions.get(xPos).set(yPos, findSprite(eventSprite.getEventNewSprite()));
+                gridPositions.get(RND.nextInt(ROWS)).set(RND.nextInt(COLUMNS), eventSprite);
+            }
         }
         if (eventSprite.eventTransformToSpriteFlag.equals(true)) {
             gridPositions.get(xPos).set(yPos, findSprite(eventSprite.getEventNewSprite()));

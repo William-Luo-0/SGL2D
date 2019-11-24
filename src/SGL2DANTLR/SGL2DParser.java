@@ -19,11 +19,14 @@ public class SGL2DParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, INCCOUNTERONE=4, DECCOUNTERONE=5, INCCOUNTERTWO=6, 
 		DECCOUNTERTWO=7, INCCOUNTERTHREE=8, DECCOUNTERTHREE=9, INCSPRITECOUNTER=10, 
-		DECSPRITECOUNTER=11, SETSPRITECOUNTER=12, TRANSFORMONZERO=13, GAMEOVERONZERO=14, 
-		WINONZERO=15, MOVETORANDOM=16, TRANSFORMTOSPRITE=17, MOVEPLAYERTO=18, 
-		GAMEOVER=19, WIN=20, ENVIRONMENT=21, GOAL=22, PLAYER=23, SPRITE=24, COUNTER=25, 
-		EVENT=26, SET=27, COUNTERINDEX=28, ARROW=29, INT=30, XINT=31, YINT=32, 
-		COLOR=33, SOLID=34, COMMAND=35, WHITESPACE=36, BOOLEAN=37, WORD=38, NEWLINE=39;
+		DECSPRITECOUNTER=11, SETSPRITECOUNTER=12, MOVETORANDOMONZERO=13, TRANSFORMONZERO=14, 
+		GAMEOVERONZERO=15, WINONZERO=16, MOVETORANDOM=17, TRANSFORMTOSPRITE=18, 
+		MOVEPLAYERTO=19, PLAYERINCCOUNTERONE=20, PLAYERINCCOUNTERTWO=21, PLAYERINCCOUNTERTHREE=22, 
+		PLAYERINCSPRITECOUNTER=23, PLAYERDECCOUNTERONE=24, PLAYERDECCOUNTERTWO=25, 
+		PLAYERDECCOUNTERTHREE=26, PLAYERDECSPRITECOUNTER=27, GAMEOVER=28, WIN=29, 
+		ENVIRONMENT=30, GOAL=31, PLAYER=32, SPRITE=33, COUNTER=34, EVENT=35, SET=36, 
+		COUNTERINDEX=37, ARROW=38, INT=39, XINT=40, YINT=41, COLOR=42, SOLID=43, 
+		COMMAND=44, WHITESPACE=45, BOOLEAN=46, WORD=47, NEWLINE=48;
 	public static final int
 		RULE_start = 0, RULE_expression = 1, RULE_environment = 2, RULE_goal = 3, 
 		RULE_player = 4, RULE_sprite = 5, RULE_counter = 6, RULE_event = 7, RULE_set = 8, 
@@ -32,16 +35,21 @@ public class SGL2DParser extends Parser {
 		RULE_incCounter3 = 17, RULE_decCounter3 = 18, RULE_incSpriteCounter = 19, 
 		RULE_decSpriteCounter = 20, RULE_setSpriteCounter = 21, RULE_transformOnZeroCounter = 22, 
 		RULE_gameOverOnZeroCounter = 23, RULE_winOnZeroCounter = 24, RULE_moveToRandom = 25, 
-		RULE_transformToSprite = 26, RULE_movePlayerTo = 27, RULE_gameOver = 28, 
-		RULE_win = 29;
+		RULE_moveToRandomOnZero = 26, RULE_transformToSprite = 27, RULE_movePlayerTo = 28, 
+		RULE_playerIncCounter1 = 29, RULE_playerIncCounter2 = 30, RULE_playerIncCounter3 = 31, 
+		RULE_playerDecCounter1 = 32, RULE_playerDecCounter2 = 33, RULE_playerDecCounter3 = 34, 
+		RULE_playerIncSpriteCounter = 35, RULE_playerDecSpriteCounter = 36, RULE_gameOver = 37, 
+		RULE_win = 38;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"start", "expression", "environment", "goal", "player", "sprite", "counter", 
 			"event", "set", "newline", "position", "range", "action", "incCounter1", 
 			"decCounter1", "incCounter2", "decCounter2", "incCounter3", "decCounter3", 
 			"incSpriteCounter", "decSpriteCounter", "setSpriteCounter", "transformOnZeroCounter", 
-			"gameOverOnZeroCounter", "winOnZeroCounter", "moveToRandom", "transformToSprite", 
-			"movePlayerTo", "gameOver", "win"
+			"gameOverOnZeroCounter", "winOnZeroCounter", "moveToRandom", "moveToRandomOnZero", 
+			"transformToSprite", "movePlayerTo", "playerIncCounter1", "playerIncCounter2", 
+			"playerIncCounter3", "playerDecCounter1", "playerDecCounter2", "playerDecCounter3", 
+			"playerIncSpriteCounter", "playerDecSpriteCounter", "gameOver", "win"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -50,8 +58,8 @@ public class SGL2DParser extends Parser {
 		return new String[] {
 			null, "'('", "','", "')'", null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, "'>'", null, null, null, null, null, 
-			null, "' '"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, "'>'", null, null, null, null, null, null, "' '"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -59,11 +67,14 @@ public class SGL2DParser extends Parser {
 		return new String[] {
 			null, null, null, null, "INCCOUNTERONE", "DECCOUNTERONE", "INCCOUNTERTWO", 
 			"DECCOUNTERTWO", "INCCOUNTERTHREE", "DECCOUNTERTHREE", "INCSPRITECOUNTER", 
-			"DECSPRITECOUNTER", "SETSPRITECOUNTER", "TRANSFORMONZERO", "GAMEOVERONZERO", 
-			"WINONZERO", "MOVETORANDOM", "TRANSFORMTOSPRITE", "MOVEPLAYERTO", "GAMEOVER", 
-			"WIN", "ENVIRONMENT", "GOAL", "PLAYER", "SPRITE", "COUNTER", "EVENT", 
-			"SET", "COUNTERINDEX", "ARROW", "INT", "XINT", "YINT", "COLOR", "SOLID", 
-			"COMMAND", "WHITESPACE", "BOOLEAN", "WORD", "NEWLINE"
+			"DECSPRITECOUNTER", "SETSPRITECOUNTER", "MOVETORANDOMONZERO", "TRANSFORMONZERO", 
+			"GAMEOVERONZERO", "WINONZERO", "MOVETORANDOM", "TRANSFORMTOSPRITE", "MOVEPLAYERTO", 
+			"PLAYERINCCOUNTERONE", "PLAYERINCCOUNTERTWO", "PLAYERINCCOUNTERTHREE", 
+			"PLAYERINCSPRITECOUNTER", "PLAYERDECCOUNTERONE", "PLAYERDECCOUNTERTWO", 
+			"PLAYERDECCOUNTERTHREE", "PLAYERDECSPRITECOUNTER", "GAMEOVER", "WIN", 
+			"ENVIRONMENT", "GOAL", "PLAYER", "SPRITE", "COUNTER", "EVENT", "SET", 
+			"COUNTERINDEX", "ARROW", "INT", "XINT", "YINT", "COLOR", "SOLID", "COMMAND", 
+			"WHITESPACE", "BOOLEAN", "WORD", "NEWLINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -140,7 +151,7 @@ public class SGL2DParser extends Parser {
 		StartContext _localctx = new StartContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_start);
 		try {
-			setState(64);
+			setState(82);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
@@ -151,9 +162,9 @@ public class SGL2DParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(61);
+				setState(79);
 				expression();
-				setState(62);
+				setState(80);
 				match(EOF);
 				}
 				break;
@@ -213,7 +224,7 @@ public class SGL2DParser extends Parser {
 		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_expression);
 		try {
-			setState(75);
+			setState(93);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case EOF:
@@ -224,56 +235,56 @@ public class SGL2DParser extends Parser {
 			case ENVIRONMENT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(67);
+				setState(85);
 				environment();
 				}
 				break;
 			case GOAL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(68);
+				setState(86);
 				goal();
 				}
 				break;
 			case PLAYER:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(69);
+				setState(87);
 				player();
 				}
 				break;
 			case SPRITE:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(70);
+				setState(88);
 				sprite();
 				}
 				break;
 			case COUNTER:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(71);
+				setState(89);
 				counter();
 				}
 				break;
 			case EVENT:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(72);
+				setState(90);
 				event();
 				}
 				break;
 			case SET:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(73);
+				setState(91);
 				set();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(74);
+				setState(92);
 				newline();
 				}
 				break;
@@ -328,17 +339,17 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
+			setState(95);
 			match(ENVIRONMENT);
-			setState(78);
+			setState(96);
 			match(ARROW);
-			setState(82);
+			setState(100);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==XINT || _la==YINT) {
 				{
 				{
-				setState(79);
+				setState(97);
 				_la = _input.LA(1);
 				if ( !(_la==XINT || _la==YINT) ) {
 				_errHandler.recoverInline(this);
@@ -350,18 +361,18 @@ public class SGL2DParser extends Parser {
 				}
 				}
 				}
-				setState(84);
+				setState(102);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(87);
+			setState(105);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(85);
+				setState(103);
 				match(NEWLINE);
-				setState(86);
+				setState(104);
 				expression();
 				}
 			}
@@ -419,17 +430,17 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(89);
+			setState(107);
 			match(GOAL);
-			setState(90);
+			setState(108);
 			match(ARROW);
-			setState(94);
+			setState(112);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XINT) | (1L << YINT) | (1L << COLOR))) != 0)) {
 				{
 				{
-				setState(91);
+				setState(109);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XINT) | (1L << YINT) | (1L << COLOR))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -441,18 +452,18 @@ public class SGL2DParser extends Parser {
 				}
 				}
 				}
-				setState(96);
+				setState(114);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(99);
+			setState(117);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(97);
+				setState(115);
 				match(NEWLINE);
-				setState(98);
+				setState(116);
 				expression();
 				}
 			}
@@ -510,17 +521,17 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(101);
+			setState(119);
 			match(PLAYER);
-			setState(102);
+			setState(120);
 			match(ARROW);
-			setState(106);
+			setState(124);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XINT) | (1L << YINT) | (1L << COLOR))) != 0)) {
 				{
 				{
-				setState(103);
+				setState(121);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << XINT) | (1L << YINT) | (1L << COLOR))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -532,18 +543,18 @@ public class SGL2DParser extends Parser {
 				}
 				}
 				}
-				setState(108);
+				setState(126);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(111);
+			setState(129);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(109);
+				setState(127);
 				match(NEWLINE);
-				setState(110);
+				setState(128);
 				expression();
 				}
 			}
@@ -598,19 +609,19 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(131);
 			match(SPRITE);
-			setState(114);
+			setState(132);
 			match(WORD);
-			setState(115);
+			setState(133);
 			match(ARROW);
-			setState(119);
+			setState(137);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COLOR || _la==SOLID) {
 				{
 				{
-				setState(116);
+				setState(134);
 				_la = _input.LA(1);
 				if ( !(_la==COLOR || _la==SOLID) ) {
 				_errHandler.recoverInline(this);
@@ -622,18 +633,18 @@ public class SGL2DParser extends Parser {
 				}
 				}
 				}
-				setState(121);
+				setState(139);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(124);
+			setState(142);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(122);
+				setState(140);
 				match(NEWLINE);
-				setState(123);
+				setState(141);
 				expression();
 				}
 			}
@@ -667,6 +678,14 @@ public class SGL2DParser extends Parser {
 		public TerminalNode INT(int i) {
 			return getToken(SGL2DParser.INT, i);
 		}
+		public List<TerminalNode> WINONZERO() { return getTokens(SGL2DParser.WINONZERO); }
+		public TerminalNode WINONZERO(int i) {
+			return getToken(SGL2DParser.WINONZERO, i);
+		}
+		public List<TerminalNode> GAMEOVERONZERO() { return getTokens(SGL2DParser.GAMEOVERONZERO); }
+		public TerminalNode GAMEOVERONZERO(int i) {
+			return getToken(SGL2DParser.GAMEOVERONZERO, i);
+		}
 		public CounterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -688,21 +707,21 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(126);
+			setState(144);
 			match(COUNTER);
-			setState(127);
+			setState(145);
 			match(COUNTERINDEX);
-			setState(128);
+			setState(146);
 			match(ARROW);
-			setState(132);
+			setState(150);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==INT || _la==BOOLEAN) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GAMEOVERONZERO) | (1L << WINONZERO) | (1L << INT) | (1L << BOOLEAN))) != 0)) {
 				{
 				{
-				setState(129);
+				setState(147);
 				_la = _input.LA(1);
-				if ( !(_la==INT || _la==BOOLEAN) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GAMEOVERONZERO) | (1L << WINONZERO) | (1L << INT) | (1L << BOOLEAN))) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -712,18 +731,18 @@ public class SGL2DParser extends Parser {
 				}
 				}
 				}
-				setState(134);
+				setState(152);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(137);
+			setState(155);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(135);
+				setState(153);
 				match(NEWLINE);
-				setState(136);
+				setState(154);
 				expression();
 				}
 			}
@@ -743,8 +762,9 @@ public class SGL2DParser extends Parser {
 
 	public static class EventContext extends ParserRuleContext {
 		public TerminalNode EVENT() { return getToken(SGL2DParser.EVENT, 0); }
-		public TerminalNode WORD() { return getToken(SGL2DParser.WORD, 0); }
 		public TerminalNode ARROW() { return getToken(SGL2DParser.ARROW, 0); }
+		public TerminalNode PLAYER() { return getToken(SGL2DParser.PLAYER, 0); }
+		public TerminalNode WORD() { return getToken(SGL2DParser.WORD, 0); }
 		public List<ActionContext> action() {
 			return getRuleContexts(ActionContext.class);
 		}
@@ -776,34 +796,42 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(139);
+			setState(157);
 			match(EVENT);
-			setState(140);
-			match(WORD);
-			setState(141);
+			setState(158);
+			_la = _input.LA(1);
+			if ( !(_la==PLAYER || _la==WORD) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(159);
 			match(ARROW);
-			setState(145);
+			setState(163);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INCCOUNTERONE) | (1L << DECCOUNTERONE) | (1L << INCCOUNTERTWO) | (1L << DECCOUNTERTWO) | (1L << INCCOUNTERTHREE) | (1L << DECCOUNTERTHREE) | (1L << INCSPRITECOUNTER) | (1L << DECSPRITECOUNTER) | (1L << SETSPRITECOUNTER) | (1L << TRANSFORMONZERO) | (1L << GAMEOVERONZERO) | (1L << WINONZERO) | (1L << MOVETORANDOM) | (1L << TRANSFORMTOSPRITE) | (1L << MOVEPLAYERTO) | (1L << GAMEOVER) | (1L << WIN))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INCCOUNTERONE) | (1L << DECCOUNTERONE) | (1L << INCCOUNTERTWO) | (1L << DECCOUNTERTWO) | (1L << INCCOUNTERTHREE) | (1L << DECCOUNTERTHREE) | (1L << INCSPRITECOUNTER) | (1L << DECSPRITECOUNTER) | (1L << SETSPRITECOUNTER) | (1L << MOVETORANDOMONZERO) | (1L << TRANSFORMONZERO) | (1L << GAMEOVERONZERO) | (1L << WINONZERO) | (1L << MOVETORANDOM) | (1L << TRANSFORMTOSPRITE) | (1L << MOVEPLAYERTO) | (1L << PLAYERINCCOUNTERONE) | (1L << PLAYERINCCOUNTERTWO) | (1L << PLAYERINCCOUNTERTHREE) | (1L << PLAYERINCSPRITECOUNTER) | (1L << PLAYERDECCOUNTERONE) | (1L << PLAYERDECCOUNTERTWO) | (1L << PLAYERDECCOUNTERTHREE) | (1L << PLAYERDECSPRITECOUNTER) | (1L << GAMEOVER) | (1L << WIN))) != 0)) {
 				{
 				{
-				setState(142);
+				setState(160);
 				action();
 				}
 				}
-				setState(147);
+				setState(165);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(150);
+			setState(168);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(148);
+				setState(166);
 				match(NEWLINE);
-				setState(149);
+				setState(167);
 				expression();
 				}
 			}
@@ -837,7 +865,10 @@ public class SGL2DParser extends Parser {
 		public RangeContext range(int i) {
 			return getRuleContext(RangeContext.class,i);
 		}
-		public TerminalNode NEWLINE() { return getToken(SGL2DParser.NEWLINE, 0); }
+		public List<TerminalNode> NEWLINE() { return getTokens(SGL2DParser.NEWLINE); }
+		public TerminalNode NEWLINE(int i) {
+			return getToken(SGL2DParser.NEWLINE, i);
+		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -860,51 +891,64 @@ public class SGL2DParser extends Parser {
 		enterRule(_localctx, 16, RULE_set);
 		int _la;
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(152);
+			setState(170);
 			match(SET);
-			setState(153);
+			setState(171);
 			match(WORD);
-			setState(154);
+			setState(172);
 			match(ARROW);
-			setState(157); 
+			setState(176); 
 			_errHandler.sync(this);
-			_la = _input.LA(1);
+			_alt = 1;
 			do {
-				{
-				setState(157);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case XINT:
-				case YINT:
+				switch (_alt) {
+				case 1:
 					{
-					setState(155);
-					position();
+					setState(176);
+					_errHandler.sync(this);
+					switch (_input.LA(1)) {
+					case XINT:
+					case YINT:
+						{
+						setState(173);
+						position();
+						}
+						break;
+					case T__0:
+						{
+						setState(174);
+						range();
+						}
+						break;
+					case NEWLINE:
+						{
+						setState(175);
+						match(NEWLINE);
+						}
+						break;
+					default:
+						throw new NoViableAltException(this);
 					}
-					break;
-				case T__0:
-					{
-					setState(156);
-					range();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				}
-				setState(159); 
+				setState(178); 
 				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << XINT) | (1L << YINT))) != 0) );
-			setState(163);
+				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+			setState(182);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(161);
+				setState(180);
 				match(NEWLINE);
-				setState(162);
+				setState(181);
 				expression();
 				}
 			}
@@ -947,9 +991,9 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(165);
+			setState(184);
 			match(NEWLINE);
-			setState(166);
+			setState(185);
 			expression();
 			}
 		}
@@ -985,24 +1029,24 @@ public class SGL2DParser extends Parser {
 		PositionContext _localctx = new PositionContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_position);
 		try {
-			setState(172);
+			setState(191);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case XINT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(168);
+				setState(187);
 				match(XINT);
-				setState(169);
+				setState(188);
 				match(YINT);
 				}
 				break;
 			case YINT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(170);
+				setState(189);
 				match(YINT);
-				setState(171);
+				setState(190);
 				match(XINT);
 				}
 				break;
@@ -1048,15 +1092,15 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(174);
+			setState(193);
 			match(T__0);
-			setState(175);
+			setState(194);
 			position();
-			setState(176);
+			setState(195);
 			match(T__1);
-			setState(177);
+			setState(196);
 			position();
-			setState(178);
+			setState(197);
 			match(T__2);
 			}
 		}
@@ -1099,6 +1143,9 @@ public class SGL2DParser extends Parser {
 		public SetSpriteCounterContext setSpriteCounter() {
 			return getRuleContext(SetSpriteCounterContext.class,0);
 		}
+		public MoveToRandomOnZeroContext moveToRandomOnZero() {
+			return getRuleContext(MoveToRandomOnZeroContext.class,0);
+		}
 		public TransformOnZeroCounterContext transformOnZeroCounter() {
 			return getRuleContext(TransformOnZeroCounterContext.class,0);
 		}
@@ -1116,6 +1163,30 @@ public class SGL2DParser extends Parser {
 		}
 		public MovePlayerToContext movePlayerTo() {
 			return getRuleContext(MovePlayerToContext.class,0);
+		}
+		public PlayerIncCounter1Context playerIncCounter1() {
+			return getRuleContext(PlayerIncCounter1Context.class,0);
+		}
+		public PlayerIncCounter2Context playerIncCounter2() {
+			return getRuleContext(PlayerIncCounter2Context.class,0);
+		}
+		public PlayerIncCounter3Context playerIncCounter3() {
+			return getRuleContext(PlayerIncCounter3Context.class,0);
+		}
+		public PlayerDecCounter1Context playerDecCounter1() {
+			return getRuleContext(PlayerDecCounter1Context.class,0);
+		}
+		public PlayerDecCounter2Context playerDecCounter2() {
+			return getRuleContext(PlayerDecCounter2Context.class,0);
+		}
+		public PlayerDecCounter3Context playerDecCounter3() {
+			return getRuleContext(PlayerDecCounter3Context.class,0);
+		}
+		public PlayerIncSpriteCounterContext playerIncSpriteCounter() {
+			return getRuleContext(PlayerIncSpriteCounterContext.class,0);
+		}
+		public PlayerDecSpriteCounterContext playerDecSpriteCounter() {
+			return getRuleContext(PlayerDecSpriteCounterContext.class,0);
 		}
 		public GameOverContext gameOver() {
 			return getRuleContext(GameOverContext.class,0);
@@ -1141,125 +1212,188 @@ public class SGL2DParser extends Parser {
 		ActionContext _localctx = new ActionContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_action);
 		try {
-			setState(197);
+			setState(225);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INCCOUNTERONE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(180);
+				setState(199);
 				incCounter1();
 				}
 				break;
 			case DECCOUNTERONE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(181);
+				setState(200);
 				decCounter1();
 				}
 				break;
 			case INCCOUNTERTWO:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(182);
+				setState(201);
 				incCounter2();
 				}
 				break;
 			case DECCOUNTERTWO:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(183);
+				setState(202);
 				decCounter2();
 				}
 				break;
 			case INCCOUNTERTHREE:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(184);
+				setState(203);
 				incCounter3();
 				}
 				break;
 			case DECCOUNTERTHREE:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(185);
+				setState(204);
 				decCounter3();
 				}
 				break;
 			case INCSPRITECOUNTER:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(186);
+				setState(205);
 				incSpriteCounter();
 				}
 				break;
 			case DECSPRITECOUNTER:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(187);
+				setState(206);
 				decSpriteCounter();
 				}
 				break;
 			case SETSPRITECOUNTER:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(188);
+				setState(207);
 				setSpriteCounter();
 				}
 				break;
-			case TRANSFORMONZERO:
+			case MOVETORANDOMONZERO:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(189);
+				setState(208);
+				moveToRandomOnZero();
+				}
+				break;
+			case TRANSFORMONZERO:
+				enterOuterAlt(_localctx, 11);
+				{
+				setState(209);
 				transformOnZeroCounter();
 				}
 				break;
 			case GAMEOVERONZERO:
-				enterOuterAlt(_localctx, 11);
+				enterOuterAlt(_localctx, 12);
 				{
-				setState(190);
+				setState(210);
 				gameOverOnZeroCounter();
 				}
 				break;
 			case WINONZERO:
-				enterOuterAlt(_localctx, 12);
+				enterOuterAlt(_localctx, 13);
 				{
-				setState(191);
+				setState(211);
 				winOnZeroCounter();
 				}
 				break;
 			case MOVETORANDOM:
-				enterOuterAlt(_localctx, 13);
+				enterOuterAlt(_localctx, 14);
 				{
-				setState(192);
+				setState(212);
 				moveToRandom();
 				}
 				break;
 			case TRANSFORMTOSPRITE:
-				enterOuterAlt(_localctx, 14);
+				enterOuterAlt(_localctx, 15);
 				{
-				setState(193);
+				setState(213);
 				transformToSprite();
 				}
 				break;
 			case MOVEPLAYERTO:
-				enterOuterAlt(_localctx, 15);
+				enterOuterAlt(_localctx, 16);
 				{
-				setState(194);
+				setState(214);
 				movePlayerTo();
 				}
 				break;
-			case GAMEOVER:
-				enterOuterAlt(_localctx, 16);
+			case PLAYERINCCOUNTERONE:
+				enterOuterAlt(_localctx, 17);
 				{
-				setState(195);
+				setState(215);
+				playerIncCounter1();
+				}
+				break;
+			case PLAYERINCCOUNTERTWO:
+				enterOuterAlt(_localctx, 18);
+				{
+				setState(216);
+				playerIncCounter2();
+				}
+				break;
+			case PLAYERINCCOUNTERTHREE:
+				enterOuterAlt(_localctx, 19);
+				{
+				setState(217);
+				playerIncCounter3();
+				}
+				break;
+			case PLAYERDECCOUNTERONE:
+				enterOuterAlt(_localctx, 20);
+				{
+				setState(218);
+				playerDecCounter1();
+				}
+				break;
+			case PLAYERDECCOUNTERTWO:
+				enterOuterAlt(_localctx, 21);
+				{
+				setState(219);
+				playerDecCounter2();
+				}
+				break;
+			case PLAYERDECCOUNTERTHREE:
+				enterOuterAlt(_localctx, 22);
+				{
+				setState(220);
+				playerDecCounter3();
+				}
+				break;
+			case PLAYERINCSPRITECOUNTER:
+				enterOuterAlt(_localctx, 23);
+				{
+				setState(221);
+				playerIncSpriteCounter();
+				}
+				break;
+			case PLAYERDECSPRITECOUNTER:
+				enterOuterAlt(_localctx, 24);
+				{
+				setState(222);
+				playerDecSpriteCounter();
+				}
+				break;
+			case GAMEOVER:
+				enterOuterAlt(_localctx, 25);
+				{
+				setState(223);
 				gameOver();
 				}
 				break;
 			case WIN:
-				enterOuterAlt(_localctx, 17);
+				enterOuterAlt(_localctx, 26);
 				{
-				setState(196);
+				setState(224);
 				win();
 				}
 				break;
@@ -1280,6 +1414,10 @@ public class SGL2DParser extends Parser {
 
 	public static class IncCounter1Context extends ParserRuleContext {
 		public TerminalNode INCCOUNTERONE() { return getToken(SGL2DParser.INCCOUNTERONE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public IncCounter1Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1297,11 +1435,26 @@ public class SGL2DParser extends Parser {
 	public final IncCounter1Context incCounter1() throws RecognitionException {
 		IncCounter1Context _localctx = new IncCounter1Context(_ctx, getState());
 		enterRule(_localctx, 26, RULE_incCounter1);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(199);
+			setState(227);
 			match(INCCOUNTERONE);
+			setState(231);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(228);
+				match(INT);
+				}
+				}
+				setState(233);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1317,6 +1470,10 @@ public class SGL2DParser extends Parser {
 
 	public static class DecCounter1Context extends ParserRuleContext {
 		public TerminalNode DECCOUNTERONE() { return getToken(SGL2DParser.DECCOUNTERONE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public DecCounter1Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1334,11 +1491,26 @@ public class SGL2DParser extends Parser {
 	public final DecCounter1Context decCounter1() throws RecognitionException {
 		DecCounter1Context _localctx = new DecCounter1Context(_ctx, getState());
 		enterRule(_localctx, 28, RULE_decCounter1);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(201);
+			setState(234);
 			match(DECCOUNTERONE);
+			setState(238);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(235);
+				match(INT);
+				}
+				}
+				setState(240);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1354,6 +1526,10 @@ public class SGL2DParser extends Parser {
 
 	public static class IncCounter2Context extends ParserRuleContext {
 		public TerminalNode INCCOUNTERTWO() { return getToken(SGL2DParser.INCCOUNTERTWO, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public IncCounter2Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1371,11 +1547,26 @@ public class SGL2DParser extends Parser {
 	public final IncCounter2Context incCounter2() throws RecognitionException {
 		IncCounter2Context _localctx = new IncCounter2Context(_ctx, getState());
 		enterRule(_localctx, 30, RULE_incCounter2);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(203);
+			setState(241);
 			match(INCCOUNTERTWO);
+			setState(245);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(242);
+				match(INT);
+				}
+				}
+				setState(247);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1391,6 +1582,10 @@ public class SGL2DParser extends Parser {
 
 	public static class DecCounter2Context extends ParserRuleContext {
 		public TerminalNode DECCOUNTERTWO() { return getToken(SGL2DParser.DECCOUNTERTWO, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public DecCounter2Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1408,11 +1603,26 @@ public class SGL2DParser extends Parser {
 	public final DecCounter2Context decCounter2() throws RecognitionException {
 		DecCounter2Context _localctx = new DecCounter2Context(_ctx, getState());
 		enterRule(_localctx, 32, RULE_decCounter2);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(205);
+			setState(248);
 			match(DECCOUNTERTWO);
+			setState(252);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(249);
+				match(INT);
+				}
+				}
+				setState(254);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1428,6 +1638,10 @@ public class SGL2DParser extends Parser {
 
 	public static class IncCounter3Context extends ParserRuleContext {
 		public TerminalNode INCCOUNTERTHREE() { return getToken(SGL2DParser.INCCOUNTERTHREE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public IncCounter3Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1445,11 +1659,26 @@ public class SGL2DParser extends Parser {
 	public final IncCounter3Context incCounter3() throws RecognitionException {
 		IncCounter3Context _localctx = new IncCounter3Context(_ctx, getState());
 		enterRule(_localctx, 34, RULE_incCounter3);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(207);
+			setState(255);
 			match(INCCOUNTERTHREE);
+			setState(259);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(256);
+				match(INT);
+				}
+				}
+				setState(261);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1465,6 +1694,10 @@ public class SGL2DParser extends Parser {
 
 	public static class DecCounter3Context extends ParserRuleContext {
 		public TerminalNode DECCOUNTERTHREE() { return getToken(SGL2DParser.DECCOUNTERTHREE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public DecCounter3Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1482,11 +1715,26 @@ public class SGL2DParser extends Parser {
 	public final DecCounter3Context decCounter3() throws RecognitionException {
 		DecCounter3Context _localctx = new DecCounter3Context(_ctx, getState());
 		enterRule(_localctx, 36, RULE_decCounter3);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(209);
+			setState(262);
 			match(DECCOUNTERTHREE);
+			setState(266);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(263);
+				match(INT);
+				}
+				}
+				setState(268);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1502,6 +1750,10 @@ public class SGL2DParser extends Parser {
 
 	public static class IncSpriteCounterContext extends ParserRuleContext {
 		public TerminalNode INCSPRITECOUNTER() { return getToken(SGL2DParser.INCSPRITECOUNTER, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public IncSpriteCounterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1519,11 +1771,26 @@ public class SGL2DParser extends Parser {
 	public final IncSpriteCounterContext incSpriteCounter() throws RecognitionException {
 		IncSpriteCounterContext _localctx = new IncSpriteCounterContext(_ctx, getState());
 		enterRule(_localctx, 38, RULE_incSpriteCounter);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(211);
+			setState(269);
 			match(INCSPRITECOUNTER);
+			setState(273);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(270);
+				match(INT);
+				}
+				}
+				setState(275);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1539,6 +1806,10 @@ public class SGL2DParser extends Parser {
 
 	public static class DecSpriteCounterContext extends ParserRuleContext {
 		public TerminalNode DECSPRITECOUNTER() { return getToken(SGL2DParser.DECSPRITECOUNTER, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public DecSpriteCounterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1556,11 +1827,26 @@ public class SGL2DParser extends Parser {
 	public final DecSpriteCounterContext decSpriteCounter() throws RecognitionException {
 		DecSpriteCounterContext _localctx = new DecSpriteCounterContext(_ctx, getState());
 		enterRule(_localctx, 40, RULE_decSpriteCounter);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(213);
+			setState(276);
 			match(DECSPRITECOUNTER);
+			setState(280);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(277);
+				match(INT);
+				}
+				}
+				setState(282);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1576,6 +1862,10 @@ public class SGL2DParser extends Parser {
 
 	public static class SetSpriteCounterContext extends ParserRuleContext {
 		public TerminalNode SETSPRITECOUNTER() { return getToken(SGL2DParser.SETSPRITECOUNTER, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
 		public SetSpriteCounterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1593,11 +1883,26 @@ public class SGL2DParser extends Parser {
 	public final SetSpriteCounterContext setSpriteCounter() throws RecognitionException {
 		SetSpriteCounterContext _localctx = new SetSpriteCounterContext(_ctx, getState());
 		enterRule(_localctx, 42, RULE_setSpriteCounter);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(215);
+			setState(283);
 			match(SETSPRITECOUNTER);
+			setState(287);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(284);
+				match(INT);
+				}
+				}
+				setState(289);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1633,7 +1938,7 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(217);
+			setState(290);
 			match(TRANSFORMONZERO);
 			}
 		}
@@ -1670,7 +1975,7 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(219);
+			setState(292);
 			match(GAMEOVERONZERO);
 			}
 		}
@@ -1707,7 +2012,7 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(221);
+			setState(294);
 			match(WINONZERO);
 			}
 		}
@@ -1744,8 +2049,45 @@ public class SGL2DParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(223);
+			setState(296);
 			match(MOVETORANDOM);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class MoveToRandomOnZeroContext extends ParserRuleContext {
+		public TerminalNode MOVETORANDOMONZERO() { return getToken(SGL2DParser.MOVETORANDOMONZERO, 0); }
+		public MoveToRandomOnZeroContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_moveToRandomOnZero; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterMoveToRandomOnZero(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitMoveToRandomOnZero(this);
+		}
+	}
+
+	public final MoveToRandomOnZeroContext moveToRandomOnZero() throws RecognitionException {
+		MoveToRandomOnZeroContext _localctx = new MoveToRandomOnZeroContext(_ctx, getState());
+		enterRule(_localctx, 52, RULE_moveToRandomOnZero);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(298);
+			match(MOVETORANDOMONZERO);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1777,11 +2119,11 @@ public class SGL2DParser extends Parser {
 
 	public final TransformToSpriteContext transformToSprite() throws RecognitionException {
 		TransformToSpriteContext _localctx = new TransformToSpriteContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_transformToSprite);
+		enterRule(_localctx, 54, RULE_transformToSprite);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(225);
+			setState(300);
 			match(TRANSFORMTOSPRITE);
 			}
 		}
@@ -1822,20 +2164,20 @@ public class SGL2DParser extends Parser {
 
 	public final MovePlayerToContext movePlayerTo() throws RecognitionException {
 		MovePlayerToContext _localctx = new MovePlayerToContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_movePlayerTo);
+		enterRule(_localctx, 56, RULE_movePlayerTo);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(227);
+			setState(302);
 			match(MOVEPLAYERTO);
-			setState(231);
+			setState(306);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==XINT || _la==YINT) {
 				{
 				{
-				setState(228);
+				setState(303);
 				_la = _input.LA(1);
 				if ( !(_la==XINT || _la==YINT) ) {
 				_errHandler.recoverInline(this);
@@ -1847,7 +2189,455 @@ public class SGL2DParser extends Parser {
 				}
 				}
 				}
-				setState(233);
+				setState(308);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerIncCounter1Context extends ParserRuleContext {
+		public TerminalNode PLAYERINCCOUNTERONE() { return getToken(SGL2DParser.PLAYERINCCOUNTERONE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerIncCounter1Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerIncCounter1; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerIncCounter1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerIncCounter1(this);
+		}
+	}
+
+	public final PlayerIncCounter1Context playerIncCounter1() throws RecognitionException {
+		PlayerIncCounter1Context _localctx = new PlayerIncCounter1Context(_ctx, getState());
+		enterRule(_localctx, 58, RULE_playerIncCounter1);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(309);
+			match(PLAYERINCCOUNTERONE);
+			setState(313);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(310);
+				match(INT);
+				}
+				}
+				setState(315);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerIncCounter2Context extends ParserRuleContext {
+		public TerminalNode PLAYERINCCOUNTERTWO() { return getToken(SGL2DParser.PLAYERINCCOUNTERTWO, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerIncCounter2Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerIncCounter2; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerIncCounter2(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerIncCounter2(this);
+		}
+	}
+
+	public final PlayerIncCounter2Context playerIncCounter2() throws RecognitionException {
+		PlayerIncCounter2Context _localctx = new PlayerIncCounter2Context(_ctx, getState());
+		enterRule(_localctx, 60, RULE_playerIncCounter2);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(316);
+			match(PLAYERINCCOUNTERTWO);
+			setState(320);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(317);
+				match(INT);
+				}
+				}
+				setState(322);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerIncCounter3Context extends ParserRuleContext {
+		public TerminalNode PLAYERINCCOUNTERTHREE() { return getToken(SGL2DParser.PLAYERINCCOUNTERTHREE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerIncCounter3Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerIncCounter3; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerIncCounter3(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerIncCounter3(this);
+		}
+	}
+
+	public final PlayerIncCounter3Context playerIncCounter3() throws RecognitionException {
+		PlayerIncCounter3Context _localctx = new PlayerIncCounter3Context(_ctx, getState());
+		enterRule(_localctx, 62, RULE_playerIncCounter3);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(323);
+			match(PLAYERINCCOUNTERTHREE);
+			setState(327);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(324);
+				match(INT);
+				}
+				}
+				setState(329);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerDecCounter1Context extends ParserRuleContext {
+		public TerminalNode PLAYERDECCOUNTERONE() { return getToken(SGL2DParser.PLAYERDECCOUNTERONE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerDecCounter1Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerDecCounter1; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerDecCounter1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerDecCounter1(this);
+		}
+	}
+
+	public final PlayerDecCounter1Context playerDecCounter1() throws RecognitionException {
+		PlayerDecCounter1Context _localctx = new PlayerDecCounter1Context(_ctx, getState());
+		enterRule(_localctx, 64, RULE_playerDecCounter1);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(330);
+			match(PLAYERDECCOUNTERONE);
+			setState(334);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(331);
+				match(INT);
+				}
+				}
+				setState(336);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerDecCounter2Context extends ParserRuleContext {
+		public TerminalNode PLAYERDECCOUNTERTWO() { return getToken(SGL2DParser.PLAYERDECCOUNTERTWO, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerDecCounter2Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerDecCounter2; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerDecCounter2(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerDecCounter2(this);
+		}
+	}
+
+	public final PlayerDecCounter2Context playerDecCounter2() throws RecognitionException {
+		PlayerDecCounter2Context _localctx = new PlayerDecCounter2Context(_ctx, getState());
+		enterRule(_localctx, 66, RULE_playerDecCounter2);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(337);
+			match(PLAYERDECCOUNTERTWO);
+			setState(341);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(338);
+				match(INT);
+				}
+				}
+				setState(343);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerDecCounter3Context extends ParserRuleContext {
+		public TerminalNode PLAYERDECCOUNTERTHREE() { return getToken(SGL2DParser.PLAYERDECCOUNTERTHREE, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerDecCounter3Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerDecCounter3; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerDecCounter3(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerDecCounter3(this);
+		}
+	}
+
+	public final PlayerDecCounter3Context playerDecCounter3() throws RecognitionException {
+		PlayerDecCounter3Context _localctx = new PlayerDecCounter3Context(_ctx, getState());
+		enterRule(_localctx, 68, RULE_playerDecCounter3);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(344);
+			match(PLAYERDECCOUNTERTHREE);
+			setState(348);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(345);
+				match(INT);
+				}
+				}
+				setState(350);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerIncSpriteCounterContext extends ParserRuleContext {
+		public TerminalNode PLAYERINCSPRITECOUNTER() { return getToken(SGL2DParser.PLAYERINCSPRITECOUNTER, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerIncSpriteCounterContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerIncSpriteCounter; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerIncSpriteCounter(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerIncSpriteCounter(this);
+		}
+	}
+
+	public final PlayerIncSpriteCounterContext playerIncSpriteCounter() throws RecognitionException {
+		PlayerIncSpriteCounterContext _localctx = new PlayerIncSpriteCounterContext(_ctx, getState());
+		enterRule(_localctx, 70, RULE_playerIncSpriteCounter);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(351);
+			match(PLAYERINCSPRITECOUNTER);
+			setState(355);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(352);
+				match(INT);
+				}
+				}
+				setState(357);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PlayerDecSpriteCounterContext extends ParserRuleContext {
+		public TerminalNode PLAYERDECSPRITECOUNTER() { return getToken(SGL2DParser.PLAYERDECSPRITECOUNTER, 0); }
+		public List<TerminalNode> INT() { return getTokens(SGL2DParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SGL2DParser.INT, i);
+		}
+		public PlayerDecSpriteCounterContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_playerDecSpriteCounter; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).enterPlayerDecSpriteCounter(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SGL2DListener ) ((SGL2DListener)listener).exitPlayerDecSpriteCounter(this);
+		}
+	}
+
+	public final PlayerDecSpriteCounterContext playerDecSpriteCounter() throws RecognitionException {
+		PlayerDecSpriteCounterContext _localctx = new PlayerDecSpriteCounterContext(_ctx, getState());
+		enterRule(_localctx, 72, RULE_playerDecSpriteCounter);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(358);
+			match(PLAYERDECSPRITECOUNTER);
+			setState(362);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==INT) {
+				{
+				{
+				setState(359);
+				match(INT);
+				}
+				}
+				setState(364);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1882,11 +2672,11 @@ public class SGL2DParser extends Parser {
 
 	public final GameOverContext gameOver() throws RecognitionException {
 		GameOverContext _localctx = new GameOverContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_gameOver);
+		enterRule(_localctx, 74, RULE_gameOver);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(234);
+			setState(365);
 			match(GAMEOVER);
 			}
 		}
@@ -1919,11 +2709,11 @@ public class SGL2DParser extends Parser {
 
 	public final WinContext win() throws RecognitionException {
 		WinContext _localctx = new WinContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_win);
+		enterRule(_localctx, 76, RULE_win);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(236);
+			setState(367);
 			match(WIN);
 			}
 		}
@@ -1939,84 +2729,140 @@ public class SGL2DParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)\u00f1\4\2\t\2\4"+
-		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\62\u0174\4\2\t\2"+
+		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
+		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
-		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\3\2\3\2\3"+
-		"\2\3\2\5\2C\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3N\n\3\3\4\3\4\3"+
-		"\4\7\4S\n\4\f\4\16\4V\13\4\3\4\3\4\5\4Z\n\4\3\5\3\5\3\5\7\5_\n\5\f\5\16"+
-		"\5b\13\5\3\5\3\5\5\5f\n\5\3\6\3\6\3\6\7\6k\n\6\f\6\16\6n\13\6\3\6\3\6"+
-		"\5\6r\n\6\3\7\3\7\3\7\3\7\7\7x\n\7\f\7\16\7{\13\7\3\7\3\7\5\7\177\n\7"+
-		"\3\b\3\b\3\b\3\b\7\b\u0085\n\b\f\b\16\b\u0088\13\b\3\b\3\b\5\b\u008c\n"+
-		"\b\3\t\3\t\3\t\3\t\7\t\u0092\n\t\f\t\16\t\u0095\13\t\3\t\3\t\5\t\u0099"+
-		"\n\t\3\n\3\n\3\n\3\n\3\n\6\n\u00a0\n\n\r\n\16\n\u00a1\3\n\3\n\5\n\u00a6"+
-		"\n\n\3\13\3\13\3\13\3\f\3\f\3\f\3\f\5\f\u00af\n\f\3\r\3\r\3\r\3\r\3\r"+
-		"\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16"+
-		"\3\16\3\16\3\16\3\16\5\16\u00c8\n\16\3\17\3\17\3\20\3\20\3\21\3\21\3\22"+
-		"\3\22\3\23\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\27\3\27\3\30\3\30\3\31"+
-		"\3\31\3\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35\7\35\u00e8\n\35\f\35\16"+
-		"\35\u00eb\13\35\3\36\3\36\3\37\3\37\3\37\2\2 \2\4\6\b\n\f\16\20\22\24"+
-		"\26\30\32\34\36 \"$&(*,.\60\62\64\668:<\2\6\3\2!\"\3\2!#\3\2#$\4\2  \'"+
-		"\'\2\u00fc\2B\3\2\2\2\4M\3\2\2\2\6O\3\2\2\2\b[\3\2\2\2\ng\3\2\2\2\fs\3"+
-		"\2\2\2\16\u0080\3\2\2\2\20\u008d\3\2\2\2\22\u009a\3\2\2\2\24\u00a7\3\2"+
-		"\2\2\26\u00ae\3\2\2\2\30\u00b0\3\2\2\2\32\u00c7\3\2\2\2\34\u00c9\3\2\2"+
-		"\2\36\u00cb\3\2\2\2 \u00cd\3\2\2\2\"\u00cf\3\2\2\2$\u00d1\3\2\2\2&\u00d3"+
-		"\3\2\2\2(\u00d5\3\2\2\2*\u00d7\3\2\2\2,\u00d9\3\2\2\2.\u00db\3\2\2\2\60"+
-		"\u00dd\3\2\2\2\62\u00df\3\2\2\2\64\u00e1\3\2\2\2\66\u00e3\3\2\2\28\u00e5"+
-		"\3\2\2\2:\u00ec\3\2\2\2<\u00ee\3\2\2\2>C\3\2\2\2?@\5\4\3\2@A\7\2\2\3A"+
-		"C\3\2\2\2B>\3\2\2\2B?\3\2\2\2C\3\3\2\2\2DN\3\2\2\2EN\5\6\4\2FN\5\b\5\2"+
-		"GN\5\n\6\2HN\5\f\7\2IN\5\16\b\2JN\5\20\t\2KN\5\22\n\2LN\5\24\13\2MD\3"+
-		"\2\2\2ME\3\2\2\2MF\3\2\2\2MG\3\2\2\2MH\3\2\2\2MI\3\2\2\2MJ\3\2\2\2MK\3"+
-		"\2\2\2ML\3\2\2\2N\5\3\2\2\2OP\7\27\2\2PT\7\37\2\2QS\t\2\2\2RQ\3\2\2\2"+
-		"SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2UY\3\2\2\2VT\3\2\2\2WX\7)\2\2XZ\5\4\3\2"+
-		"YW\3\2\2\2YZ\3\2\2\2Z\7\3\2\2\2[\\\7\30\2\2\\`\7\37\2\2]_\t\3\2\2^]\3"+
-		"\2\2\2_b\3\2\2\2`^\3\2\2\2`a\3\2\2\2ae\3\2\2\2b`\3\2\2\2cd\7)\2\2df\5"+
-		"\4\3\2ec\3\2\2\2ef\3\2\2\2f\t\3\2\2\2gh\7\31\2\2hl\7\37\2\2ik\t\3\2\2"+
-		"ji\3\2\2\2kn\3\2\2\2lj\3\2\2\2lm\3\2\2\2mq\3\2\2\2nl\3\2\2\2op\7)\2\2"+
-		"pr\5\4\3\2qo\3\2\2\2qr\3\2\2\2r\13\3\2\2\2st\7\32\2\2tu\7(\2\2uy\7\37"+
-		"\2\2vx\t\4\2\2wv\3\2\2\2x{\3\2\2\2yw\3\2\2\2yz\3\2\2\2z~\3\2\2\2{y\3\2"+
-		"\2\2|}\7)\2\2}\177\5\4\3\2~|\3\2\2\2~\177\3\2\2\2\177\r\3\2\2\2\u0080"+
-		"\u0081\7\33\2\2\u0081\u0082\7\36\2\2\u0082\u0086\7\37\2\2\u0083\u0085"+
-		"\t\5\2\2\u0084\u0083\3\2\2\2\u0085\u0088\3\2\2\2\u0086\u0084\3\2\2\2\u0086"+
-		"\u0087\3\2\2\2\u0087\u008b\3\2\2\2\u0088\u0086\3\2\2\2\u0089\u008a\7)"+
-		"\2\2\u008a\u008c\5\4\3\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
-		"\17\3\2\2\2\u008d\u008e\7\34\2\2\u008e\u008f\7(\2\2\u008f\u0093\7\37\2"+
-		"\2\u0090\u0092\5\32\16\2\u0091\u0090\3\2\2\2\u0092\u0095\3\2\2\2\u0093"+
-		"\u0091\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0098\3\2\2\2\u0095\u0093\3\2"+
-		"\2\2\u0096\u0097\7)\2\2\u0097\u0099\5\4\3\2\u0098\u0096\3\2\2\2\u0098"+
-		"\u0099\3\2\2\2\u0099\21\3\2\2\2\u009a\u009b\7\35\2\2\u009b\u009c\7(\2"+
-		"\2\u009c\u009f\7\37\2\2\u009d\u00a0\5\26\f\2\u009e\u00a0\5\30\r\2\u009f"+
-		"\u009d\3\2\2\2\u009f\u009e\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\u009f\3\2"+
-		"\2\2\u00a1\u00a2\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3\u00a4\7)\2\2\u00a4"+
-		"\u00a6\5\4\3\2\u00a5\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\23\3\2\2"+
-		"\2\u00a7\u00a8\7)\2\2\u00a8\u00a9\5\4\3\2\u00a9\25\3\2\2\2\u00aa\u00ab"+
-		"\7!\2\2\u00ab\u00af\7\"\2\2\u00ac\u00ad\7\"\2\2\u00ad\u00af\7!\2\2\u00ae"+
-		"\u00aa\3\2\2\2\u00ae\u00ac\3\2\2\2\u00af\27\3\2\2\2\u00b0\u00b1\7\3\2"+
-		"\2\u00b1\u00b2\5\26\f\2\u00b2\u00b3\7\4\2\2\u00b3\u00b4\5\26\f\2\u00b4"+
-		"\u00b5\7\5\2\2\u00b5\31\3\2\2\2\u00b6\u00c8\5\34\17\2\u00b7\u00c8\5\36"+
-		"\20\2\u00b8\u00c8\5 \21\2\u00b9\u00c8\5\"\22\2\u00ba\u00c8\5$\23\2\u00bb"+
-		"\u00c8\5&\24\2\u00bc\u00c8\5(\25\2\u00bd\u00c8\5*\26\2\u00be\u00c8\5,"+
-		"\27\2\u00bf\u00c8\5.\30\2\u00c0\u00c8\5\60\31\2\u00c1\u00c8\5\62\32\2"+
-		"\u00c2\u00c8\5\64\33\2\u00c3\u00c8\5\66\34\2\u00c4\u00c8\58\35\2\u00c5"+
-		"\u00c8\5:\36\2\u00c6\u00c8\5<\37\2\u00c7\u00b6\3\2\2\2\u00c7\u00b7\3\2"+
-		"\2\2\u00c7\u00b8\3\2\2\2\u00c7\u00b9\3\2\2\2\u00c7\u00ba\3\2\2\2\u00c7"+
-		"\u00bb\3\2\2\2\u00c7\u00bc\3\2\2\2\u00c7\u00bd\3\2\2\2\u00c7\u00be\3\2"+
-		"\2\2\u00c7\u00bf\3\2\2\2\u00c7\u00c0\3\2\2\2\u00c7\u00c1\3\2\2\2\u00c7"+
-		"\u00c2\3\2\2\2\u00c7\u00c3\3\2\2\2\u00c7\u00c4\3\2\2\2\u00c7\u00c5\3\2"+
-		"\2\2\u00c7\u00c6\3\2\2\2\u00c8\33\3\2\2\2\u00c9\u00ca\7\6\2\2\u00ca\35"+
-		"\3\2\2\2\u00cb\u00cc\7\7\2\2\u00cc\37\3\2\2\2\u00cd\u00ce\7\b\2\2\u00ce"+
-		"!\3\2\2\2\u00cf\u00d0\7\t\2\2\u00d0#\3\2\2\2\u00d1\u00d2\7\n\2\2\u00d2"+
-		"%\3\2\2\2\u00d3\u00d4\7\13\2\2\u00d4\'\3\2\2\2\u00d5\u00d6\7\f\2\2\u00d6"+
-		")\3\2\2\2\u00d7\u00d8\7\r\2\2\u00d8+\3\2\2\2\u00d9\u00da\7\16\2\2\u00da"+
-		"-\3\2\2\2\u00db\u00dc\7\17\2\2\u00dc/\3\2\2\2\u00dd\u00de\7\20\2\2\u00de"+
-		"\61\3\2\2\2\u00df\u00e0\7\21\2\2\u00e0\63\3\2\2\2\u00e1\u00e2\7\22\2\2"+
-		"\u00e2\65\3\2\2\2\u00e3\u00e4\7\23\2\2\u00e4\67\3\2\2\2\u00e5\u00e9\7"+
-		"\24\2\2\u00e6\u00e8\t\2\2\2\u00e7\u00e6\3\2\2\2\u00e8\u00eb\3\2\2\2\u00e9"+
-		"\u00e7\3\2\2\2\u00e9\u00ea\3\2\2\2\u00ea9\3\2\2\2\u00eb\u00e9\3\2\2\2"+
-		"\u00ec\u00ed\7\25\2\2\u00ed;\3\2\2\2\u00ee\u00ef\7\26\2\2\u00ef=\3\2\2"+
-		"\2\26BMTY`elqy~\u0086\u008b\u0093\u0098\u009f\u00a1\u00a5\u00ae\u00c7"+
-		"\u00e9";
+		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
+		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\3\2\3\2\3\2\3\2\5\2"+
+		"U\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3`\n\3\3\4\3\4\3\4\7\4e\n"+
+		"\4\f\4\16\4h\13\4\3\4\3\4\5\4l\n\4\3\5\3\5\3\5\7\5q\n\5\f\5\16\5t\13\5"+
+		"\3\5\3\5\5\5x\n\5\3\6\3\6\3\6\7\6}\n\6\f\6\16\6\u0080\13\6\3\6\3\6\5\6"+
+		"\u0084\n\6\3\7\3\7\3\7\3\7\7\7\u008a\n\7\f\7\16\7\u008d\13\7\3\7\3\7\5"+
+		"\7\u0091\n\7\3\b\3\b\3\b\3\b\7\b\u0097\n\b\f\b\16\b\u009a\13\b\3\b\3\b"+
+		"\5\b\u009e\n\b\3\t\3\t\3\t\3\t\7\t\u00a4\n\t\f\t\16\t\u00a7\13\t\3\t\3"+
+		"\t\5\t\u00ab\n\t\3\n\3\n\3\n\3\n\3\n\3\n\6\n\u00b3\n\n\r\n\16\n\u00b4"+
+		"\3\n\3\n\5\n\u00b9\n\n\3\13\3\13\3\13\3\f\3\f\3\f\3\f\5\f\u00c2\n\f\3"+
+		"\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3"+
+		"\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3"+
+		"\16\3\16\3\16\5\16\u00e4\n\16\3\17\3\17\7\17\u00e8\n\17\f\17\16\17\u00eb"+
+		"\13\17\3\20\3\20\7\20\u00ef\n\20\f\20\16\20\u00f2\13\20\3\21\3\21\7\21"+
+		"\u00f6\n\21\f\21\16\21\u00f9\13\21\3\22\3\22\7\22\u00fd\n\22\f\22\16\22"+
+		"\u0100\13\22\3\23\3\23\7\23\u0104\n\23\f\23\16\23\u0107\13\23\3\24\3\24"+
+		"\7\24\u010b\n\24\f\24\16\24\u010e\13\24\3\25\3\25\7\25\u0112\n\25\f\25"+
+		"\16\25\u0115\13\25\3\26\3\26\7\26\u0119\n\26\f\26\16\26\u011c\13\26\3"+
+		"\27\3\27\7\27\u0120\n\27\f\27\16\27\u0123\13\27\3\30\3\30\3\31\3\31\3"+
+		"\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35\3\36\3\36\7\36\u0133\n\36\f\36"+
+		"\16\36\u0136\13\36\3\37\3\37\7\37\u013a\n\37\f\37\16\37\u013d\13\37\3"+
+		" \3 \7 \u0141\n \f \16 \u0144\13 \3!\3!\7!\u0148\n!\f!\16!\u014b\13!\3"+
+		"\"\3\"\7\"\u014f\n\"\f\"\16\"\u0152\13\"\3#\3#\7#\u0156\n#\f#\16#\u0159"+
+		"\13#\3$\3$\7$\u015d\n$\f$\16$\u0160\13$\3%\3%\7%\u0164\n%\f%\16%\u0167"+
+		"\13%\3&\3&\7&\u016b\n&\f&\16&\u016e\13&\3\'\3\'\3(\3(\3(\2\2)\2\4\6\b"+
+		"\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLN\2\7\3"+
+		"\2*+\3\2*,\3\2,-\5\2\21\22))\60\60\4\2\"\"\61\61\2\u0191\2T\3\2\2\2\4"+
+		"_\3\2\2\2\6a\3\2\2\2\bm\3\2\2\2\ny\3\2\2\2\f\u0085\3\2\2\2\16\u0092\3"+
+		"\2\2\2\20\u009f\3\2\2\2\22\u00ac\3\2\2\2\24\u00ba\3\2\2\2\26\u00c1\3\2"+
+		"\2\2\30\u00c3\3\2\2\2\32\u00e3\3\2\2\2\34\u00e5\3\2\2\2\36\u00ec\3\2\2"+
+		"\2 \u00f3\3\2\2\2\"\u00fa\3\2\2\2$\u0101\3\2\2\2&\u0108\3\2\2\2(\u010f"+
+		"\3\2\2\2*\u0116\3\2\2\2,\u011d\3\2\2\2.\u0124\3\2\2\2\60\u0126\3\2\2\2"+
+		"\62\u0128\3\2\2\2\64\u012a\3\2\2\2\66\u012c\3\2\2\28\u012e\3\2\2\2:\u0130"+
+		"\3\2\2\2<\u0137\3\2\2\2>\u013e\3\2\2\2@\u0145\3\2\2\2B\u014c\3\2\2\2D"+
+		"\u0153\3\2\2\2F\u015a\3\2\2\2H\u0161\3\2\2\2J\u0168\3\2\2\2L\u016f\3\2"+
+		"\2\2N\u0171\3\2\2\2PU\3\2\2\2QR\5\4\3\2RS\7\2\2\3SU\3\2\2\2TP\3\2\2\2"+
+		"TQ\3\2\2\2U\3\3\2\2\2V`\3\2\2\2W`\5\6\4\2X`\5\b\5\2Y`\5\n\6\2Z`\5\f\7"+
+		"\2[`\5\16\b\2\\`\5\20\t\2]`\5\22\n\2^`\5\24\13\2_V\3\2\2\2_W\3\2\2\2_"+
+		"X\3\2\2\2_Y\3\2\2\2_Z\3\2\2\2_[\3\2\2\2_\\\3\2\2\2_]\3\2\2\2_^\3\2\2\2"+
+		"`\5\3\2\2\2ab\7 \2\2bf\7(\2\2ce\t\2\2\2dc\3\2\2\2eh\3\2\2\2fd\3\2\2\2"+
+		"fg\3\2\2\2gk\3\2\2\2hf\3\2\2\2ij\7\62\2\2jl\5\4\3\2ki\3\2\2\2kl\3\2\2"+
+		"\2l\7\3\2\2\2mn\7!\2\2nr\7(\2\2oq\t\3\2\2po\3\2\2\2qt\3\2\2\2rp\3\2\2"+
+		"\2rs\3\2\2\2sw\3\2\2\2tr\3\2\2\2uv\7\62\2\2vx\5\4\3\2wu\3\2\2\2wx\3\2"+
+		"\2\2x\t\3\2\2\2yz\7\"\2\2z~\7(\2\2{}\t\3\2\2|{\3\2\2\2}\u0080\3\2\2\2"+
+		"~|\3\2\2\2~\177\3\2\2\2\177\u0083\3\2\2\2\u0080~\3\2\2\2\u0081\u0082\7"+
+		"\62\2\2\u0082\u0084\5\4\3\2\u0083\u0081\3\2\2\2\u0083\u0084\3\2\2\2\u0084"+
+		"\13\3\2\2\2\u0085\u0086\7#\2\2\u0086\u0087\7\61\2\2\u0087\u008b\7(\2\2"+
+		"\u0088\u008a\t\4\2\2\u0089\u0088\3\2\2\2\u008a\u008d\3\2\2\2\u008b\u0089"+
+		"\3\2\2\2\u008b\u008c\3\2\2\2\u008c\u0090\3\2\2\2\u008d\u008b\3\2\2\2\u008e"+
+		"\u008f\7\62\2\2\u008f\u0091\5\4\3\2\u0090\u008e\3\2\2\2\u0090\u0091\3"+
+		"\2\2\2\u0091\r\3\2\2\2\u0092\u0093\7$\2\2\u0093\u0094\7\'\2\2\u0094\u0098"+
+		"\7(\2\2\u0095\u0097\t\5\2\2\u0096\u0095\3\2\2\2\u0097\u009a\3\2\2\2\u0098"+
+		"\u0096\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009d\3\2\2\2\u009a\u0098\3\2"+
+		"\2\2\u009b\u009c\7\62\2\2\u009c\u009e\5\4\3\2\u009d\u009b\3\2\2\2\u009d"+
+		"\u009e\3\2\2\2\u009e\17\3\2\2\2\u009f\u00a0\7%\2\2\u00a0\u00a1\t\6\2\2"+
+		"\u00a1\u00a5\7(\2\2\u00a2\u00a4\5\32\16\2\u00a3\u00a2\3\2\2\2\u00a4\u00a7"+
+		"\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00aa\3\2\2\2\u00a7"+
+		"\u00a5\3\2\2\2\u00a8\u00a9\7\62\2\2\u00a9\u00ab\5\4\3\2\u00aa\u00a8\3"+
+		"\2\2\2\u00aa\u00ab\3\2\2\2\u00ab\21\3\2\2\2\u00ac\u00ad\7&\2\2\u00ad\u00ae"+
+		"\7\61\2\2\u00ae\u00b2\7(\2\2\u00af\u00b3\5\26\f\2\u00b0\u00b3\5\30\r\2"+
+		"\u00b1\u00b3\7\62\2\2\u00b2\u00af\3\2\2\2\u00b2\u00b0\3\2\2\2\u00b2\u00b1"+
+		"\3\2\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00b2\3\2\2\2\u00b4\u00b5\3\2\2\2\u00b5"+
+		"\u00b8\3\2\2\2\u00b6\u00b7\7\62\2\2\u00b7\u00b9\5\4\3\2\u00b8\u00b6\3"+
+		"\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\23\3\2\2\2\u00ba\u00bb\7\62\2\2\u00bb"+
+		"\u00bc\5\4\3\2\u00bc\25\3\2\2\2\u00bd\u00be\7*\2\2\u00be\u00c2\7+\2\2"+
+		"\u00bf\u00c0\7+\2\2\u00c0\u00c2\7*\2\2\u00c1\u00bd\3\2\2\2\u00c1\u00bf"+
+		"\3\2\2\2\u00c2\27\3\2\2\2\u00c3\u00c4\7\3\2\2\u00c4\u00c5\5\26\f\2\u00c5"+
+		"\u00c6\7\4\2\2\u00c6\u00c7\5\26\f\2\u00c7\u00c8\7\5\2\2\u00c8\31\3\2\2"+
+		"\2\u00c9\u00e4\5\34\17\2\u00ca\u00e4\5\36\20\2\u00cb\u00e4\5 \21\2\u00cc"+
+		"\u00e4\5\"\22\2\u00cd\u00e4\5$\23\2\u00ce\u00e4\5&\24\2\u00cf\u00e4\5"+
+		"(\25\2\u00d0\u00e4\5*\26\2\u00d1\u00e4\5,\27\2\u00d2\u00e4\5\66\34\2\u00d3"+
+		"\u00e4\5.\30\2\u00d4\u00e4\5\60\31\2\u00d5\u00e4\5\62\32\2\u00d6\u00e4"+
+		"\5\64\33\2\u00d7\u00e4\58\35\2\u00d8\u00e4\5:\36\2\u00d9\u00e4\5<\37\2"+
+		"\u00da\u00e4\5> \2\u00db\u00e4\5@!\2\u00dc\u00e4\5B\"\2\u00dd\u00e4\5"+
+		"D#\2\u00de\u00e4\5F$\2\u00df\u00e4\5H%\2\u00e0\u00e4\5J&\2\u00e1\u00e4"+
+		"\5L\'\2\u00e2\u00e4\5N(\2\u00e3\u00c9\3\2\2\2\u00e3\u00ca\3\2\2\2\u00e3"+
+		"\u00cb\3\2\2\2\u00e3\u00cc\3\2\2\2\u00e3\u00cd\3\2\2\2\u00e3\u00ce\3\2"+
+		"\2\2\u00e3\u00cf\3\2\2\2\u00e3\u00d0\3\2\2\2\u00e3\u00d1\3\2\2\2\u00e3"+
+		"\u00d2\3\2\2\2\u00e3\u00d3\3\2\2\2\u00e3\u00d4\3\2\2\2\u00e3\u00d5\3\2"+
+		"\2\2\u00e3\u00d6\3\2\2\2\u00e3\u00d7\3\2\2\2\u00e3\u00d8\3\2\2\2\u00e3"+
+		"\u00d9\3\2\2\2\u00e3\u00da\3\2\2\2\u00e3\u00db\3\2\2\2\u00e3\u00dc\3\2"+
+		"\2\2\u00e3\u00dd\3\2\2\2\u00e3\u00de\3\2\2\2\u00e3\u00df\3\2\2\2\u00e3"+
+		"\u00e0\3\2\2\2\u00e3\u00e1\3\2\2\2\u00e3\u00e2\3\2\2\2\u00e4\33\3\2\2"+
+		"\2\u00e5\u00e9\7\6\2\2\u00e6\u00e8\7)\2\2\u00e7\u00e6\3\2\2\2\u00e8\u00eb"+
+		"\3\2\2\2\u00e9\u00e7\3\2\2\2\u00e9\u00ea\3\2\2\2\u00ea\35\3\2\2\2\u00eb"+
+		"\u00e9\3\2\2\2\u00ec\u00f0\7\7\2\2\u00ed\u00ef\7)\2\2\u00ee\u00ed\3\2"+
+		"\2\2\u00ef\u00f2\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1"+
+		"\37\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f3\u00f7\7\b\2\2\u00f4\u00f6\7)\2\2"+
+		"\u00f5\u00f4\3\2\2\2\u00f6\u00f9\3\2\2\2\u00f7\u00f5\3\2\2\2\u00f7\u00f8"+
+		"\3\2\2\2\u00f8!\3\2\2\2\u00f9\u00f7\3\2\2\2\u00fa\u00fe\7\t\2\2\u00fb"+
+		"\u00fd\7)\2\2\u00fc\u00fb\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe\u00fc\3\2"+
+		"\2\2\u00fe\u00ff\3\2\2\2\u00ff#\3\2\2\2\u0100\u00fe\3\2\2\2\u0101\u0105"+
+		"\7\n\2\2\u0102\u0104\7)\2\2\u0103\u0102\3\2\2\2\u0104\u0107\3\2\2\2\u0105"+
+		"\u0103\3\2\2\2\u0105\u0106\3\2\2\2\u0106%\3\2\2\2\u0107\u0105\3\2\2\2"+
+		"\u0108\u010c\7\13\2\2\u0109\u010b\7)\2\2\u010a\u0109\3\2\2\2\u010b\u010e"+
+		"\3\2\2\2\u010c\u010a\3\2\2\2\u010c\u010d\3\2\2\2\u010d\'\3\2\2\2\u010e"+
+		"\u010c\3\2\2\2\u010f\u0113\7\f\2\2\u0110\u0112\7)\2\2\u0111\u0110\3\2"+
+		"\2\2\u0112\u0115\3\2\2\2\u0113\u0111\3\2\2\2\u0113\u0114\3\2\2\2\u0114"+
+		")\3\2\2\2\u0115\u0113\3\2\2\2\u0116\u011a\7\r\2\2\u0117\u0119\7)\2\2\u0118"+
+		"\u0117\3\2\2\2\u0119\u011c\3\2\2\2\u011a\u0118\3\2\2\2\u011a\u011b\3\2"+
+		"\2\2\u011b+\3\2\2\2\u011c\u011a\3\2\2\2\u011d\u0121\7\16\2\2\u011e\u0120"+
+		"\7)\2\2\u011f\u011e\3\2\2\2\u0120\u0123\3\2\2\2\u0121\u011f\3\2\2\2\u0121"+
+		"\u0122\3\2\2\2\u0122-\3\2\2\2\u0123\u0121\3\2\2\2\u0124\u0125\7\20\2\2"+
+		"\u0125/\3\2\2\2\u0126\u0127\7\21\2\2\u0127\61\3\2\2\2\u0128\u0129\7\22"+
+		"\2\2\u0129\63\3\2\2\2\u012a\u012b\7\23\2\2\u012b\65\3\2\2\2\u012c\u012d"+
+		"\7\17\2\2\u012d\67\3\2\2\2\u012e\u012f\7\24\2\2\u012f9\3\2\2\2\u0130\u0134"+
+		"\7\25\2\2\u0131\u0133\t\2\2\2\u0132\u0131\3\2\2\2\u0133\u0136\3\2\2\2"+
+		"\u0134\u0132\3\2\2\2\u0134\u0135\3\2\2\2\u0135;\3\2\2\2\u0136\u0134\3"+
+		"\2\2\2\u0137\u013b\7\26\2\2\u0138\u013a\7)\2\2\u0139\u0138\3\2\2\2\u013a"+
+		"\u013d\3\2\2\2\u013b\u0139\3\2\2\2\u013b\u013c\3\2\2\2\u013c=\3\2\2\2"+
+		"\u013d\u013b\3\2\2\2\u013e\u0142\7\27\2\2\u013f\u0141\7)\2\2\u0140\u013f"+
+		"\3\2\2\2\u0141\u0144\3\2\2\2\u0142\u0140\3\2\2\2\u0142\u0143\3\2\2\2\u0143"+
+		"?\3\2\2\2\u0144\u0142\3\2\2\2\u0145\u0149\7\30\2\2\u0146\u0148\7)\2\2"+
+		"\u0147\u0146\3\2\2\2\u0148\u014b\3\2\2\2\u0149\u0147\3\2\2\2\u0149\u014a"+
+		"\3\2\2\2\u014aA\3\2\2\2\u014b\u0149\3\2\2\2\u014c\u0150\7\32\2\2\u014d"+
+		"\u014f\7)\2\2\u014e\u014d\3\2\2\2\u014f\u0152\3\2\2\2\u0150\u014e\3\2"+
+		"\2\2\u0150\u0151\3\2\2\2\u0151C\3\2\2\2\u0152\u0150\3\2\2\2\u0153\u0157"+
+		"\7\33\2\2\u0154\u0156\7)\2\2\u0155\u0154\3\2\2\2\u0156\u0159\3\2\2\2\u0157"+
+		"\u0155\3\2\2\2\u0157\u0158\3\2\2\2\u0158E\3\2\2\2\u0159\u0157\3\2\2\2"+
+		"\u015a\u015e\7\34\2\2\u015b\u015d\7)\2\2\u015c\u015b\3\2\2\2\u015d\u0160"+
+		"\3\2\2\2\u015e\u015c\3\2\2\2\u015e\u015f\3\2\2\2\u015fG\3\2\2\2\u0160"+
+		"\u015e\3\2\2\2\u0161\u0165\7\31\2\2\u0162\u0164\7)\2\2\u0163\u0162\3\2"+
+		"\2\2\u0164\u0167\3\2\2\2\u0165\u0163\3\2\2\2\u0165\u0166\3\2\2\2\u0166"+
+		"I\3\2\2\2\u0167\u0165\3\2\2\2\u0168\u016c\7\35\2\2\u0169\u016b\7)\2\2"+
+		"\u016a\u0169\3\2\2\2\u016b\u016e\3\2\2\2\u016c\u016a\3\2\2\2\u016c\u016d"+
+		"\3\2\2\2\u016dK\3\2\2\2\u016e\u016c\3\2\2\2\u016f\u0170\7\36\2\2\u0170"+
+		"M\3\2\2\2\u0171\u0172\7\37\2\2\u0172O\3\2\2\2\'T_fkrw~\u0083\u008b\u0090"+
+		"\u0098\u009d\u00a5\u00aa\u00b2\u00b4\u00b8\u00c1\u00e3\u00e9\u00f0\u00f7"+
+		"\u00fe\u0105\u010c\u0113\u011a\u0121\u0134\u013b\u0142\u0149\u0150\u0157"+
+		"\u015e\u0165\u016c";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

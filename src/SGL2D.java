@@ -20,12 +20,12 @@ public class SGL2D extends JFrame {
     /**
      * SGL2D Game Frame Initializer
      */
-    public SGL2D() throws IOException {
+    public SGL2D(String filePath) throws IOException {
         super("SGL2D Game");                       // JFrame frame = new JFrame("Frame Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);                  // Will display window bar
         GameFactory gameFactory = new GameFactory();
-        Pair<GenericGame, ArrayList<Boolean>> gameFactoryOutput = gameFactory.createGame();
+        Pair<GenericGame, ArrayList<Boolean>> gameFactoryOutput = gameFactory.createGame(filePath);
         game = gameFactoryOutput.getKey();
         gamePanel = new GamePanel(game);        // Create game JPanel
         counterPanel = new CounterPanel(game,
@@ -60,12 +60,22 @@ public class SGL2D extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        try {
-            new SGL2D();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e);
-            System.out.println("Error, could not create game, file not readable or does not exist!");
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("choosertitle");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            try {
+                new SGL2D(chooser.getSelectedFile().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(e);
+                System.out.println("Error, could not create game, file not readable or does not exist!");
+            }
+        } else {
+            System.out.println("No Selection ");
         }
     }
 }

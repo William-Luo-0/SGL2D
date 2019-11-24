@@ -15,6 +15,7 @@ public class Player extends AbstractSprite {
      */
     public Player (String name) {
         super(name);
+        color = Color.blue;
         xCoord = 0;
         yCoord = 0;
     }

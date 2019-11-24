@@ -328,6 +328,18 @@ public class SGL2DBaseListener implements SGL2DListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMoveToRandomOnZero(SGL2DParser.MoveToRandomOnZeroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMoveToRandomOnZero(SGL2DParser.MoveToRandomOnZeroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTransformToSprite(SGL2DParser.TransformToSpriteContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -347,6 +359,102 @@ public class SGL2DBaseListener implements SGL2DListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMovePlayerTo(SGL2DParser.MovePlayerToContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerIncCounter1(SGL2DParser.PlayerIncCounter1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerIncCounter1(SGL2DParser.PlayerIncCounter1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerIncCounter2(SGL2DParser.PlayerIncCounter2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerIncCounter2(SGL2DParser.PlayerIncCounter2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerIncCounter3(SGL2DParser.PlayerIncCounter3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerIncCounter3(SGL2DParser.PlayerIncCounter3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerDecCounter1(SGL2DParser.PlayerDecCounter1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerDecCounter1(SGL2DParser.PlayerDecCounter1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerDecCounter2(SGL2DParser.PlayerDecCounter2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerDecCounter2(SGL2DParser.PlayerDecCounter2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerDecCounter3(SGL2DParser.PlayerDecCounter3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerDecCounter3(SGL2DParser.PlayerDecCounter3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerIncSpriteCounter(SGL2DParser.PlayerIncSpriteCounterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerIncSpriteCounter(SGL2DParser.PlayerIncSpriteCounterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlayerDecSpriteCounter(SGL2DParser.PlayerDecSpriteCounterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlayerDecSpriteCounter(SGL2DParser.PlayerDecSpriteCounterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

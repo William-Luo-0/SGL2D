@@ -268,6 +268,16 @@ public interface SGL2DListener extends ParseTreeListener {
 	 */
 	void exitMoveToRandom(SGL2DParser.MoveToRandomContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#moveToRandomOnZero}.
+	 * @param ctx the parse tree
+	 */
+	void enterMoveToRandomOnZero(SGL2DParser.MoveToRandomOnZeroContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#moveToRandomOnZero}.
+	 * @param ctx the parse tree
+	 */
+	void exitMoveToRandomOnZero(SGL2DParser.MoveToRandomOnZeroContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SGL2DParser#transformToSprite}.
 	 * @param ctx the parse tree
 	 */
@@ -287,6 +297,86 @@ public interface SGL2DListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMovePlayerTo(SGL2DParser.MovePlayerToContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerIncCounter1}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerIncCounter1(SGL2DParser.PlayerIncCounter1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerIncCounter1}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerIncCounter1(SGL2DParser.PlayerIncCounter1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerIncCounter2}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerIncCounter2(SGL2DParser.PlayerIncCounter2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerIncCounter2}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerIncCounter2(SGL2DParser.PlayerIncCounter2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerIncCounter3}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerIncCounter3(SGL2DParser.PlayerIncCounter3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerIncCounter3}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerIncCounter3(SGL2DParser.PlayerIncCounter3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerDecCounter1}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerDecCounter1(SGL2DParser.PlayerDecCounter1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerDecCounter1}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerDecCounter1(SGL2DParser.PlayerDecCounter1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerDecCounter2}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerDecCounter2(SGL2DParser.PlayerDecCounter2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerDecCounter2}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerDecCounter2(SGL2DParser.PlayerDecCounter2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerDecCounter3}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerDecCounter3(SGL2DParser.PlayerDecCounter3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerDecCounter3}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerDecCounter3(SGL2DParser.PlayerDecCounter3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerIncSpriteCounter}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerIncSpriteCounter(SGL2DParser.PlayerIncSpriteCounterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerIncSpriteCounter}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerIncSpriteCounter(SGL2DParser.PlayerIncSpriteCounterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SGL2DParser#playerDecSpriteCounter}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlayerDecSpriteCounter(SGL2DParser.PlayerDecSpriteCounterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SGL2DParser#playerDecSpriteCounter}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlayerDecSpriteCounter(SGL2DParser.PlayerDecSpriteCounterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SGL2DParser#gameOver}.
 	 * @param ctx the parse tree
