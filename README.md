@@ -4,7 +4,7 @@ SGL2D is our CPSC311 Term Project. This application takes in a SGL2D syntax file
 
 ## How to use SGL2D
 
-#The SGL2D file consist of lines of expressions to specifiy the user's game:
+The SGL2D file consist of lines of expressions to specifiy the user's game:
 
 **EBNF rules:**
 
