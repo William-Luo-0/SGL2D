@@ -40,6 +40,7 @@ public class GenericGame extends Observable {
             gridPositions.add(new ArrayList<>());
         }
         observers = new Observable();
+        isVictory = false;
         isGameOver = false;
         valueCounter1 = 0;
         valueCounter2 = 0;
@@ -157,6 +158,38 @@ public class GenericGame extends Observable {
     }
 
     /**
+     * Returns the goal (null if it doesn't have one)
+     * @return isGameOver
+     */
+    public Goal getGoal() {
+        return goal;
+    }
+
+    /**
+     * Returns the player (null if it doesn't have one)
+     * @return isGameOver
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Returns the goal (null if it doesn't have one)
+     * @return isGameOver
+     */
+    public List<Sprite> getSprites() {
+        return sprites;
+    }
+
+    /**
+     * Returns the goal (null if it doesn't have one)
+     * @return isGameOver
+     */
+    public List<List<Sprite>> getGridPositions() {
+        return gridPositions;
+    }
+
+    /**
      * Getter for valueCounter1.
      * @return valueCounter1
      */
@@ -209,7 +242,7 @@ public class GenericGame extends Observable {
      * @param name the name of the sprite to find
      * @return the sprite matching the name or null
      */
-    private Sprite findSprite(String name) {
+    public Sprite findSprite(String name) {
         if (sprites == null) {
             return null;
         }
@@ -227,7 +260,7 @@ public class GenericGame extends Observable {
      * @param name the name of the sprite to find
      * @return true or false
      */
-    private Boolean containsSprite(String name) {
+    public Boolean containsSprite(String name) {
         if (sprites == null) {
             return false;
         }
