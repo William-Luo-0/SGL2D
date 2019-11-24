@@ -1,5 +1,6 @@
 package model;
 
+
 import javafx.util.Pair;
 
 import java.awt.*;
@@ -29,6 +30,7 @@ public class GenericGame extends Observable {
     private int valueCounter1;
     private int valueCounter2;
     private int valueCounter3;
+    private int spriteCounter;
 
     /**
      * Constructor for a GenericGame
@@ -45,6 +47,7 @@ public class GenericGame extends Observable {
         valueCounter1 = 0;
         valueCounter2 = 0;
         valueCounter3 = 0;
+        spriteCounter = 0;
     }
 
     // TODO: ADD WHEN FINISHED
@@ -238,6 +241,14 @@ public class GenericGame extends Observable {
     }
 
     /**
+     * Setter for spriteCounter
+     * @param value the value to set the spriteCounter to
+     */
+    public void setSpriteCounter(int value) {
+        spriteCounter = value;
+    }
+
+    /**
      * Finds a sprite given the name in sprites if it exists otherwise return null.
      * @param name the name of the sprite to find
      * @return the sprite matching the name or null
@@ -393,6 +404,39 @@ public class GenericGame extends Observable {
         }
         if (eventSprite.eventDecCounter3Flag.equals(true)) {
             setValueCounter3(valueCounter2 - 1);
+        }
+        if (eventSprite.eventIncSpriteCounterFlag.equals(true)){
+            setSpriteCounter(spriteCounter + 1);
+        }
+        if (eventSprite.eventDecSpriteCounterFlag.equals(true)){
+            setSpriteCounter(spriteCounter - 1);
+        }
+        if (eventSprite.eventSetSpriteCounterFlag.equals(true)){
+            setSpriteCounter(spriteCounter);
+        }
+        if (eventSprite.eventTransformOnZeroCounterFlag.equals(true)){
+
+        }
+        if (eventSprite.eventGameOverOnZeroCounterFlag.equals(true)){
+
+        }
+        if (eventSprite.eventWinOnZeroCounterFlag.equals(true)){
+
+        }
+        if (eventSprite.eventMoveToRandomFlag.equals(true)){
+
+        }
+        if (eventSprite.eventTransformToSpriteFlag.equals(true)){
+
+        }
+        if (eventSprite.eventMovePlayerToFlag.equals(true)){
+
+        }
+        if (eventSprite.eventWinFlag.equals(true)){
+            isVictory = true;
+        }
+        if (eventSprite.eventGameOverFlag.equals(true)){
+            isGameOver = true;
         }
     }
 }

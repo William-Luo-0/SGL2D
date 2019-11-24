@@ -15,8 +15,8 @@ public class Goal extends AbstractSprite {
      */
     public Goal (String name) {
         super(name);
-        xCoord = 0;
-        yCoord = 0;
+        this.xCoord = 0;
+        this.yCoord = 0;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Goal extends AbstractSprite {
      * @return xCoord
      */
     public int getxCoord() {
-        return xCoord;
+        return this.xCoord;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Goal extends AbstractSprite {
      * @return yCoord
      */
     public int getyCoord() {
-        return yCoord;
+        return this.yCoord;
     }
 
     /**
