@@ -37,15 +37,7 @@ public class GameFactory {
                 //genericGame.setRows(Integer.parseInt(xText.substring(2)));
                 //genericGame.setColumns(Integer.parseInt(yText.substring(2)));
             }
-
-            @Override
-            public void enterPlayer(SGL2DParser.PlayerContext ctx) {
-                String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
-                String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
-                //genericGame.setRows(Integer.parseInt(xText.substring(2)));
-                //genericGame.setColumns(Integer.parseInt(yText.substring(2)));
-            }
-
+            
 
         });
         parser.start();

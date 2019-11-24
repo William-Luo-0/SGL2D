@@ -55,7 +55,7 @@ public class SGL2D extends JFrame {
      */
     public static void main(String[] args) throws IOException {
         GameFactory gameFactory = new GameFactory();
-        InputStream inputStream = new FileInputStream("gameFile.sgl2d");
+        InputStream inputStream = new FileInputStream("test-game.sgl2d");
         GenericGame genericGame = gameFactory.createGame(inputStream);
         new SGL2D();
     }
