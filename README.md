@@ -6,30 +6,85 @@ SGL2D is our CPSC311 Term Project. This application takes in a SGL2D syntax file
 
 ### To implement our most simple game:
 
-The file would consists of lines of expressions:
+The SGL2D file consists of lines of expressions to define the game:
 
 EBNF rules:
-digits = ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+
 
-roygbiv = "red" | "orange" | "yellow" | "green" | "blue" | "indigo" | "violet" | "black" | "white" | "grey"
+<boolean> = "true" | "false" | "T" | "F";
+
+<word> = ([a-z] | [A-Z] | "_")+;
+
+<digits> = ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+;
+
+<roygbiv> = "red" | "orange" | "yellow" | "green" | "blue" | "indigo" | "violet" | "black" | "white" | "grey";
+
+<command> = "incCounter1=<digits>" |
+			"decCounter1=<digits>" |
+			"incCounter2=<digits>" |
+			"decCounter2=<digits>" |
+			"incCounter3=<digits>" |
+			"decCounter3=<digits>" |
+			"incSpriteCounter=<digits>" |
+			"decSpriteCounter=<digits>" |
+			"setSpriteCounter=<digits>" |
+			"transformOnZeroCounter=<words>" |
+			"gameOverOnZeroCounter" |
+			"winOnZeroCounter=<digits>" |
+			"moveToRandom=<words>" |
+			"transformToSprite=<words>" |
+			"movePlayerTo= x=<digits> y=<digits>" |
+			"gameOver" |
+			"win";
+			
 
 Define an environment:
 
-environment > x=digits y=digits -> defines an environment of X*Y grid size
+environment > x=<digits> y=<digits> -> defines an environment of X*Y grid size
 
 otherwise defaults to x=0, y=0
 
+
 Define a goal:
 
-goal > x=digits y=digits color=roygbiv -> defines a goal at coordinate (X,Y) with the respective color
+goal > x=<digits> y=<digits> color=<roygbiv> -> defines a goal at coordinate (X,Y) with the respective color
 
-otherwise defaults to x=0, y=0, color=black
+otherwise defaults to x=0, y=0, color=grey
+
+
 
 Define a player:
 
-player > x=digits y=digits color=roygbiv -> defines a goal at coordinate (X,Y) with the respective color
+player > x=<digits> y=<digits> color=<roygbiv> -> defines a goal at coordinate (X,Y) with the respective color
 
-otherwise defaults to x=0, y=0, color=black
+otherwise defaults to x=0, y=0, color=grey
+
+
+
+Define a sprite:
+
+sprite <word> > color=<roygbiv> solid=<boolean> -> defines a sprite named 'word' with the respective color and if the wall is solid (player cannot pass through it)
+
+otherwise defaults to color= grey,solid=false
+
+
+
+Define a counter:
+
+counter('1' | '2' | '3') > ( <boolean> | <digits>)* -> sets counter(1,2 or 3) to T/F or an integer
+
+
+
+Define an event:
+
+event (sprite <word>) | goal) > <command>* -> runs the command on the sprite or goal
+
+
+
+Set an entity:
+
+set (sprite <word> | goal) >  ( x=<digits> y=<digits> | '('x=<digits> y=<digits>','x=<digits> y=<digits>')')+
+
+
 
 ### Examples:
 
