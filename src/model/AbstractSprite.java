@@ -17,9 +17,19 @@ public abstract class AbstractSprite {
     protected Boolean eventDecCounter2Flag;
     protected Boolean eventIncCounter3Flag;
     protected Boolean eventDecCounter3Flag;
+    protected Boolean eventIncSpriteCounter;
+    protected Boolean eventDecSpriteCounter;
+    protected Boolean eventSetSpriteCounter;
+    protected Boolean eventTransformOnZeroCounter;
+    protected Boolean eventWinOnZeroCounter;
+    protected Boolean eventMovePlayerTo;
+    protected Boolean eventGameOver;
+    protected Boolean eventWin;
     protected Boolean eventMoveToRandomFlag;
     protected Boolean eventTransformToSpriteFlag;
     protected String eventNewSprite;
+    // All of its children can make use of the counter since there could be multiple sprites for goals and player
+    protected int spriteCounter;
 
 
     public AbstractSprite(String name) {
@@ -35,7 +45,16 @@ public abstract class AbstractSprite {
         eventDecCounter3Flag = false;
         eventMoveToRandomFlag = false;
         eventTransformToSpriteFlag = false;
+        eventIncSpriteCounter = false;
+        eventDecSpriteCounter = false;
+        eventSetSpriteCounter = false;
+        eventTransformOnZeroCounter = false;
+        eventWinOnZeroCounter = false;
+        eventMovePlayerTo = false;
+        eventGameOver = false;
+        eventWin = false;
         eventNewSprite = null;
+        spriteCounter = 0;
     }
 
     public abstract void paint(Graphics g);
@@ -107,6 +126,42 @@ public abstract class AbstractSprite {
         return eventNewSprite;
     }
 
+    public Boolean getEventIncSpriteCounter () {
+        return eventIncSpriteCounter;
+    }
+
+    public Boolean getEventDecSpriteCounter() {
+        return eventDecSpriteCounter;
+    }
+
+    public Boolean getEventSetSpriteCounter() {
+        return eventSetSpriteCounter;
+    }
+
+    public Boolean getEventTransformOnZeroCounter() {
+        return eventTransformOnZeroCounter;
+    }
+
+    public Boolean getEventWinOnZeroCounter() {
+        return eventWinOnZeroCounter;
+    }
+
+    public Boolean getEventMovePlayerTo() {
+        return eventMovePlayerTo;
+    }
+
+    public Boolean getEventGameOver() {
+        return eventGameOver;
+    }
+
+    public Boolean getEventWin() {
+        return eventWin;
+    }
+
+    public int getSpriteCounter() {
+        return spriteCounter;
+    }
+
     public void setEventIncCounter1Flag(Boolean eventIncCounter1Flag) {
         this.eventIncCounter1Flag = eventIncCounter1Flag;
     }
@@ -139,8 +194,44 @@ public abstract class AbstractSprite {
         this.eventTransformToSpriteFlag = eventTransformToSpriteFlag;
     }
 
+    public void setEventIncSpriteCounter(Boolean eventIncSpriteCounter){
+        this.eventIncSpriteCounter = eventIncSpriteCounter;
+    }
+
+    public void setEventDecSpriteCounter(Boolean eventDecSpriteCounter){
+        this.eventDecSpriteCounter = eventDecSpriteCounter;
+    }
+
+    public void setEventSetSpriteCounter(Boolean eventSetSpriteCounter){
+        this.eventSetSpriteCounter = eventSetSpriteCounter;
+    }
+
+    public void setEventTransformOnZeroCounter(Boolean eventTransformOnZeroCounter){
+        this.eventTransformOnZeroCounter = eventTransformOnZeroCounter;
+    }
+
+    public void setEventWinOnZeroCounter(Boolean eventWinOnZeroCounter){
+        this.eventWinOnZeroCounter = eventWinOnZeroCounter;
+    }
+
+    public void setEventMovePlayerTo(Boolean eventMovePlayerTo){
+        this.eventMovePlayerTo = eventMovePlayerTo;
+    }
+
+    public void setEventGameOver(Boolean eventGameOver){
+        this.eventGameOver = eventGameOver;
+    }
+
+    public void setEventWin(Boolean eventWin){
+        this.eventWin = eventWin;
+    }
+
     public void setEventNewSprite(String eventNewSprite) {
         this.eventNewSprite = eventNewSprite;
+    }
+
+    public void setEventSpriteCounter(int EventSpriteCounter){
+        this.spriteCounter = EventSpriteCounter;
     }
 
     @Override
