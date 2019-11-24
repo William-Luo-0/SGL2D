@@ -32,7 +32,6 @@ public class GenericGameTest {
         List<List<Sprite>> gridPositions = genericGame.getGridPositions();
         assertFalse(gridPositions.isEmpty());
 
-
         for (List<Sprite> gridList : gridPositions) {
             assertTrue(gridList.isEmpty());
         }
@@ -48,7 +47,7 @@ public class GenericGameTest {
     }
 
     @Test
-    public void testNullGoal() {
+    public void testNoGoal() {
         assertNull(genericGame.getGoal());
     }
 
@@ -78,11 +77,9 @@ public class GenericGameTest {
     @Test
     public void testAddSpriteSuccess() throws Exception {
         genericGame.addSprite("wall");
-        assertTrue(genericGame.containsSprite("wall"));
+        List<Sprite> sprites = genericGame.getSprites();
 
-        Sprite foundSprite = genericGame.findSprite("wall");
-        Sprite newSprite = new Sprite("wall");
-        assertEquals(foundSprite, newSprite);
+        assertTrue(sprites.contains(new Sprite("wall")));
     }
 
     @Test
@@ -105,4 +102,5 @@ public class GenericGameTest {
         genericGame.setValueCounter3(3);
         assertEquals(genericGame.getValueCounter3(), 3);
     }
+
 }

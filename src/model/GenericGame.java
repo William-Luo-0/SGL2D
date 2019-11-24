@@ -111,9 +111,9 @@ public class GenericGame extends Observable {
     /**
      * Adds a new sprite to sprites if it exists otherwise do nothing.
      * @param name Name of the new sprite
-     * @throws Exception If the name of the sprite is "goal" or player", throws IllegalArgumentException
+     * @throws IllegalArgumentException If the name of the sprite is "goal" or player", throws IllegalArgumentException
      */
-    public void addSprite(String name) throws Exception {
+    public void addSprite(String name) throws IllegalArgumentException {
         if (name.toLowerCase().equals("goal") || name.toLowerCase().equals("player")) {
             throw new IllegalArgumentException("Invalid Arguments: Cannot name sprite: " + name + ".");
         }
@@ -133,7 +133,7 @@ public class GenericGame extends Observable {
     }
 
     /**
-     * Creates a new Goal if goal is not null.
+     * Creates a new Goal if goal is null.
      */
     public void createGoal() {
         if (goal == null) {
@@ -150,7 +150,7 @@ public class GenericGame extends Observable {
     }
 
     /**
-     * Checks if the game won.
+     * Checks if the game is won.
      * @return isVictory
      */
     public Boolean isVictory() {
@@ -159,7 +159,7 @@ public class GenericGame extends Observable {
 
     /**
      * Returns the goal (null if it doesn't have one)
-     * @return isGameOver
+     * @return goal
      */
     public Goal getGoal() {
         return goal;
@@ -167,23 +167,23 @@ public class GenericGame extends Observable {
 
     /**
      * Returns the player (null if it doesn't have one)
-     * @return isGameOver
+     * @return player
      */
     public Player getPlayer() {
         return player;
     }
 
     /**
-     * Returns the goal (null if it doesn't have one)
-     * @return isGameOver
+     * Returns the sprites
+     * @return sprites
      */
     public List<Sprite> getSprites() {
         return sprites;
     }
 
     /**
-     * Returns the goal (null if it doesn't have one)
-     * @return isGameOver
+     * Returns the gridPositions
+     * @return gridPositions
      */
     public List<List<Sprite>> getGridPositions() {
         return gridPositions;
@@ -242,7 +242,7 @@ public class GenericGame extends Observable {
      * @param name the name of the sprite to find
      * @return the sprite matching the name or null
      */
-    public Sprite findSprite(String name) {
+    private Sprite findSprite(String name) {
         if (sprites == null) {
             return null;
         }
@@ -260,7 +260,7 @@ public class GenericGame extends Observable {
      * @param name the name of the sprite to find
      * @return true or false
      */
-    public Boolean containsSprite(String name) {
+    private Boolean containsSprite(String name) {
         if (sprites == null) {
             return false;
         }
