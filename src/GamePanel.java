@@ -49,6 +49,12 @@ public class GamePanel  extends JPanel {
      * @param g the panel to paint game over
      */
     private void victory (Graphics g) {
+        long duration = game.getEndTime() - game.getStartTime();
+        long millis = duration % 1000;
+        long second = (duration / 1000) % 60;
+        long minute = (duration / (1000 * 60)) % 60;
+        String time = String.format("%02d:%02d.%d", minute, second, millis);
+
         Color saved = g.getColor();
         g.setColor(new Color(255,255,255, 175));
         g.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -56,6 +62,9 @@ public class GamePanel  extends JPanel {
         g.setFont(new Font("Arial", 20, 75));
         FontMetrics fm = g.getFontMetrics();
         centreString("Victory!", g, fm, GAME_HEIGHT / 2);
+        g.setFont(new Font("Arial", 20, 20));
+        fm = g.getFontMetrics();
+        centreString("Time Elapsed: " + time, g, fm, GAME_HEIGHT / 2 + 50);
         g.setColor(saved);
     }
 
@@ -64,6 +73,12 @@ public class GamePanel  extends JPanel {
      * @param g the panel to paint game over
      */
     private void gameOver (Graphics g) {
+        long duration = game.getEndTime() - game.getStartTime();
+        long millis = duration % 1000;
+        long second = (duration / 1000) % 60;
+        long minute = (duration / (1000 * 60)) % 60;
+        String time = String.format("%02d:%02d.%d", minute, second, millis);
+
         Color saved = g.getColor();
         g.setColor(new Color(255,255,255, 175));
         g.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -71,6 +86,9 @@ public class GamePanel  extends JPanel {
         g.setFont(new Font("Arial", 20, 75));
         FontMetrics fm = g.getFontMetrics();
         centreString("Game Over!", g, fm, GAME_HEIGHT / 2);
+        g.setFont(new Font("Arial", 20, 20));
+        fm = g.getFontMetrics();
+        centreString("Time Elapsed: " + time, g, fm, GAME_HEIGHT / 2 + 50);
         g.setColor(saved);
     }
 

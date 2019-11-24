@@ -18,6 +18,8 @@ public class GenericGame extends Observable {
     private static final int GAME_HEIGHT = 600;
     private static int COLUMNS = 10;
     private static int ROWS = 10;
+    private static long START_TIME;
+    private static long END_TIME;
 
     private List<Sprite> sprites;
     private List<List<Sprite>> gridPositions;
@@ -87,6 +89,7 @@ public class GenericGame extends Observable {
         counter1GameOverOnZero = false;
         counter2GameOverOnZero = false;
         counter3GameOverOnZero = false;
+        START_TIME = System.currentTimeMillis();
     }
 
     /**
@@ -96,17 +99,19 @@ public class GenericGame extends Observable {
         for (int j = 0; j < COLUMNS; j++) {
             for (int i = 0; i < ROWS; i++) {
                 Sprite eventSprite = gridPositions.get(j).get(i);
-                if (eventSprite.eventTransformOnZeroCounterFlag.equals(true)) {
+                if (eventSprite.eventTransformOnZeroCounterFlag.equals(true) && eventSprite.getSpriteCounter() == 0) {
                     gridPositions.get(j).set(i, findSprite(eventSprite.getEventNewSprite()));
                 }
                 if (eventSprite.eventGameOverOnZeroCounterFlag.equals(true)) {
                     if (eventSprite.getSpriteCounter() == 0) {
                         isGameOver = true;
+                        END_TIME = System.currentTimeMillis();
                     }
                 }
                 if (eventSprite.eventWinOnZeroCounterFlag.equals(true)) {
                     if (eventSprite.getSpriteCounter() == 0) {
-                        isGameOver = true;
+                        isVictory = true;
+                        END_TIME = System.currentTimeMillis();
                     }
                 }
                 if (eventSprite.eventPlayerIncCounterFlag.equals(true)) {
@@ -119,7 +124,16 @@ public class GenericGame extends Observable {
                     eventSprite.setSpriteCounter(eventSprite.getInitialSpriteCounter());
                     if (containsSprite(eventSprite.getEventNewSprite())) {
                         gridPositions.get(j).set(i, findSprite(eventSprite.getEventNewSprite()));
-                        gridPositions.get(RND.nextInt(ROWS)).set(RND.nextInt(COLUMNS), eventSprite);
+                        int tryCounter = 10;
+                        while (tryCounter != 0) {
+                            int xRand = RND.nextInt(ROWS);
+                            int yRand = RND.nextInt(COLUMNS);
+                            if (gridPositions.get(xRand).get(yRand).getName().toLowerCase().equals(eventSprite.getEventNewSprite())) {
+                                gridPositions.get(xRand).set(yRand, eventSprite);
+                                break;
+                            }
+                            tryCounter -= 1;
+                        }
                     }
                 }
             }
@@ -127,36 +141,43 @@ public class GenericGame extends Observable {
         if (counter1WinOnZero) {
             if (valueCounter1 == 0) {
                 isVictory = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         if (counter2WinOnZero) {
             if (valueCounter2 == 0) {
                 isVictory = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         if (counter3WinOnZero) {
             if (valueCounter3 == 0) {
                 isVictory = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         if (counter1GameOverOnZero) {
             if (valueCounter1 == 0) {
                 isGameOver = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         if (counter2GameOverOnZero) {
             if (valueCounter2 == 0) {
                 isGameOver = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         if (counter3GameOverOnZero) {
             if (valueCounter3 == 0) {
                 isGameOver = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         if (goal != null) {
             if (player.getxCoord() == goal.getxCoord() & player.getyCoord() == goal.getyCoord()) {
                 isVictory = true;
+                END_TIME = System.currentTimeMillis();
             }
         }
         setChanged();
@@ -271,6 +292,14 @@ public class GenericGame extends Observable {
 
     public Player getPlayer () {
         return player;
+    }
+
+    public static long getStartTime() {
+        return START_TIME;
+    }
+
+    public static long getEndTime() {
+        return END_TIME;
     }
 
     /**
@@ -589,10 +618,10 @@ public class GenericGame extends Observable {
             setValueCounter2(valueCounter2 - eventSprite.getDecCounter2());
         }
         if (eventSprite.eventIncCounter3Flag.equals(true)) {
-            setValueCounter3(valueCounter2 + eventSprite.getIncCounter3());
+            setValueCounter3(valueCounter3 + eventSprite.getIncCounter3());
         }
         if (eventSprite.eventDecCounter3Flag.equals(true)) {
-            setValueCounter3(valueCounter2 - eventSprite.getDecCounter3());
+            setValueCounter3(valueCounter3 - eventSprite.getDecCounter3());
         }
         if (eventSprite.eventIncSpriteCounterFlag.equals(true)) {
             eventSprite.setSpriteCounter(eventSprite.getSpriteCounter() + eventSprite.getIncSpriteCounter());
@@ -606,7 +635,16 @@ public class GenericGame extends Observable {
             }
             if (containsSprite(eventSprite.getEventNewSprite())) {
                 gridPositions.get(xPos).set(yPos, findSprite(eventSprite.getEventNewSprite()));
-                gridPositions.get(RND.nextInt(ROWS)).set(RND.nextInt(COLUMNS), eventSprite);
+                int tryCounter = 10;
+                while (tryCounter != 0) {
+                    int xRand = RND.nextInt(ROWS);
+                    int yRand = RND.nextInt(COLUMNS);
+                    if (gridPositions.get(xRand).get(yRand).getName().toLowerCase().equals(eventSprite.getEventNewSprite())) {
+                        gridPositions.get(xRand).set(yRand, eventSprite);
+                        break;
+                    }
+                    tryCounter -= 1;
+                }
             }
         }
         if (eventSprite.eventTransformToSpriteFlag.equals(true)) {
@@ -619,9 +657,11 @@ public class GenericGame extends Observable {
         }
         if (eventSprite.eventGameOverFlag.equals(true)) {
             isGameOver = true;
+            END_TIME = System.currentTimeMillis();
         }
         if (eventSprite.eventWinFlag.equals(true)) {
             isVictory = true;
+            END_TIME = System.currentTimeMillis();
         }
     }
 }

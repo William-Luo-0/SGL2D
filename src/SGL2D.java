@@ -33,7 +33,7 @@ public class SGL2D extends JFrame {
                 gameFactoryOutput.getValue().get(1),
                 gameFactoryOutput.getValue().get(2));  // Create counter JPanel
         game.addObserver(counterPanel);         // Add counter to observe game
-        add(gamePanel);                         // Defaults to fill rest of frame (center)
+        add(gamePanel, BorderLayout.CENTER);                         // Defaults to fill rest of frame (center)
         add(counterPanel, BorderLayout.NORTH);  // Positions the counter at top of frame
         addKeyListener(new KeyHandler());       // Add key listener
         pack();                                 // Size window
@@ -72,7 +72,7 @@ public class SGL2D extends JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println(e);
-                System.out.println("Error, could not create game, file not readable or does not exist!");
+                ErrorFrame ef = new ErrorFrame(e);
             }
         } else {
             System.out.println("No Selection ");
