@@ -1,20 +1,18 @@
 # SGL2D
 
-SGL2D is our CPSC311 Term Project. This application takes in a SGL2D syntax file and generates a game application based on our specification. 
+SGL2D is our CPSC311 Term Project. This application takes in a SGL2D syntax file and generates a game application based on the specification. SGL2D can define environments, players, goals, entities, and scoreboard in order to create a simple game.
 
 ## How to use SGL2D
 
-### To implement our most simple game:
-
-The SGL2D file would consists of lines of expressions:
+#The SGL2D file consist of lines of expressions to specifiy the user's game:
 
 **EBNF rules:**
 
 *boolean* = "true" | "false" | "T" | "F";
 
-*word* = ([a-z] | [A-Z] | "_")+;
+*word* = ( [a-z] | [A-Z] | "_" )+;
 
-*digits* = ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+;
+*digits* = ( "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" )+;
 
 *roygbiv* = "red" | "orange" | "yellow" | "green" | "blue" | "indigo" | "violet" | "black" | "white" | "grey";
 
@@ -76,7 +74,7 @@ counter('1' | '2' | '3') > ( *boolean* | *digits* )* -> sets counter(1,2 or 3) i
 
 **Define an event:**
 
-event (sprite *word*) | goal) > *command** -> runs the command/event on the sprite or goal
+event (sprite *word*) | goal) > *command** -> defines an event on the sprite or goal
 
 
 
