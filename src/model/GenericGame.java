@@ -55,16 +55,43 @@ public class GenericGame extends Observable {
      */
     public void update() {
         // repaint game panel in game panel... (DONE)
-        // setChanged();
-
-        // notifyObservers();
+        setChanged();
         notifyObservers();
         // checkVictory(); NOTE: NOT THE SAME AS isVICTORY, must notify all observers and end the game.
-
+        checkVictory();
         // checkGameOver(); NOTE: See above
-
+        checkGameOver();
     }
 
+
+    /**
+     * Checks if game is over
+     * Notifies all observers that game is over and end game
+     */
+    private void checkGameOver() {
+        if(isGameOver()){
+            setChanged();
+            notifyObservers("endGame");
+        }
+    }
+
+    /**
+     * Checks if victory has been acheived
+     * Notifies all observers that victory is acheived and end game
+     */
+    private void checkVictory(){
+        if(isVictory()){
+            setChanged();
+            notifyObservers("endGame");
+        }
+    }
+
+    /**
+     * Notifies all observers that there was change
+     */
+    public void notifyObservers(){
+        observers.notifyObservers();
+    }
 
     /**
      * KeyEvent listener for the game with basic arrow key listeners and an exit through escape.
@@ -140,6 +167,28 @@ public class GenericGame extends Observable {
     }
 
     /**
+     * Setter for the properties of a player(XCoords,YCoords)
+     * if no player exists makes a player
+     * @param xCords X-coordinates of player
+     * @param yCords Y-coordinates of player
+     */
+    public void setPlayerCords(int xCords, int yCords){
+        createPlayer();
+        player.setxCoord(xCords);
+        player.setxCoord(yCords);
+    }
+
+    /**
+     * Setter for the properties of a player(Color)
+     * if no player exists makes a player
+     * @param color Color of player
+     */
+    public void setPlayerColor(String color){
+        createPlayer();
+        player.setColor(color);
+    }
+
+    /**
      * Creates a new Goal if goal is not null.
      */
     public void createGoal() {
@@ -149,18 +198,32 @@ public class GenericGame extends Observable {
     }
 
     /**
-     * Setter for the properties of a goal(XCoords,YCoords,Color)
+     * Setter for the properties of a goal(XCoords)
      * if no goal exists makes a goal
      * @param xCords X-coordinates of goal
+     */
+    public void setGoalY(int xCords){
+        createGoal();
+        goal.setxCoord(xCords);
+    }
+
+    /**
+     * Setter for the properties of a goal(YCoords)
+     * if no goal exists makes a goal
      * @param yCords Y-coordinates of goal
+     */
+    public void setGoalX(int yCords){
+        createGoal();
+        goal.setyCoord(yCords);
+    }
+
+    /**
+     * Setter for the properties of a goal(Color)
+     * if no goal exists makes a goal
      * @param color Color of goal
      */
-    public void setGoal(int xCords, int yCords,String color){
-        if (goal == null){
-            createGoal();
-        }
-        goal.setxCoord(xCords);
-        goal.setxCoord(yCords);
+    public void setGoalColor(String color){
+        createGoal();
         goal.setColor(color);
     }
 
@@ -253,6 +316,32 @@ public class GenericGame extends Observable {
         }
         return null;
     }
+    /**
+     * Setter for Sprite color if sprite exists
+     * if no sprite do nothing
+     * @param name name is name of sprite
+     * @param color is the color set for the sprite
+     */
+    public void setSpriteColor(String name,String color){
+        Sprite tempSprite = findSprite(name);
+        if(tempSprite != null){
+            tempSprite.setColor(color);
+        }
+    }
+
+    /**
+     * Setter for Sprite solid property if sprite exists
+     * if no sprite do nothing
+     * @param name name is name of sprite
+     * @param solid is the solid boolean for the sprite
+     */
+    public void setSpriteSoild(String name,Boolean solid){
+        Sprite tempSprite = findSprite(name);
+        if(tempSprite != null){
+            tempSprite.setSolid(solid);
+        }
+    }
+
     /**
      * Setter for COLUMNS
      * @param YINT is the value of the COLUMNS

@@ -2,6 +2,7 @@ import SGL2DANTLR.SGL2DBaseListener;
 import SGL2DANTLR.SGL2DLexer;
 import SGL2DANTLR.SGL2DParser;
 import model.GenericGame;
+import model.Sprite;
 import org.antlr.v4.runtime.*;
 
 import java.io.IOException;
@@ -33,31 +34,64 @@ public class GameFactory {
 
             @Override
             public void exitEnvironment(SGL2DParser.EnvironmentContext ctx) {
-                String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
-                String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
-                genericGame.setRows(Integer.parseInt(xText.substring(2)));
-                genericGame.setColumns(Integer.parseInt(yText.substring(2)));
+                if(ctx.XINT().size() > 0){
+                    String xText = ctx.XINT().get(0).getText();
+                    genericGame.setRows(Integer.parseInt(xText));
+                }
+                if(ctx.YINT().size() > 0){
+                    String yText = ctx.YINT().get(0).getText();
+                    genericGame.setColumns(Integer.parseInt(yText));
+                }
             }
 
             @Override
             public void exitGoal(SGL2DParser.GoalContext ctx){
-                String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
-                String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
-                String colorText = ctx.COLOR().get(ctx.COLOR().size()-1).getText();
-                genericGame.setGoal(Integer.parseInt(xText.substring(2)),Integer.parseInt(yText.substring(2)),colorText);
+                if(ctx.XINT().size() > 0){
+                    String xText = ctx.XINT().get(0).getText();
+                    genericGame.setGoalX(Integer.parseInt(xText));
+                }
+                if(ctx.YINT().size() > 0){
+                    String yText = ctx.YINT().get(0).getText();
+                    genericGame.setGoalY(Integer.parseInt(yText));
+                }
+                if(ctx.COLOR().size() > 0){
+                    String colorText = ctx.COLOR().get(0).getText();
+                    genericGame.setGoalColor(colorText);
+                }
             }
 
             @Override
             public void exitPlayer(SGL2DParser.PlayerContext ctx){
-                String xText = ctx.XINT().get(ctx.XINT().size() - 1).getText();
-                String yText = ctx.YINT().get(ctx.YINT().size() - 1).getText();
-                String colorText = ctx.COLOR().get(ctx.COLOR().size()-1).getText();
+                if(ctx.XINT().size() > 0 && ctx.YINT().size() > 0){
+                    String xText = ctx.XINT().get(0).getText();
+                    String yText = ctx.YINT().get(0).getText();
+                    genericGame.setPlayerCords(Integer.parseInt(xText),Integer.parseInt(yText));
+                }
+                if(ctx.COLOR().size() > 0){
+                    String colorText = ctx.COLOR().get(0).getText();
+                    genericGame.setPlayerColor(colorText);
+
+                }
             }
 
             @Override
-            public void exitSprite(SGL2DParser.SpriteContext ctx){
-                String colorText = ctx.COLOR().get(ctx.COLOR().size()-1).getText();
-                String solidText = ctx.SOLID().get(ctx.SOLID().size()-1).getText();
+            public void exitSprite(SGL2DParser.SpriteContext ctx) {
+                if(ctx.WORD() != null){
+                    String wordText = ctx.WORD().getText();
+                    try{
+                        genericGame.addSprite(wordText);
+                        if(ctx.COLOR().size() > 0){
+                            String colorText = ctx.COLOR().get(0).getText();
+                            genericGame.setSpriteColor(wordText,colorText);
+                        }
+                        if(ctx.SOLID().size() > 0){
+                            String solidText = ctx.SOLID().get(0).getText();
+                            genericGame.setSpriteSoild(wordText,Boolean.parseBoolean(solidText));
+                        }
+                    }catch(Exception e){
+
+                    }
+                }
             }
 
             @Override

@@ -45,6 +45,7 @@ public class CounterPanel extends JPanel implements Observer {
         counter3.setVisible(c1Enable);                  // Sets visibility of counter 3
     }
 
+
     /**
      * Sets the visibility of counter 1 on the CounterPanel
      * @param isVisible Determines if counter 1 is enabled
@@ -76,6 +77,11 @@ public class CounterPanel extends JPanel implements Observer {
      */
     @Override
     public void update (Observable o, Object arg) {
+        if(arg == "endGame"){
+            setCounter1Visibility(false);
+            setCounter2Visibility(false);
+            setCounter3Visibility(false);
+        }
         counter1.setText(COUNTER_ONE_TEXT + game.getValueCounter1());         // Updates Counter 1 on change
         counter2.setText(COUNTER_ONE_TEXT + game.getValueCounter2());         // Updates Counter 2 on change
         counter3.setText(COUNTER_ONE_TEXT + game.getValueCounter3());       // Updates Counter 3 on change
