@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class SGL2D extends JFrame {
 
@@ -17,11 +20,11 @@ public class SGL2D extends JFrame {
     /**
      * SGL2D Game Frame Initializer
      */
-    public SGL2D() {
+    public SGL2D(String fileName) throws IOException {
         super("SGL2D Game");                       // JFrame frame = new JFrame("Frame Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);                  // Will display window bar
-        game = new GenericGame();               // Create new game, may change for interpreter!
+        game = new GameFactory().createGame(fileName);  // Create new game, may change for interpreter!
         gamePanel = new GamePanel(game);        // Create game JPanel
         counterPanel = new CounterPanel(game, false, false, false);  // Create counter JPanel
         game.addObserver(counterPanel);         // Add counter to observe game
@@ -47,12 +50,11 @@ public class SGL2D extends JFrame {
         }
     }
 
-    // TODO: CHANGE THIS AS WELL AS SGL2D() to call GameFactory with given file input.
     /**
      * Initializer of SGL2D
      * @param args
      */
-    public static void main(String[] args) {
-        new SGL2D();
+    public static void main(String[] args) throws IOException {
+        new SGL2D(args[0]);
     }
 }

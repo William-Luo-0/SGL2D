@@ -5,17 +5,14 @@ import model.GenericGame;
 import org.antlr.v4.runtime.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class GameFactory {
-    public GenericGame createGame (InputStream in) throws IOException {
+    public GenericGame createGame (String fileName) throws IOException {
         GenericGame genericGame = new GenericGame();
-        // TODO: Change this as well as in SGL2D to take in an input file name from read sys call or however you like
-        // TODO: May have to do changes so it takes in the counter panel input or forwards it to another method call later
-        SGL2DLexer lexer = new SGL2DLexer(CharStreams.fromFileName("/test-game.sgl2d"));
+        SGL2DLexer lexer = new SGL2DLexer(CharStreams.fromFileName(fileName));
         SGL2DParser parser = new SGL2DParser(new CommonTokenStream(lexer));
         parser.addErrorListener(new BaseErrorListener() {
             @Override
