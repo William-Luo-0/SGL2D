@@ -86,4 +86,5 @@ public class SGL2D extends JFrame {
 * move events into more specific classes
 * move static fields too
 * add position class to handle positioning for the generic game
+* Add timer based games
 * */
