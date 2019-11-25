@@ -19,7 +19,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="antlr-4.7.2-complete" level="project" />
     <orderEntry type="module-library">
       <library name="JUnit5.3">
         <CLASSES>
@@ -32,5 +31,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="antlr-4.7.2-complete" level="project" />
   </component>
 </module>

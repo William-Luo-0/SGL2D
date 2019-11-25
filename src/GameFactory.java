@@ -10,13 +10,15 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-
+/**
+ * Game creator from SGL2D syntax file
+ */
 public class GameFactory {
     protected static String errorMessage;
 
     public Pair<GenericGame, ArrayList<Boolean>> createGame (String filePath) throws Exception {
         GenericGame genericGame = new GenericGame();
-        InputStream inputStream = new FileInputStream(filePath); //GameFactory.class.getResourceAsStream(filePath);
+        InputStream inputStream = new FileInputStream(filePath);
         SGL2DLexer lexer = new SGL2DLexer(CharStreams.fromStream(inputStream));
         SGL2DParser parser = new SGL2DParser(new CommonTokenStream(lexer));
         parser.addErrorListener(new BaseErrorListener() {

@@ -14,26 +14,23 @@ public class SGL2D extends JFrame {
     private GamePanel gamePanel;
     private CounterPanel counterPanel;
 
-    // Future Implementations:
-    // Use timer from Javax.Swing.Timer to create tick based games, initialize timer to set default update cycle
-
     /**
      * SGL2D Game Frame Initializer
      */
     public SGL2D(String filePath) throws Exception {
         super("SGL2D Game");                       // JFrame frame = new JFrame("Frame Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(false);                  // Will display window bar
+        setUndecorated(false);                          // Will display window bar
         GameFactory gameFactory = new GameFactory();
         Pair<GenericGame, ArrayList<Boolean>> gameFactoryOutput = gameFactory.createGame(filePath);
         game = gameFactoryOutput.getKey();
-        gamePanel = new GamePanel(game);        // Create game JPanel
+        gamePanel = new GamePanel(game);                // Create game JPanel
         counterPanel = new CounterPanel(game,
                 gameFactoryOutput.getValue().get(0),
                 gameFactoryOutput.getValue().get(1),
-                gameFactoryOutput.getValue().get(2));  // Create counter JPanel
-        game.addObserver(counterPanel);         // Add counter to observe game
-        add(gamePanel, BorderLayout.CENTER);                         // Defaults to fill rest of frame (center)
+                gameFactoryOutput.getValue().get(2));   // Create counter JPanel
+        game.addObserver(counterPanel);                 // Add counter to observe game
+        add(gamePanel, BorderLayout.CENTER);            // Defaults to fill rest of frame (center)
         add(counterPanel, BorderLayout.NORTH);  // Positions the counter at top of frame
         addKeyListener(new KeyHandler());       // Add key listener
         pack();                                 // Size window
@@ -60,7 +57,7 @@ public class SGL2D extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser();  // File selector
         chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setDialogTitle("SGL2D File Chooser");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -72,7 +69,7 @@ public class SGL2D extends JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println(e);
-                ErrorFrame ef = new ErrorFrame(e);
+                ErrorFrame ef = new ErrorFrame(e); // Creates and prints error message on Error Frame
             }
         } else {
             System.out.println("No Selection ");
@@ -82,9 +79,11 @@ public class SGL2D extends JFrame {
 
 
 /*
-* future changes:
-* move events into more specific classes
-* move static fields too
-* add position class to handle positioning for the generic game
+* Possible Future Changes:
+* Move events into more specific classes
+* Move static fields too
+* Add position class to handle positioning for the generic game
 * Add timer based games
+    // Use timer from Javax.Swing.Timer to create tick based games, initialize timer to set default update cycle
+*
 * */

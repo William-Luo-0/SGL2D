@@ -211,7 +211,7 @@ public class GenericGame extends Observable {
     }
 
     /**
-     * Handles
+     * Handles painting the graphics
      * @param g panel to paint over
      */
     public void paint(Graphics g) {
@@ -286,18 +286,34 @@ public class GenericGame extends Observable {
         return isVictory;
     }
 
+    /**
+     * Getter for goal
+     * @return goal
+     */
     public Goal getGoal () {
         return goal;
     }
 
+    /**
+     * Getter for player
+     * @return player
+     */
     public Player getPlayer () {
         return player;
     }
 
+    /**
+     * Getter for START_TIME
+     * @return START_TIME
+     */
     public static long getStartTime() {
         return START_TIME;
     }
 
+    /**
+     * Getter for END_TIME
+     * @return END_TIME
+     */
     public static long getEndTime() {
         return END_TIME;
     }
@@ -350,74 +366,146 @@ public class GenericGame extends Observable {
         valueCounter3 = value;
     }
 
+    /**
+     * Setter for PlayerIncCounter1Flag
+     * @param playerIncCounter1Flag true or false
+     */
     public void setPlayerIncCounter1Flag(Boolean playerIncCounter1Flag) {
         this.playerIncCounter1Flag = playerIncCounter1Flag;
     }
 
+    /**
+     * Setter for PlayerIncCounter2Flag
+     * @param playerIncCounter2Flag true or false
+     */
     public void setPlayerIncCounter2Flag(Boolean playerIncCounter2Flag) {
         this.playerIncCounter2Flag = playerIncCounter2Flag;
     }
 
+    /**
+     * Setter for PlayerIncCounter3Flag
+     * @param playerIncCounter3Flag true or false
+     */
     public void setPlayerIncCounter3Flag(Boolean playerIncCounter3Flag) {
         this.playerIncCounter3Flag = playerIncCounter3Flag;
     }
 
+    /**
+     * Setter for PlayerDecCounter1Flag
+     * @param playerDecCounter1Flag true or false
+     */
     public void setPlayerDecCounter1Flag(Boolean playerDecCounter1Flag) {
         this.playerDecCounter1Flag = playerDecCounter1Flag;
     }
 
+    /**
+     * Setter for PlayerDecCounter2Flag
+     * @param playerDecCounter2Flag true or false
+     */
     public void setPlayerDecCounter2Flag(Boolean playerDecCounter2Flag) {
         this.playerDecCounter2Flag = playerDecCounter2Flag;
     }
 
+    /**
+     * Setter for PlayerDecCounter3Flag
+     * @param playerDecCounter3Flag true or false
+     */
     public void setPlayerDecCounter3Flag(Boolean playerDecCounter3Flag) {
         this.playerDecCounter3Flag = playerDecCounter3Flag;
     }
 
+    /**
+     * Setter for PlayerIncValue1
+     * @param playerIncValue1 value to set
+     */
     public void setPlayerIncValue1(int playerIncValue1) {
         this.playerIncValue1 = playerIncValue1;
     }
 
+    /**
+     * Setter for PlayerIncValue2
+     * @param playerIncValue2 value to set
+     */
     public void setPlayerIncValue2(int playerIncValue2) {
         this.playerIncValue2 = playerIncValue2;
     }
 
+    /**
+     * Setter for PlayerIncValue3
+     * @param playerIncValue3 value to set
+     */
     public void setPlayerIncValue3(int playerIncValue3) {
         this.playerIncValue3 = playerIncValue3;
     }
 
+    /**
+     * Setter for PlayerDecValue1
+     * @param playerDecValue1 value to set
+     */
     public void setPlayerDecValue1(int playerDecValue1) {
         this.playerDecValue1 = playerDecValue1;
     }
 
+    /**
+     * Setter for PlayerDecValue2
+     * @param playerDecValue2 value to set
+     */
     public void setPlayerDecValue2(int playerDecValue2) {
         this.playerDecValue2 = playerDecValue2;
     }
 
+    /**
+     * Setter for PlayerDecValue3
+     * @param playerDecValue3 value to set
+     */
     public void setPlayerDecValue3(int playerDecValue3) {
         this.playerDecValue3 = playerDecValue3;
     }
 
+    /**
+     * Setter for Counter1WinOnZero
+     * @param counter1WinOnZero true or false
+     */
     public void setCounter1WinOnZero(Boolean counter1WinOnZero) {
         this.counter1WinOnZero = counter1WinOnZero;
     }
 
+    /**
+     * Setter for Counter2WinOnZero
+     * @param counter2WinOnZero true or false
+     */
     public void setCounter2WinOnZero(Boolean counter2WinOnZero) {
         this.counter2WinOnZero = counter2WinOnZero;
     }
 
+    /**
+     * Setter for Counter3WinOnZero
+     * @param counter3WinOnZero true or false
+     */
     public void setCounter3WinOnZero(Boolean counter3WinOnZero) {
         this.counter3WinOnZero = counter3WinOnZero;
     }
 
+    /**
+     * Setter for Counter1GameOverOnZero
+     * @param counter1GameOverOnZero true or false
+     */
     public void setCounter1GameOverOnZero(Boolean counter1GameOverOnZero) {
         this.counter1GameOverOnZero = counter1GameOverOnZero;
     }
 
+    /**
+     * Setter for Counter2GameOverOnZero
+     * @param counter2GameOverOnZero true or false
+     */
     public void setCounter2GameOverOnZero(Boolean counter2GameOverOnZero) {
         this.counter2GameOverOnZero = counter2GameOverOnZero;
     }
 
+    /**
+     * Setter for Counter3GameOverOnZero
+     * @param counter3GameOverOnZero true or false
+     */
     public void setCounter3GameOverOnZero(Boolean counter3GameOverOnZero) {
         this.counter3GameOverOnZero = counter3GameOverOnZero;
     }

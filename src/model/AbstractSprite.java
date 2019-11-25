@@ -3,7 +3,6 @@ package model;
 import java.awt.*;
 import java.util.Objects;
 
-// Add setter for Sprite Width and Height if we implementing custom grid sizes.
 public abstract class AbstractSprite {
     protected static int SPRITE_WIDTH;
     protected static int SPRITE_HEIGHT;
@@ -44,7 +43,10 @@ public abstract class AbstractSprite {
     protected Boolean eventWinFlag;
     protected String eventNewSprite;
 
-
+    /**
+     * Default sprite class
+     * @param name the name of the sprite
+     */
     public AbstractSprite(String name) {
         this.name = name.toLowerCase();
         this.color = Color.DARK_GRAY;
@@ -84,18 +86,40 @@ public abstract class AbstractSprite {
         eventPlayerIncCounterFlag = false;
     }
 
+    /**
+     * Abstract paint method
+     * @param g the graphics to paint over
+     */
     public abstract void paint(Graphics g);
 
+    /**
+     * Abstract paint method
+     * @param g the graphics to paint over
+     * @param xCoord starting xCoord to paint
+     * @param yCoord starting yCoord to paint
+     */
     public abstract void paint(Graphics g, int xCoord, int yCoord);
 
+    /**
+     * Getter for name
+     * @return name
+     */
     public String getName () {
         return name;
     }
 
+    /**
+     * Getter for color
+     * @return color
+     */
     public Color getColor () {
         return color;
     }
 
+    /**
+     * Setter for color based on ROYGBIV color scheme (see doc)
+     * @param colorName the name of the color to set
+     */
     public void setColor (String colorName) {
         switch(colorName.toLowerCase()) {
             case ("red"):
@@ -136,78 +160,26 @@ public abstract class AbstractSprite {
         }
     }
 
-    public Boolean getEventIncCounter1Flag() {
-        return eventIncCounter1Flag;
-    }
-
-    public Boolean getEventDecCounter1Flag() {
-        return eventDecCounter1Flag;
-    }
-
-    public Boolean getEventIncCounter2Flag() {
-        return eventIncCounter2Flag;
-    }
-
-    public Boolean getEventDecCounter2Flag() {
-        return eventDecCounter2Flag;
-    }
-
-    public Boolean getEventIncCounter3Flag() {
-        return eventIncCounter3Flag;
-    }
-
-    public Boolean getEventDecCounter3Flag() {
-        return eventDecCounter3Flag;
-    }
-
-    public Boolean getEventIncSpriteCounterFlag() {
-        return eventIncSpriteCounterFlag;
-    }
-
-    public Boolean getEventDecSpriteCounterFlag() {
-        return eventDecSpriteCounterFlag;
-    }
-
-    public Boolean getEventTransformOnZeroCounterFlag() {
-        return eventTransformOnZeroCounterFlag;
-    }
-
-    public Boolean getEventGameOverOnZeroCounterFlag() {
-        return eventGameOverOnZeroCounterFlag;
-    }
-
-    public Boolean getEventWinOnZeroCounterFlag() {
-        return eventWinOnZeroCounterFlag;
-    }
-
-    public Boolean getEventMovePlayerToFlag() {
-        return eventMovePlayerToFlag;
-    }
-
-    public Boolean getEventMoveToRandomFlag() {
-        return eventMoveToRandomFlag;
-    }
-
-    public Boolean getEventTransformToSpriteFlag() {
-        return eventTransformToSpriteFlag;
-    }
-
-    public Boolean getEventGameOverFlag() {
-        return eventGameOverFlag;
-    }
-
-    public Boolean getEventWinFlag() {
-        return eventWinFlag;
-    }
-
+    /**
+     * Getter for eventNewSprite
+     * @return eventNewSprite
+     */
     public String getEventNewSprite() {
         return eventNewSprite;
     }
 
+    /**
+     * Setter for EventIncCounter1Flag
+     * @param eventIncCounter1Flag true or false
+     */
     public void setEventIncCounter1Flag(Boolean eventIncCounter1Flag) {
         this.eventIncCounter1Flag = eventIncCounter1Flag;
     }
 
+    /**
+     * Setter for EventDecCounter1Flag
+     * @param eventDecCounter1Flag true or false
+     */
     public void setEventDecCounter1Flag(Boolean eventDecCounter1Flag) {
         this.eventDecCounter1Flag = eventDecCounter1Flag;
     }
