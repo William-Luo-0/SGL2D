@@ -300,6 +300,128 @@ public class GenericGame extends Observable {
     }
 
     /**
+     * Sets the flag for the command on the goal
+     * @param command Name of command
+     */
+    public void setGoalCommand(String command){
+        Goal sp = goal;
+        setAbstractSpriteCommand(sp,command);
+    }
+
+    /**
+     * Sets the flag for the command on the sprite
+     * @param sprite Name of sprite
+     * @param command Name of command
+     */
+    public void setSpriteCommand(String sprite,String command){
+        Sprite sp = findSprite(sprite);
+        setAbstractSpriteCommand(sp,command);
+    }
+
+    /**
+     * Helper Function to take in AbstractSprite and parse command function
+     * @param as
+     * @param command
+     */
+    private void setAbstractSpriteCommand(AbstractSprite as, String command){
+        AbstractSprite sp = as;
+        if(command.length() == 3){
+            sp.setEventWinFlag(true);
+        }else if(command.length() == 8){
+            sp.setEventGameOverFlag(true);
+        }else{
+            String commandName = command.substring(0,11);
+            int counterNum = 0;
+            String word = "";
+            switch (commandName){
+                case "INCCOUNTER1":
+                    counterNum = Integer.parseInt(command.substring(12));
+                    sp.setEventIncCounter1Flag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "DECCOUNTER1":
+                    counterNum = Integer.parseInt(command.substring(12));
+                    sp.setEventDecCounter1Flag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "INCCOUNTER2":
+                    counterNum = Integer.parseInt(command.substring(12));
+                    sp.setEventIncCounter2Flag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "DECCOUNTER2":
+                    counterNum = Integer.parseInt(command.substring(12));
+                    sp.setEventDecCounter2Flag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "INCCOUNTER3":
+                    counterNum = Integer.parseInt(command.substring(12));
+                    sp.setEventIncCounter3Flag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "DECCOUNTER3":
+                    counterNum = Integer.parseInt(command.substring(12));
+                    sp.setEventDecCounter3Flag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "INCSPRITECO":
+                    counterNum = Integer.parseInt(command.substring(17));
+                    sp.setEventIncSpriteCounterFlag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "DECSPRITECO":
+                    counterNum = Integer.parseInt(command.substring(17));
+                    sp.setEventDecSpriteCounterFlag(true);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "SETSPRITECO":
+                    counterNum = Integer.parseInt(command.substring(17));
+                    sp.setEventSetSpriteCounterFlag(true);
+                    sp.setEventSpriteCounter(counterNum);
+                    sp.setActionInt1(counterNum);
+                    break;
+                case "TRANSFORMON":
+                    word = command.substring(23);
+                    sp.setEventTransformOnZeroCounterFlag(true);
+                    sp.setActionString(word);
+                    break;
+                case "GAMEOVERONZ":
+                    sp.setEventGameOverOnZeroCounterFlag(true);
+                    break;
+                case "WINONZEROCO":
+                    sp.setEventWinOnZeroCounterFlag(true);
+                    break;
+                case "MOVETORANDO":
+                    word = command.substring(13);
+                    sp.setEventMoveToRandomFlag(true);
+                    sp.setActionString(word);
+                    break;
+                case "TRANSFORMTO":
+                    word = command.substring(18);
+                    sp.setEventTransformToSpriteFlag(true);
+                    sp.setActionString(word);
+                    break;
+                case "MOVEPLAYERT":
+                    int x = command.indexOf("X=");
+                    int y = command.indexOf("Y=");
+                    int xInt = 0;
+                    int yInt = 0;
+                    if(x > y){
+                        yInt = Integer.parseInt(command.substring(y+1,x));
+                        xInt = Integer.parseInt(command.substring(x+1));
+                    }else{
+                        xInt = Integer.parseInt(command.substring(x+1,y));
+                        yInt = Integer.parseInt(command.substring(y+1));
+                    }
+                    sp.setEventMovePlayerToFlag(true);
+                    sp.setActionInt1(xInt);
+                    sp.setActionInt2(yInt);
+                    break;
+            }
+        }
+    }
+
+    /**
      * Finds a sprite given the name in sprites if it exists otherwise return null.
      * @param name the name of the sprite to find
      * @return the sprite matching the name or null
@@ -504,7 +626,7 @@ public class GenericGame extends Observable {
             setSpriteCounter(spriteCounter - 1);
         }
         if (eventSprite.eventSetSpriteCounterFlag.equals(true)){
-            setSpriteCounter(spriteCounter);
+            setSpriteCounter(eventSprite.getActionInt1());
         }
         if (eventSprite.eventTransformOnZeroCounterFlag.equals(true)){
 

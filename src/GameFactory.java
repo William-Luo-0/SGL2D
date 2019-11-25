@@ -96,15 +96,53 @@ public class GameFactory {
 
             @Override
             public void exitCounter(SGL2DParser.CounterContext ctx){
-                String counterText = ctx.INT().get(ctx.INT().size()-1).getText();
-                String boolText = ctx.BOOLEAN().get(ctx.BOOLEAN().size()-1).getText();
-                String intText = ctx.INT().get(ctx.INT().size()-1).getText();
+                int counterNum = Integer.parseInt(ctx.getText().substring(6,7));
+                if(ctx.BOOLEAN().size() > 0){
+                    // TODO: Need to add boolean for Counter
+                    String boolText = ctx.BOOLEAN().get(0).getText();
+                    switch(counterNum){
+                        case 1:
+
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        default:
+                    }
+                }
+                if(ctx.INT().size() > 0){
+                    int intText = Integer.parseInt(ctx.INT().get(0).getText());
+                    switch(counterNum){
+                        case 1:
+                            genericGame.setValueCounter1(intText);
+                            break;
+                        case 2:
+                            genericGame.setValueCounter2(intText);
+                            break;
+                        case 3:
+                            genericGame.setValueCounter3(intText);
+                            break;
+                        default:
+                    }
+                }
             }
 
             @Override
             public void exitEvent(SGL2DParser.EventContext ctx){
-                String spriteText = ctx.WORD().getText();
-
+                if(ctx.WORD() != null){
+                    String spriteText = ctx.WORD().getText();
+                    if(ctx.COMMAND().size()> 0){
+                        String commandText = ctx.COMMAND().get(0).getText();
+                        genericGame.setSpriteCommand(spriteText,commandText);
+                    }
+                }
+                else{
+                    String commandText = ctx.COMMAND().get(0).getText();
+                    genericGame.setGoalCommand(commandText);
+                }
             }
 
             @Override

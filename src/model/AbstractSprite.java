@@ -31,6 +31,10 @@ public abstract class AbstractSprite {
     protected String eventNewSprite;
     // All of its children can make use of the counter since there could be multiple sprites for goals and player
     protected int spriteCounter;
+    // integer of actions values
+    protected int actionInt1, actionInt2;
+    // String value of actions
+    protected String actionString;
 
 
     public AbstractSprite(String name) {
@@ -90,6 +94,30 @@ public abstract class AbstractSprite {
             case ("grey"):
                 color = Color.GRAY;
         }
+    }
+
+    public int getActionInt1() {
+        return actionInt1;
+    }
+
+    public int getActionInt2(){
+        return actionInt2;
+    }
+
+    public String getActionString(){
+        return actionString;
+    }
+
+    public void setActionInt1(int actionInt1){
+        this.actionInt1 = actionInt1;
+    }
+
+    public void setActionInt2(int actionInt2){
+        this.actionInt2 = actionInt2;
+    }
+
+    public void setActionString(String actionString){
+        this.actionString = actionString;
     }
 
     public Boolean getEventIncCounter1Flag() {
