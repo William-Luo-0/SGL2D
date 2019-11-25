@@ -205,8 +205,10 @@ public class GenericGame extends Observable {
             } else if (keyCode == KeyEvent.VK_KP_DOWN || keyCode == KeyEvent.VK_DOWN) {
                 movePlayer("DOWN");
                 update();
-            } else if (keyCode == KeyEvent.VK_ESCAPE)
-                System.exit(0);
+            }
+        }
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
         }
     }
 
