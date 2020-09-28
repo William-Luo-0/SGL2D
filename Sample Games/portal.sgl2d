@@ -1,0 +1,37 @@
+environment >
+player > x=0 y=0 color=blue
+goal > x=9 y=9
+sprite wall > color=black solid=true
+sprite floor > color=grey
+sprite portalstart > color=white
+sprite portalone > color=orange
+sprite portaltwo > color=violet
+sprite portalthree > color=orange
+sprite portalfour > color=orange
+sprite portalbackone > color=violet
+sprite portalbacktwo > color=orange
+sprite portalbackthree > color=violet
+sprite portalbackfour > color=violet
+
+event portalstart > moveplayerto= x=6 y=0
+event portalone > moveplayerto= x=0 y=4
+event portaltwo > moveplayerto= x=6 y=4
+event portalthree > moveplayerto= x=0 y=8
+event portalfour > moveplayerto= x=6 y=8
+event portalbackone > moveplayerto= x=0 y=0
+event portalbacktwo > moveplayerto= x=0 y=0
+event portalbackthree > moveplayerto= x=6 y=0
+event portalbackfour > moveplayerto= x=0 y=4
+
+set floor > (x=0 y=0, x=9 y=9)
+set wall > (x=4 y=0, x=5 y=9) (x=0 y=2, x=9 y=3) (x=0 y=6, x=9 y=7)
+set portalstart > (x=3 y=0, x=3 y=1)
+set portalbackone > x=9 y=0
+set portalone > x=9 y=1
+set portaltwo > x=3 y=4
+set portalbacktwo > x=3 y=5
+set portalbackthree > x=9 y=4
+set portalthree > x=9 y=5
+set portalbackfour > x=3 y=8
+set portalfour > x=3 y=9
+

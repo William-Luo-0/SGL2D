@@ -1,0 +1,18 @@
+environment >
+player > x=5 y=5 color=blue
+sprite low > color=red
+sprite med > color=yellow
+sprite > color=green
+sprite floor > color=grey
+counter counter1 > true 0
+counter counter2 > true 50 gameoveronzerocounter
+counter counter3 > true 55
+event player > playerdeccounter2=1 playerdeccounter1=1 playerdeccounter3=1
+event low > movetorandom=floor inccounter1=1 inccounter2=1 inccounter3=1 setspritecounter=15 playerdecspritecounter=1 transformtosprite=high
+event med > movetorandom=floor inccounter1=1 inccounter2=1 inccounter3=1 setspritecounter=10 playerincspritecounter=1 movetorandomonzero=floor
+event high > movetorandom=floor inccounter1=1 inccounter2=1 inccounter3=1 setspritecounter=5 playerdecspritecounter=1 movetorandomonzero=floor
+set floor > (x=0 y=0, x=9 y=9)
+set low > x=1 y=5
+set med > x=5 y=1
+set high > x=9 y=5
+set floor > (x=0 y=0, x=9 y=9)
